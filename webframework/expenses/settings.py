@@ -54,7 +54,7 @@ ROOT_URLCONF = 'expenses.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'forms/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -66,6 +66,13 @@ TEMPLATES = [
         },
     },
 ]
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static/"),
+    os.path.join(BASE_DIR, 'forms/static/'),
+    os.path.join(BASE_DIR, 'forms/static/forms/images'),
+    #'/var/www/static/'
+)
 
 WSGI_APPLICATION = 'expenses.wsgi.application'
 

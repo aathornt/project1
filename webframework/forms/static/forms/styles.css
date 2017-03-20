@@ -1,0 +1,170 @@
+body {
+  width: 99%;
+  /*background: #6495ed;*/
+  background: #36648b;
+}
+div#header {
+  width: 100%;
+  background-color: #36648b;
+  margin: 0 auto 0 auto;
+  position: fixed;
+  top: 0;
+  left:0;
+  border-bottom: thin solid white;
+}
+div#invisible-header {
+  width: 100%;
+  visibility: hidden;
+  margin: 0 auto 0 auto;
+  /*border-bottom: thick solid white;*/
+}
+div#header h2, div#invisible-header h2 {
+  font-family: Elephant, Verdana, Geneva, sans-serif;
+  font-weight: 900;
+  color: white;
+  font-size: 2.5em;
+  margin-left: auto;
+  margin-right: auto;
+}
+div#header img, div#invisible-header img{
+  float: left;
+  margin: .9em .6em 0 .75em;
+}
+.clear-float {
+  clear: both;
+}
+div#navbar {
+  width: 90%;
+  margin: 0 auto 0 auto;
+}
+div#navbar ul {
+  list-style-type: none;
+}
+div#navbar ul li a {
+  font-family: Arial, Verdana, Geneva, sans-serif;
+  font-size: 1.1em;
+  font-weight: 900;
+  text-decoration: none;
+  color: white;
+  display: block;
+  padding: .75em;
+}
+div#navbar ul li {
+  text-align: center;
+  display: inline;
+  width: 19%;
+  float: left;
+  margin-right: .5em;
+}
+li.change-background {
+  /*background-color: #ffb90f;*/
+  background-color: #6495ed;
+}
+li.change-background:hover {
+  background-color: #ffb90f;
+}
+li.change-background:active {
+  background-color: #cd6600;
+}
+div#main {
+  width: 90%;
+  margin: 0 auto 0 auto;
+}
+h1 {
+  font-family: Arial, Verdana, sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+  margin-top: 1em;
+}
+p.intro {
+  font-family: Arial, Verdana, sans-serif;
+  font-size: 1.5em;
+  color: white;
+  text-align: justify;
+}
+div#content {
+  width: 74%;
+  float: left;
+}
+div#sidebar {
+  width: 23%;
+  float: right;
+}
+ul#list li {
+  list-style-type: circle;
+  color: white;
+  font-size: 1.25em;
+  padding-bottom: 5px;
+}
+a {
+  text-decoration:none;
+  color: #ffff00;
+}
+a:hover {
+  text-decoration: underline;
+}
+a:active {
+  color: #cd6600;
+}
+div#sidebar h5 {
+  font-family: Arial, Verdana, sans-serif;
+  font-size: 1.25em;
+  color: white;
+  margin-bottom: 0;
+  margin-left: 1em;
+}
+h5#sidebar-header {
+  font-family: Arial, Verdana, sans-serif;
+  font-size: 1.25em;
+  color: white;
+  display: block;
+  margin-bottom: 0;
+  margin-left: .5em;
+}
+form {
+  width: 50%;
+  margin: 0 auto 0 auto;
+  font-family: Arial, Verdana, sans-serif;
+  font-size: 1em;
+  color: white;
+  background-color: #36648b;
+}
+input[type="submit"] {
+  font-size:1.25em;
+}
+legend {
+  font-size: 1.5em;
+  color: #white;
+}
+p.contact {
+  margin-top: 0;
+  float:right;
+  margin-right: .25em;
+  color: white;
+  font-size: 1.7em;
+}
+#pics {
+  display: inline;
+  padding: 10px;
+}
+a.to-the-top {
+  font-size: 1.25em;
+  display: block;
+  text-align: center;
+}
+.description {
+  font-size: 1.5em;
+  color: white;
+  text-align: justify;
+}
+h4#name {
+  font-size: 1.75em;
+  color: white;
+  font-weight: bold;
+}
+h3#transition {
+  font-size: 3.5em;
+  color: white;
+  text-align: center;
+}
