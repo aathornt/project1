@@ -1,0 +1,46 @@
+//Writing first view in the app -- main folder (expenses)
+In expenses folder, we create local host home at 127.0.0.1:8000 which serves as 
+the default homepage. We have a simple HttpResponse that is returned when the 
+index is requested. To call this view we needed to map it to a URL, so we created
+a URLconf in the forms folder in a file called urls.py. Then in the expenses urls.py
+we added an include() in the urlpatterns list, making it easier to plug-and-play URLs
+This wired an index view into the URLconf. 
+
+
+//Creating models --  essentially our database layout, with additional metadata
+Represented in models.py, I only created one basic model for a 'Traveler',
+but once our group discusses more we can add in the other class models with ease.
+
+The class model 'Traveler' contains four class variables, each of which represents
+a database field in the model. These fields are BigIntegerField for the employee id
+and the sap id(Which I think we should condense), and CharField for the employee 
+name and email.
+
+With this code Django is able to create a database schema for this app and 
+create a python database-access API for accessing Traveler objects.
+
+To include the app in project, we added a reference to its configuration in 
+INSTALLED_APPS in settings.py. We then ran makemigrations to tell django that 
+we made changes to our models. 
+
+//Creating basic html template 
+This template will be rendered by views.py to display a basic layout for a user 
+to input their basic information. In index.html I created a form id of 'create 
+employee' which will take all of the form's fields and their attributes will 
+be unpacked into HTML markup from {{ form }} by Django's template language. It 
+the POSTS after the user hits submit. 
+I added some basic CSS styling on the page to make it look neater.
+
+
+//Writing view in forms folders, 127.0.0.1:8000/forms/
+In the file views.py in forms, a request is defined by a submit button, which is
+located in the template index.html file.This deals with forms, and we only use two
+HTTP methods when dealings with forms: GET and POST. The user will trigger a POST 
+method when they hit the submit button. Initally, there is no submit because the 
+user needs to see the webpage first before putting in information. Thus a class form 
+is created from a forms.py file. This file receives the class variables from the 
+Traveler class and allows for field values of these attributes. Then once they hit 
+submit views.py will check to make sure the form is valid, and if so it will save it 
+to the configured database.
+
+

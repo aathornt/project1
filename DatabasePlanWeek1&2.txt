@@ -1,0 +1,26 @@
+Database plan for the first 2 weeks 
+
+Relational Database Management System - Common choice for the 
+storage of information in new databases
+A program that lets you create, update, and administer a 
+relational database
+
+Relational Database- collection of data items organized as a 
+set of formally described tables from which data can be 
+accessed or reassembled in many different ways without 
+having to reorganize the database tables.
+
+Database Language: MySQL
+Data structure: the storage objects are tables which stored
+data in rows and columns
+
+1. Produce a conceptual data model that reflects the structure
+of the information to be held in the database.
+  Common approaches
+  i. Develop an entity-relationship model, probably with drawings
+  ii. A Unified Modeling Language (UML)
+2. Ask Provost questions detailing information he wants stored in
+program. Establish definitions of the terminology used for entities
+and their relationship and attributes.
+3. Translate this into a schema that implements the relevant data 
+structures within the database. 

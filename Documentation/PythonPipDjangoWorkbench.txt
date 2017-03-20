@@ -1,0 +1,17 @@
+CSCI 387 Project Documentation
+Python 2.7.13
+mysql Ver 14.14 Distrib 5.7.17, for Win64 (x86_64)
+
+
+
+
+MySQL 
+Viewing
+SHOW DATABASES --> show list of databases
+USE 'database name' --> choose database to enter
+SHOW TABLES --> show all tables of that database
+DESCRIBE 'column name' --> Shows all fields of that column name
+
+modifying
+CREATE TABLE 'table name' (parameters)
+ex. CREATE TABLE 'zack' (Name, Height, Age)
