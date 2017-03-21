@@ -55,9 +55,9 @@ ROOT_URLCONF = 'expenses.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR,
-        ],
+        # 'DIRS': [
+        #     BASE_DIR + '/templates/',
+        # ],
         #'DIRS' : [],
          'DIRS': [os.path.join(BASE_DIR, 'forms/templates')],
         'APP_DIRS': True,

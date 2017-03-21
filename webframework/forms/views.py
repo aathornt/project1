@@ -21,4 +21,4 @@ def index(request):
 	else:
 		# We'll create a blank form if we have a GET
 		form = TravelerForm()	
-	return render(request, 'forms/templates/index.html', {'form': form})
+	return render(request, 'index.html', {'form': form})
