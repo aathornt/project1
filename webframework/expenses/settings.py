@@ -14,7 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -31,13 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'forms'
+    'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [
@@ -55,11 +55,13 @@ ROOT_URLCONF = 'expenses.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'forms/templates')],
-        # 'DIRS': [
-        #     BASE_DIR + '/templates/',
-        # ],
-        #'DIRS' : [],
+        #'DIRS': [os.path.join(BASE_DIR, 'expenses/templates')],
+        #'DIRS': [
+        #     BASE_DIR + 'expenses\templates/',
+        #],
+        'DIRS' : [
+            os.path.join(PROJECT_PATH, 'templates').replace('\\','/'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
