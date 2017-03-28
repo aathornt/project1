@@ -22,3 +22,6 @@ def index(request):
 		# We'll create a blank form if we have a GET
 		form = TravelerForm()
 	return render(request, 'register.html', {'form': form})
+
+def trip(request):
+	return render(request, 'trip.html', {})
