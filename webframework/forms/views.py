@@ -7,7 +7,7 @@ from .forms import TravelerForm
 # Originally, there is no post so we go to the else and create a form
 # from TravelerForm() in forms.py we then render the request and the
 # template to display a basic html page
-def index(request):
+def register(request):
 	# if this is a post request we need to process the form data
 	if request.method == 'POST':
 		# create a form instance and populate it with data from the request:
@@ -25,3 +25,6 @@ def index(request):
 
 def trip(request):
 	return render(request, 'trip.html', {})
+
+def index(request):
+	return render(request, 'main.html', {})
