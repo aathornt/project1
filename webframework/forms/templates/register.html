@@ -13,7 +13,7 @@
 </style>
 
 <!-- Tells browser to return the form data to the URL /forms/, using the POST method. -->
-<form id="createEmployee" action="/forms/" method="POST">
+<form id="createEmployee" action="/forms/register/" method="POST">
 {% csrf_token %}
 	<table>
 	{{ form }}

@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from .forms import TravelerForm
-
+from .models import Traveler
 
 # Originally, there is no post so we go to the else and create a form
 # from TravelerForm() in forms.py we then render the request and the
@@ -17,14 +17,18 @@ def register(request):
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
-			return HttpResponse('Thank you! <a href="/forms/">Return</a>')
+			return HttpResponse('Thank you! <a href="/forms/register/">Return</a>')
 	else:
 		# We'll create a blank form if we have a GET
 		form = TravelerForm()
 	return render(request, 'register.html', {'form': form})
 
-def trip(request):
-	return render(request, 'trip.html', {})
+def addtrip(request):
+	return render(request, 'addtrip.html', {})
 
 def index(request):
-	return render(request, 'main.html', {})
+	recent = Traveler.objects.all().order_by('employee_name')
+	return render(request, 'main.html', {'recent': recent})
+
+def trip(request):
+	return render(request, 'trip.html', {})

@@ -45,6 +45,9 @@ body { padding-top: 70px; }
 tr {
     color:black;
 }
+p {
+  color:black;
+}
 </style>
 
 </head>
@@ -83,10 +86,16 @@ tr {
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
+                      <!--  <th scope="row">1</th>
                         <td>Breakfast</td>
                         <td>$8.46</td>
-                        <td>3/11</td>
+                        <td>3/11</td>-->
+                          {% for name in recent %}
+                          <div>
+                            <td>Name: {{ name.employee_name }}
+                            ID: {{ name.employee_id }}</td>
+                          </div>
+                          {% endfor %}
                     </tr>
                     <tr>
                         <th scope="row">2</th>
