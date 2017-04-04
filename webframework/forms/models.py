@@ -22,8 +22,9 @@ CHOICES=(
 		('DIN', 'Dinner'),
 
 	)
-class Meal(models.Model):	
-	Meal_Category = models.CharField(max_length=2, choices=CHOICES, default='BR')	
+class Meal(models.Model):
+
+	Meal_Category = models.CharField(max_length=3, choices=CHOICES)	
 	Date = models.DateField(primary_key=True)
 	Meal_No_Tip = models.FloatField()
 	Meal_Tip = models.FloatField()

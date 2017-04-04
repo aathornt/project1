@@ -66,7 +66,9 @@ p {
         <!--Current Trip Button-->
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-danger btn-block large">Your Current Trip:<br />Trip Name</button>
+
+                 <a href="/forms/trip/" class="btn btn-danger large" role="button">Your Current Trip:<br />Vegas!</a>
+
             </div>
         </div><br />
 
@@ -90,12 +92,12 @@ p {
                         <td>Breakfast</td>
                         <td>$8.46</td>
                         <td>3/11</td>-->
-                          {% for name in recent %}
+                          
                           <div>
-                            <td>Name: {{ name.employee_name }}
-                            ID: {{ name.employee_id }}</td>
+                            <td>Name:
+                            ID:</td>
                           </div>
-                          {% endfor %}
+                          
                     </tr>
                     <tr>
                         <th scope="row">2</th>
@@ -114,11 +116,11 @@ p {
             </div>
 
 
-            {% for name in recent %}
+            
             <div> 
-                <tr> {{ name }}</tr>
+                <tr></tr>
             </div>
-            {% endfor %}
+            
         <!--Trip Management-->
         <div>
             <h2 class="center">Trip Management</h2><br />

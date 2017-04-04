@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
 <title>Register Page</title>
-
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -24,13 +20,11 @@
 	width: auto;
 }
 .jumbotron {
-
 	background-color:#2f3f4f;
 	color:lightgrey;
 }
 /* Adds borders for tabs */
 .tab-content {
-
 	border-left: 1px solid #ddd;
 	border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
@@ -46,43 +40,44 @@
 </style>
 <body>
 	<div class="container">
-
 	<div class="page-header">
 	<h1>Register Page</h1>
 	</div>
-
 	<div class="jumbotron">
 <!-- Tells browser to return the form data to the URL /forms/, using the POST method. -->
-
 	<p>Register</p>
-
 	<p>
-
 	<form id="createEmployee" action="/forms/register/" method="POST">
 {% csrf_token %}
 {% load widget_tweaks %}
 		<div class="input-group input-group-sm">
-		<span class="input-group-addon">Employee ID</span>
-			{{ form.employee_id|add_class:"form-control" }}
-		</div><br>
-		<div class="input-group input-group-sm">
-		<span class="input-group-addon">Employee Name</span>
-				{{ form.employee_name|add_class:"form-control" }}
-		</div><br>
-		<div class="input-group input-group-sm">
 		<span class="input-group-addon">SAP ID</span>
-				{{ form.sap_id|add_class:"form-control" }}
+			{{ form.SAP_ID|add_class:"form-control" }}
 		</div><br>
 		<div class="input-group input-group-sm">
-		<span class="input-group-addon">Employee Email</span>
-				{{ form.employee_email|add_class:"form-control" }}
-	</div>
-
+		<span class="input-group-addon">First Name</span>
+				{{ form.First_Name|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Last Name</span>
+				{{ form.Last_Name|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Title</span>
+				{{ form.Title|add_class:"form-control" }}
+		</div></br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Email</span>
+				{{ form.Email|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Department Name</span>
+				{{ form.Department_Name|add_class:"form-control" }}
+		</div><br>
 	<div class="form-input submit-button">
 		<button type="submit" class="btn btn-danger" value="true">Submit Form</button>
 	</div>
 	</form>
-
 </p>
 </div>
 </div>

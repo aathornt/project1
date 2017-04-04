@@ -1,6 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Register Page</title>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 #createEmployee .form-input {
-	width: 100%;
+	width: auto;
 	clear: both;
 }
 #createEmployee .submit-button {
@@ -8,17 +17,69 @@
 	text-align: center;
 }
 #createEmployee {
-	width: 400px;
+	width: auto;
+}
+.jumbotron {
+	background-color:#2f3f4f;
+	color:lightgrey;
+}
+/* Adds borders for tabs */
+.tab-content {
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	padding: 10px;
+}
+.fix {
+	width:auto;
+}
+}
+.nav-tabs {
+	margin-bottom: 0;
+}
+
+.dropdown {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align-last:center;
 }
 </style>
 
-<!-- Tells browser to return the form data to the URL /forms/, using the POST method. -->
-<form id="createEmployee" action="/forms/addmeal/" method="POST">
-{% csrf_token %}
-
-     {{ form.as_p }}
-
-	<div class="form-input submit-button">
-		<button type="submit" value="true">Submit Form</button>
+<body>
+	<div class="container">
+	<div class="page-header">
+	<h1>Add A Meal!</h1>
 	</div>
-</form>
+	<div class="jumbotron">
+<!-- Tells browser to return the form data to the URL /forms/, using the POST method. -->
+	<p>Meal Expense
+	</p>
+	<p>
+	<form id="createEmployee" action="/forms/addmeal/" method="POST">
+{% csrf_token %}
+{% load widget_tweaks %}
+		<div class="dropdown">
+				{{ form.Meal_Category|add_class:"form-control" }}
+		</div><br> 	
+
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Date</span>
+				{{ form.Date|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Meal Before Tip</span>
+				{{ form.Meal_No_Tip|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Meal After Tip</span>
+				{{ form.Meal_Tip|add_class:"form-control" }}
+		</div></br>
+	<div class="form-input submit-button">
+		<button type="submit" class="btn btn-danger" value="true">Submit Form</button>
+	</div>
+	</form>
+</p>
+</div>
+</div>
+</body>
