@@ -6,7 +6,6 @@ from .forms import MealForm
 from .models import Traveler
 from .models import Meal
 
-
 # Originally, there is no post so we go to the else and create a form
 # from TravelerForm() in forms.py we then render the request and the
 # template to display a basic html page
@@ -29,15 +28,15 @@ def register(request):
 def addtrip(request):
 	return render(request, 'addtrip.html', {})
 
-def main(request):
-	recent = Traveler.objects.all().order_by('First_Name')[:3]
-	return render(request, 'main.html', {'recent' : recent})
-
-def addexpense(request):
-	return render(request, 'addexpenses.html', {})
+def index(request):
+	recent = Traveler.objects.all().order_by('employee_name')
+	return render(request, 'main.html', {'recent': recent})
 
 def trip(request):
 	return render(request, 'trip.html', {})
+
+def addexpense(request):
+	return render(request, 'addexpenses.html', {})
 
 def addmeal(request):
 	# if this is a post request we need to process the form data

@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <title>Main Page</title>
+
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <style>
         .jumbotron {
             background-color: #2f3f4f;
@@ -19,34 +24,46 @@
             border-bottom: 1px solid #ddd;
             padding: 10px;
         }
+
         .nav-tabs {
             margin-bottom: 0;
         }
+
         .navbar-custom {
             background-color: indianred;
             margin: 0 15px 0 15px;
             color: white;
         }
+
         body {
             padding-top: 70px;
         }
+
         .center {
             text-align: center;
         }
+
         .large {
             font-size: 1.25em;
         }
+
         tr {
             color: black;
         }
     </style>
+
 </head>
+
 <body>
+
     <div class="container">
+
         <div class="page-header">
             <h1>Welcome to TripExpenser!</h1>
         </div>
+
         <div class="jumbotron">
+
             <p>
                 <!--<nav class="nav navbar-nav">
                     <ul class="nav nav-pills nav-justified">
@@ -54,31 +71,33 @@
                     </ul>
                     <br />
                 </nav>-->
+
                 <div>
                     <h2 class="center">Trip Name</h2>
                 </div>
+
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                     <div class="btn-group" role="group">
-
-                        <a href="/forms/addexpense" class="btn btn-danger" role="button"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Expense</a>
-                           
-                        
+                        <button type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Expense
+                        </button>
                     </div>
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-edit" area-hidden="true"></span> Edit Expense
                         </button>
                     </div>
-                    
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Expense
                         </button>
                     </div>
                 </div><br />
+
                 <div class="panel panel-default">
                     <!-- Default panel contents containg Recent Expenses-->
                     <div class="panel-heading">Food</div>
+
                     <!-- Table for Recent Expenses-->
                     <table class="table table-striped">
                         <thead>
@@ -111,9 +130,11 @@
                         </tbody>
                     </table>
                 </div>
+
                 <div class="panel panel-default">
                     <!-- Default panel contents containg Recent Expenses-->
                     <div class="panel-heading">Daily Expenses</div>
+
                     <!-- Table for Recent Expenses-->
                     <table class="table table-striped">
                         <thead>
@@ -146,9 +167,13 @@
                         </tbody>
                     </table>
                 </div>
+
         </div>
         </p>
+
     </div>
+
     </div>
+
 </body>
 </html>

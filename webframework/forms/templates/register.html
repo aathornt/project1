@@ -1,6 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Register Page</title>
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 #createEmployee .form-input {
-	width: 100%;
+	width: auto;
 	clear: both;
 }
 #createEmployee .submit-button {
@@ -8,33 +21,69 @@
 	text-align: center;
 }
 #createEmployee {
-	width: 400px;
+	width: auto;
+}
+.jumbotron {
+
+	background-color:#2f3f4f;
+	color:lightgrey;
+}
+/* Adds borders for tabs */
+.tab-content {
+
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	padding: 10px;
+}
+.fix {
+	width:auto;
+}
+}
+.nav-tabs {
+	margin-bottom: 0;
 }
 </style>
+<body>
+	<div class="container">
 
-<!-- Tells browser to return the form data to the URL /forms/, using the POST method. -->
-<form id="createEmployee" action="/forms/register/" method="POST">
-{% csrf_token %}
-
-<h1> This is our header!</h1>
-	<table border="1">
-	<tr>
-	<td>SAP ID: {{ form.SAP_ID }}</td>
-	<td>First Name: {{ form.First_Name }}</td>
-	</tr>
-	</table>
-	<table>
-	<td>Last Name: {{ form.Last_Name }}</td>
-	<td>Title: {{ form.Title }}</td>
-	</tr>
-	</table>
-	<table>
-	<tr>
-	<td>Email: {{ form.Email }}</td>
-	<td>Department Name: {{ form.Department_Name }}</td>
-	</tr>
-	</table>
-	<div class="form-input submit-button">
-		<button type="submit" value="true">Submit Form</button>
+	<div class="page-header">
+	<h1>Register Page</h1>
 	</div>
-</form>
+
+	<div class="jumbotron">
+<!-- Tells browser to return the form data to the URL /forms/, using the POST method. -->
+
+	<p>Register</p>
+
+	<p>
+
+	<form id="createEmployee" action="/forms/register/" method="POST">
+{% csrf_token %}
+{% load widget_tweaks %}
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Employee ID</span>
+			{{ form.employee_id|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Employee Name</span>
+				{{ form.employee_name|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">SAP ID</span>
+				{{ form.sap_id|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Employee Email</span>
+				{{ form.employee_email|add_class:"form-control" }}
+	</div>
+
+	<div class="form-input submit-button">
+		<button type="submit" class="btn btn-danger" value="true">Submit Form</button>
+	</div>
+	</form>
+
+</p>
+</div>
+</div>
+</body>
