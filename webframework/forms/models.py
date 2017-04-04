@@ -15,17 +15,14 @@ class Traveler(models.Model):
 
 CHOICES=(
 		('BR', 'Breakfast'),
-		# (Breakfast_Tip, 'Breakfast_Tip'),
 		('LUN', 'Lunch'),
-		# (Lunch_Tip, 'Breakfast_Tip'),
-		# (Dinner_No_Tip, 'Breakfast_Tip'),
 		('DIN', 'Dinner'),
 
 	)
 
 class Meal(models.Model):
 	Meal_ID = models.AutoField(primary_key=True)
-	Meal_Category = models.CharField(max_length=3, choices=CHOICES)
+	Meal_Category = models.CharField(max_length=3, choices=CHOICES, default='BR')
 	Date = models.DateField()
 	Meal_No_Tip = models.FloatField()
 	Meal_Tip = models.FloatField()
