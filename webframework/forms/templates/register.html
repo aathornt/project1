@@ -62,21 +62,29 @@
 {% csrf_token %}
 {% load widget_tweaks %}
 		<div class="input-group input-group-sm">
-		<span class="input-group-addon">Employee ID</span>
-			{{ form.employee_id|add_class:"form-control" }}
-		</div><br>
-		<div class="input-group input-group-sm">
-		<span class="input-group-addon">Employee Name</span>
-				{{ form.employee_name|add_class:"form-control" }}
-		</div><br>
-		<div class="input-group input-group-sm">
 		<span class="input-group-addon">SAP ID</span>
-				{{ form.sap_id|add_class:"form-control" }}
+			{{ form.SAP_ID|add_class:"form-control" }}
 		</div><br>
 		<div class="input-group input-group-sm">
-		<span class="input-group-addon">Employee Email</span>
-				{{ form.employee_email|add_class:"form-control" }}
-	</div>
+		<span class="input-group-addon">First Name</span>
+				{{ form.First_Name|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Last Name</span>
+				{{ form.Last_Name|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Title</span>
+				{{ form.Title|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Email</span>
+				{{ form.Email|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Department Name</span>
+				{{ form.Department_Name|add_class:"form-control" }}
+		</div>
 
 	<div class="form-input submit-button">
 		<button type="submit" class="btn btn-danger" value="true">Submit Form</button>
