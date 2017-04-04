@@ -13,7 +13,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 #createEmployee .form-input {
-	width: 100%;
+	width: auto;
 	clear: both;
 }
 #createEmployee .submit-button {
@@ -21,7 +21,7 @@
 	text-align: center;
 }
 #createEmployee {
-	width: 400px;
+	width: auto;
 }
 .jumbotron {
 
@@ -36,8 +36,11 @@
 	border-bottom: 1px solid #ddd;
 	padding: 10px;
 }
+.fix {
+	width:auto;
+}
+}
 .nav-tabs {
-
 	margin-bottom: 0;
 }
 </style>
@@ -57,21 +60,22 @@
 
 	<form id="createEmployee" action="/forms/register/" method="POST">
 {% csrf_token %}
-	<div class="input-group input-group-sm">
+{% load widget_tweaks %}
+		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Employee ID</span>
-			{{ form.employee_id }}
+			{{ form.employee_id|add_class:"form-control" }}
 		</div><br>
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Employee Name</span>
-				{{ form.employee_name }}
+				{{ form.employee_name|add_class:"form-control" }}
 		</div><br>
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">SAP ID</span>
-				{{ form.sap_id }}
+				{{ form.sap_id|add_class:"form-control" }}
 		</div><br>
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Employee Email</span>
-				{{ form.employee_email }}
+				{{ form.employee_email|add_class:"form-control" }}
 	</div>
 
 	<div class="form-input submit-button">
