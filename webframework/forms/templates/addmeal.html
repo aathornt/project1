@@ -1,0 +1,24 @@
+<style>
+#createEmployee .form-input {
+	width: 100%;
+	clear: both;
+}
+#createEmployee .submit-button {
+	margin-top: 20px;
+	text-align: center;
+}
+#createEmployee {
+	width: 400px;
+}
+</style>
+
+<!-- Tells browser to return the form data to the URL /forms/, using the POST method. -->
+<form id="createEmployee" action="/forms/addmeal/" method="POST">
+{% csrf_token %}
+
+     {{ form.as_p }}
+
+	<div class="form-input submit-button">
+		<button type="submit" value="true">Submit Form</button>
+	</div>
+</form>

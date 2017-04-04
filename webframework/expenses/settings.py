@@ -25,6 +25,7 @@ SECRET_KEY = 'e)-_rm+omrc=1t+biq#&0!$2wys6a5m!2jd5ei(mvlxeijtoe6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = []
 
 

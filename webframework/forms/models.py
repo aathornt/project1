@@ -1,21 +1,39 @@
 from django.db import models
 
-# Create your models here.
+# # Create your models here.
 class Traveler(models.Model):
-	employee_id = models.BigIntegerField(primary_key=True)
-	employee_name = models.CharField(max_length=200)
-	sap_id = models.BigIntegerField()
-	employee_email = models.CharField(max_length=200)
+	SAP_ID = models.BigIntegerField(primary_key=True)
+	First_Name = models.CharField(max_length=200)
+	Last_Name = models.CharField(max_length=200)
+	Title = models.CharField(max_length=200)
+	Email = models.CharField(max_length=200)
+	Department_Name = models.CharField(max_length=200)
 
-# class Trip(models.Model)
-# 	trip_id = models.AutoField(primary_key = True)
-# 	trip_loc = models.CharField(max_length=200)
-# 	start_date = models.DateTimeField()
-# 	end_date = models.DateTimeField()
-# 	transportation_type = models.CharField(max_length=200)
-# 	employee = models.ForeignKey(Traveler, on_delete=models.CASCADE)
+	def __unicode__(self):
+		return self.First_Name
 
-# class Expense(models.Model)
-# 	expenses_id = models.AutoField(primary_key = True)
-# 	trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
-# 	date
+
+CHOICES=(
+		('BR', 'Breakfast'),
+		# (Breakfast_Tip, 'Breakfast_Tip'),
+		('LUN', 'Lunch'),
+		# (Lunch_Tip, 'Breakfast_Tip'),
+		# (Dinner_No_Tip, 'Breakfast_Tip'),
+		('DIN', 'Dinner'),
+
+	)
+class Meal(models.Model):	
+	Meal_Category = models.CharField(max_length=2, choices=CHOICES, default='BR')	
+	Date = models.DateField(primary_key=True)
+	Meal_No_Tip = models.FloatField()
+	Meal_Tip = models.FloatField()
+	# Breakfast_No_Tip = models.FloatField()
+	# Breakfast_Tip = models.FloatField()
+	# Lunch_No_Tip = models.FloatField()
+	# Lunch_Tip = models.FloatField()
+	# Dinner_No_Tip = models.FloatField()
+	# Dinner_Tip = models.FloatField()
+	
+
+	
+

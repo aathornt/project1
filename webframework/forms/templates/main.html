@@ -103,6 +103,13 @@ tr {
                 </tbody>
             </table>
             </div>
+
+
+            {% for name in recent %}
+            <div> 
+                <tr> {{ name }}</tr>
+            </div>
+            {% endfor %}
         <!--Trip Management-->
         <div>
             <h2 class="center">Trip Management</h2><br />

@@ -13,10 +13,26 @@
 </style>
 
 <!-- Tells browser to return the form data to the URL /forms/, using the POST method. -->
-<form id="createEmployee" action="/forms/" method="POST">
+<form id="createEmployee" action="/forms/register/" method="POST">
 {% csrf_token %}
+
+<h1> This is our header!</h1>
+	<table border="1">
+	<tr>
+	<td>SAP ID: {{ form.SAP_ID }}</td>
+	<td>First Name: {{ form.First_Name }}</td>
+	</tr>
+	</table>
 	<table>
-	{{ form }}
+	<td>Last Name: {{ form.Last_Name }}</td>
+	<td>Title: {{ form.Title }}</td>
+	</tr>
+	</table>
+	<table>
+	<tr>
+	<td>Email: {{ form.Email }}</td>
+	<td>Department Name: {{ form.Department_Name }}</td>
+	</tr>
 	</table>
 	<div class="form-input submit-button">
 		<button type="submit" value="true">Submit Form</button>

@@ -1,11 +1,22 @@
 from django.forms import ModelForm
 from .models import Traveler
+from .models import Meal
+from django import forms
 
 class TravelerForm(ModelForm):
 	class Meta:
 		model = Traveler;
-		fields = ['employee_id', 'employee_name', 'sap_id', 'employee_email']
-	# employee_id = forms.CharField(label='Employee ID:', max_length=100)
-	# employee_name = forms.CharField(label='Employee Name:', max_length=100)
-	# sap_id = forms.CharField(label='SAP ID:', max_length=100)
-	# employee_email = forms.EmailField(label='Employee E-Mail:', max_length=100)s
+		fields = ['SAP_ID', 'First_Name', 'Last_Name', 'Email', 'Title', 'Department_Name',]
+	
+# class MealForm(ModelForm):
+# 	Date = forms.DateField(input_formats=['%m-%d-%y'])
+# 	class Meta:
+# 		model = Meal;
+# 		fields = ['Date', 'Breakfast_No_Tip', 'Breakfast_Tip', 'Lunch_No_Tip', 'Lunch_Tip', 'Dinner_No_Tip','Dinner_Tip',]
+
+	
+class MealForm(ModelForm):
+	Date = forms.DateField(input_formats=['%m-%d-%y'])
+	class Meta:
+		model = Meal;
+		fields = ['Meal_Category', 'Date', 'Meal_No_Tip', 'Meal_Tip']
