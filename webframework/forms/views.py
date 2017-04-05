@@ -29,11 +29,13 @@ def addtrip(request):
 	return render(request, 'addtrip.html', {})
 
 def index(request):
-	recent = Traveler.objects.all().order_by('employee_name')
+	# recent = Traveler.objects.all().order_by('First_Name')[:3]
+	recent = Meal.objects.all().order_by('-Meal_ID')[:3]
 	return render(request, 'main.html', {'recent': recent})
 
 def trip(request):
-	return render(request, 'trip.html', {})
+	recent = Meal.objects.all().order_by('-Meal_ID')[:3]
+	return render(request, 'trip.html', {'recent': recent})
 
 def addexpense(request):
 	return render(request, 'addexpenses.html', {})

@@ -24,7 +24,9 @@
             border-bottom: 1px solid #ddd;
             padding: 10px;
         }
-
+        .page-header {
+            text-align: center;
+        }
         .nav-tabs {
             margin-bottom: 0;
         }
@@ -73,7 +75,7 @@
                 </nav>-->
 
                 <div>
-                    <h2 class="center">Trip Name</h2>
+                    <h2 class="center">Vegas!</h2>
                 </div>
 
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
@@ -103,14 +105,23 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Description</th>
-                                <th>Amount</th>
                                 <th>Date</th>
+                                <th>Category</th>
+                                <th>Total Before Tip</th>
+                                <th>Total After Tip</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+
+                        {% for name in recent %}
+                          <div>                          
+                           <td> {{ name.Date }} </td>
+                           <td> {{ name.Meal_Category }} </td>
+                           <td> ${{ name.Meal_No_Tip }} </td>
+                           <td> ${{ name.Meal_Tip }}</td>
+                           <tr></tr>
+                          </div>{% endfor %}
+                            <!-- <tr>
                                 <th scope="row">1</th>
                                 <td>Breakfast</td>
                                 <td>$8.46</td>
@@ -127,14 +138,14 @@
                                 <td>Lunch</td>
                                 <td>$10.56</td>
                                 <td>3/10</td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
 
                 <div class="panel panel-default">
                     <!-- Default panel contents containg Recent Expenses-->
-                    <div class="panel-heading">Daily Expenses</div>
+                    <div class="panel-heading">Daily Expenses (Not created yet)</div>
 
                     <!-- Table for Recent Expenses-->
                     <table class="table table-striped">

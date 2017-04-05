@@ -42,6 +42,12 @@ body { padding-top: 70px; }
 .large {
     font-size:1.25em;
 }
+.page-header {
+    text-align: center;
+}
+.panel-heading {
+    text-align: center;
+}
 tr {
     color:black;
 }
@@ -53,9 +59,7 @@ p {
 </head>
 
 <body>
-
 <div class="container">
-
 <div class="page-header">
 <h1>Welcome to TripExpenser!</h1>
 </div>
@@ -74,32 +78,35 @@ p {
 
         <div class="panel panel-default">
             <!-- Default panel contents containg Recent Expenses-->
-            <div class="panel-heading">Your Recent Expenses</div>
+            <div class="panel-heading">Your Most Recent Expenses</div>
 
             <!-- Table for Recent Expenses-->
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Description</th>
-                        <th>Amount</th>
+                        <th>Category</th>
                         <th>Date</th>
+                        <th>Meal Before Tip</th>
+                        <th>Meal After Tip</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <!-- <tr> -->
                       <!--  <th scope="row">1</th>
                         <td>Breakfast</td>
                         <td>$8.46</td>
                         <td>3/11</td>-->
+{% for name in recent %}
+                          <div> 
+                           <td> {{ name.Meal_Category }} </td>
+                           <td> {{ name.Date }} </td>
+                           <td> ${{ name.Meal_No_Tip }} </td>
+                           <td> ${{ name.Meal_Tip }}</td>
+                           <tr></tr>
+                          </div>{% endfor %}
 
-                          <div>
-                            <td>Name:
-                            ID:</td>
-                          </div>
-
-                    </tr>
-                    <tr>
+                    <!-- </tr> -->
+                    <!-- <tr>
                         <th scope="row">2</th>
                         <td>Gas</td>
                         <td>$19.67</td>
@@ -110,7 +117,7 @@ p {
                         <td>Dinner</td>
                         <td>$16.78</td>
                         <td>3/10</td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
             </div>
@@ -129,9 +136,10 @@ p {
         <!--Trip Management Buttons-->
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Trip
-                </button>
+                <!-- <button type="button" class="btn btn-danger"> -->
+
+                   <a href="/forms/addtrip" class="btn btn-danger" role="button"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Trip</a>
+                
             </div>
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-danger">Your Trips</button>
