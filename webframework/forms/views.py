@@ -50,9 +50,8 @@ def addmeal(request):
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
-			return HttpResponse('Thank you! <a href="/forms/addmeal/">Return</a>')
+			return HttpResponse('Thank you! <a href="/forms/trip/">Return</a>')
 	else:
 		# We'll create a blank form if we have a GET
 		form = MealForm()
 	return render(request, 'addmeal.html', {'form': form})
-
