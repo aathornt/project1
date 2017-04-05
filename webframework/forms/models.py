@@ -13,6 +13,8 @@ class Traveler(models.Model):
 		return self.First_Name
 
 
+
+
 CHOICES=(
 		('BR', 'Breakfast'),
 		('LUN', 'Lunch'),
