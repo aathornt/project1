@@ -4,15 +4,16 @@ from django.shortcuts import render
 from .forms import TravelerForm
 from .forms import MealForm
 from .forms import UserForm
-# from .forms import TripForm
 from .models import Traveler
 from .models import Meal
-from django.contrib.auth.models import User 
-# from .models import Trip 
+from django.contrib.auth.models import User
 
 # Originally, there is no post so we go to the else and create a form
 # from TravelerForm() in forms.py we then render the request and the
 # template to display a basic html page
+
+#TODO copy views from expenses
+
 def register(request):
 	# if this is a post request we need to process the form data
 	if request.method == 'POST':
@@ -30,7 +31,6 @@ def register(request):
 			# save data as an instance in a database
 			user.save()
 			return HttpResponse('Thank You! <a href="../../">Return</a>')
-			# reply with thank you, offer them a chance to enter again
 			# return HttpResponse('Thank you! <a href="/forms/trip/">Return</a>')
 	else:
 		# We'll create a blank form if we have a GET
