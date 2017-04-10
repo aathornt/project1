@@ -3,8 +3,12 @@ from django.shortcuts import render
 
 from .forms import TravelerForm
 from .forms import MealForm
+from .forms import UserForm
+# from .forms import TripForm
 from .models import Traveler
 from .models import Meal
+from django.contrib.auth.models import User 
+# from .models import Trip 
 
 # Originally, there is no post so we go to the else and create a form
 # from TravelerForm() in forms.py we then render the request and the
@@ -13,16 +17,24 @@ def register(request):
 	# if this is a post request we need to process the form data
 	if request.method == 'POST':
 		# create a form instance and populate it with data from the request:
-		form = TravelerForm(request.POST)
+		form = UserForm(request.POST)
 		# check whether it's valid:
 		if form.is_valid():
+			username = form.cleaned_data['username']
+			password = form.cleaned_data['password']
+			email = form.cleaned_data['email']
+			first_name = form.cleaned_data['first_name']
+			last_name = form.cleaned_data['last_name']
+
+			user = User.objects.create_user(username, password, email, first_name = first_name, last_name  = last_name)
 			# save data as an instance in a database
-			form.save()
+			user.save()
+			return HttpResponse('Thank You! <a href="../../">Return</a>')
 			# reply with thank you, offer them a chance to enter again
-			return HttpResponse('Thank you! <a href="/forms/register/">Return</a>')
+			# return HttpResponse('Thank you! <a href="/forms/trip/">Return</a>')
 	else:
 		# We'll create a blank form if we have a GET
-		form = TravelerForm()
+		form = UserForm()
 	return render(request, 'register.html', {'form': form})
 
 def addtrip(request):
