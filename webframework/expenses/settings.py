@@ -52,6 +52,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+LOGIN_REDIRECT_URL = 'forms/'
+
 ROOT_URLCONF = 'expenses.urls'
 
 TEMPLATES = [

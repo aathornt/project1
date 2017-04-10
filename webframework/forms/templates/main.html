@@ -97,7 +97,8 @@ p {
                         <td>$8.46</td>
                         <td>3/11</td>-->
 {% for name in recent %}
-                          <div> 
+                          <div>
+                            <td> {{ name.Meal_ID }}</td>
                            <td> {{ name.Meal_Category }} </td>
                            <td> {{ name.Date }} </td>
                            <td> ${{ name.Meal_No_Tip }} </td>
@@ -139,7 +140,7 @@ p {
                 <!-- <button type="button" class="btn btn-danger"> -->
 
                    <a href="/forms/addtrip" class="btn btn-danger" role="button"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Trip</a>
-                
+
             </div>
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-danger">Your Trips</button>

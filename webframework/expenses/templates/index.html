@@ -44,8 +44,24 @@
 	<p>SAP Authentication</p>
 
     <p>
+			{% block content %}
+				<form method="post">
+					{% csrf_token %}
+					{% load widget_tweaks %}
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon">Username</span>
+							{{ form.username|add_class:"form-control" }}
+						</div><br>
+						<div class="input-group input-group-sm">
+							<span class="input-group-addon">Password</span>
+								{{ form.password|add_class:"form-control" }}
+							</div><br>
+							<button type="submit" class="btn btn-danger" value="true">Login</button>
+							<a href="../forms/register/" class="btn btn-danger" role="button">Register</a>
+						</form>
+						{% endblock %}
 
-    <div class="input-group input-group-lg">
+    <!--<div class="input-group input-group-lg">
         <span class="input-group-addon">Username</span>
         <input type="text" class="form-control">
     </div><br>
@@ -56,7 +72,7 @@
     </div><br>
 
     <a href="#" class="btn btn-danger" role="button">Login</a>
-        <a href="#" class="btn btn-danger" role="button">Register</a>
+        <a href="#" class="btn btn-danger" role="button">Register</a>-->
     </p>
 
 </div>
