@@ -2,18 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.conf import settings
 
-# # Create your models here.
-class Traveler(models.Model):
-	SAP_ID = models.BigIntegerField(primary_key=True)
-	First_Name = models.CharField(max_length=200)
-	Last_Name = models.CharField(max_length=200)
-	Title = models.CharField(max_length=200)
-	Email = models.CharField(max_length=200)
-	Department_Name = models.CharField(max_length=200)
-
-	def __unicode__(self):
-		return self.First_Name
 
 CHOICES=(
 		('Breakfast', 'Breakfast'),
@@ -31,7 +21,7 @@ class Meal(models.Model):
 
 class Trip(models.Model):
 	Trip_ID = models.AutoField(primary_key=True)
-	Traveler = models.ForeignKey('Traveler', on_delete=models.CASCADE)
+	User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	Contact_Person = models.CharField(max_length=200)
 	Place = models.CharField(max_length=200)
 	Purpose = models.CharField(max_length=200)

@@ -49,7 +49,7 @@
 					{% csrf_token %}
 					{% load widget_tweaks %}
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon">Username</span>
+						<span class="input-group-addon">SAP ID</span>
 							{{ form.username|add_class:"form-control" }}
 						</div><br>
 						<div class="input-group input-group-sm">
@@ -60,25 +60,6 @@
 							<a href="../forms/register/" class="btn btn-danger" role="button">Register</a>
 						</form>
 						{% endblock %}
-
-    <!--<div class="input-group input-group-lg">
-        <span class="input-group-addon">Username</span>
-        <input type="text" class="form-control">
-    </div><br>
-
-     <div class="input-group input-group-lg">
-        <span class="input-group-addon">Password</span>
-        <input type="text" class="form-control">
-    </div><br>
-
-    <a href="#" class="btn btn-danger" role="button">Login</a>
-<<<<<<< HEAD
-        <a href="../forms/register" class="btn btn-danger" role="button">Register</a>
-||||||| merged common ancestors
-        <a href="#" class="btn btn-danger" role="button">Register</a>
-=======
-        <a href="#" class="btn btn-danger" role="button">Register</a>-->
->>>>>>> 4d719f8f248fbf0b667e180ba26dceb1b8e5e323
     </p>
 
 </div>

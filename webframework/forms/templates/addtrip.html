@@ -45,36 +45,53 @@
 	<p>Trip</p>
 
     <p>
+    <form id="createEmployee" action="/forms/trip/" method="POST">
+    {% csrf_token %}
+    {% load widget_tweaks %}
 
     <div class="input-group input-group-sm">
-        <span class="input-group-addon"></span>
-        <input type="text" class="form-control">
+        <span class="input-group-addon">SAP ID</span>
+         {{ form.User_id|add_class:"form-control" }}
+    </div><br>
+
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">Place</span>
+         {{ form.Place|add_class:"form-control" }}
+    </div><br>
+
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">Purpose</span>
+        {{ form.Purpose|add_class:"form-control" }}
+    </div><br>
+
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">Date Left</span>
+        {{ form.Date_Left|add_class:"form-control" }}
     </div><br>
 
      <div class="input-group input-group-sm">
-        <span class="input-group-addon">Place</span>
-        <input type="text" class="form-control">
-    </div><br>
-
-         <div class="input-group input-group-sm">
-        <span class="input-group-addon">Date Left</span>
-        <input type="text" class="form-control">
+        <span class="input-group-addon">Time Left</span>
+        {{ form.Date_Returned|add_class:"form-control" }}
     </div><br>
 
          <div class="input-group input-group-sm">
         <span class="input-group-addon">Date Returned</span>
-        <input type="text" class="form-control">
+        {{ form.Time_Left|add_class:"form-control" }}
     </div><br>
 
          <div class="input-group input-group-sm">
-        <span class="input-group-addon">Other Persons</span>
-        <input type="text" class="form-control">
+        <span class="input-group-addon">Time Returned</span>
+        {{ form.Time_Returned|add_class:"form-control" }}
     </div><br>
 
-
-
-    <a href="#" class="btn btn-danger" role="button">Next</a>
-
+         <div class="input-group input-group-sm">
+        <span class="input-group-addon">Contact Person</span>
+        {{ form.Contact_Person|add_class:"form-control" }}
+    </div><br>
+        <div class="form-input submit-button">
+        <button type="submit" class="btn btn-danger" value="true">Submit Form</button>
+    </div>
+   </form>
     </p>
 
 </div>
