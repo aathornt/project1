@@ -20,10 +20,9 @@ class TripForm(ModelForm):
 	Date_Left = forms.DateField(input_formats=['%m-%d-%y'])
 	Date_Returned = forms.DateField(input_formats=['%m-%d-%y'])
 	Time_Left = forms.TimeField(input_formats=['%H:%M'])
-	Time_Returned = forms.TimeField(input_formats=['%H: %M'])
-	User = forms.ModelChoiceField(User.objects)
+	Time_Returned = forms.TimeField(input_formats=['%H:%M'])
 	class Meta:
 		model = Trip;
-		fields = ['User', 'Place', 'Date_Left', 'Time_Left', 'Date_Returned', 'Time_Returned', 'Purpose', 'Contact_Person']
-
+		fields = [ 'Username', 'Place', 'Purpose', 'Date_Left', 'Time_Left', 'Date_Returned', 'Time_Returned', 'Contact_Person']
+ 
 		 

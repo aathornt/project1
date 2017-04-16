@@ -12,55 +12,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<style>
-.jumbotron {
-
-	background-color:#2f3f4f;
-	color:lightgrey;
-}
-/* Adds borders for tabs */
-.tab-content {
-
-	border-left: 1px solid #ddd;
-	border-right: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	padding: 10px;
-}
-.nav-tabs {
-
-	margin-bottom: 0;
-}
-.navbar-custom {
-    background-color: indianred;
-    margin: 0 15px 0 15px;
-    color:white;
-}
-body { padding-top: 70px; }
-.center {
-    text-align:center;
-}
-.large {
-    font-size:1.25em;
-}
-.page-header {
-    text-align: center;
-}
-.panel-heading {
-    text-align: center;
-}
-tr {
-    color:black;
-}
-p {
-  color:black;
-}
-</style>
+<link rel="stylesheet" href="/static/forms/main.css">
 
 </head>
 
 <body>
+
+
 <div class="container">
 <div class="page-header">
+{% include 'signout_panel.html' %}
 <h1>Welcome to TripExpenser!</h1>
 </div>
 

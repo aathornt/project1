@@ -10,34 +10,16 @@
 
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<style>
-.jumbotron {
+<link rel="stylesheet" href="/static/forms/addtrip.css">
 
-	background-color:#2f3f4f;
-	color:lightgrey;
-}
-/* Adds borders for tabs */
-.tab-content {
-
-	border-left: 1px solid #ddd;
-	border-right: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	padding: 10px;
-}
-.nav-tabs {
-
-	margin-bottom: 0;
-}
-</style>
-
-</head>
 </head>
 <body>
 
 <div class="container">
 
 <div class="page-header">
-<h1>Trip Page</h1>
+{% include 'signout_panel.html' %}
+<h1 class='center'>Add A Trip!</h1>
 </div>
 
 <div class="jumbotron">
@@ -45,15 +27,16 @@
 	<p>Trip</p>
 
     <p>
-    <form id="createEmployee" action="/forms/trip/" method="POST">
+    <form id="createEmployee" action="/forms/addtrip/" method="POST">
     {% csrf_token %}
     {% load widget_tweaks %}
 
-    <div class="input-group input-group-sm">
+       <!--   <div class="input-group input-group-sm">
         <span class="input-group-addon">SAP ID</span>
-         {{ form.User_id|add_class:"form-control" }}
-    </div><br>
-
+        <input type="text" disabled value="{{ user.username }}">
+    </div><br> -->
+    <input type="hidden" name="Username" id="id_Username" value="{{ user.id }}" />
+    
     <div class="input-group input-group-sm">
         <span class="input-group-addon">Place</span>
          {{ form.Place|add_class:"form-control" }}
@@ -61,30 +44,30 @@
 
     <div class="input-group input-group-sm">
         <span class="input-group-addon">Purpose</span>
-        {{ form.Purpose|add_class:"form-control" }}
+         {{ form.Purpose|add_class:"form-control" }}
     </div><br>
 
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">Date Left</span>
+        <span class="input-group-addon">Date Left (MM-DD-YY)</span>
         {{ form.Date_Left|add_class:"form-control" }}
     </div><br>
 
-     <div class="input-group input-group-sm">
-        <span class="input-group-addon">Time Left</span>
-        {{ form.Date_Returned|add_class:"form-control" }}
-    </div><br>
-
-         <div class="input-group input-group-sm">
-        <span class="input-group-addon">Date Returned</span>
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">Time Left (H:M)</span>
         {{ form.Time_Left|add_class:"form-control" }}
     </div><br>
 
-         <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">Date Returned</span>
+        {{ form.Date_Returned|add_class:"form-control" }}
+    </div><br>
+
+    <div class="input-group input-group-sm">
         <span class="input-group-addon">Time Returned</span>
         {{ form.Time_Returned|add_class:"form-control" }}
     </div><br>
 
-         <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
         <span class="input-group-addon">Contact Person</span>
         {{ form.Contact_Person|add_class:"form-control" }}
     </div><br>
@@ -99,7 +82,13 @@
 </div>
 
 
-
+{% if form.Username.errors %}
+    <ul class='form-errors'>
+        {% for error in form.Username.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 
 
 

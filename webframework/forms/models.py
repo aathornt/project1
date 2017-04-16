@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.conf import settings
-
 
 CHOICES=(
 		('Breakfast', 'Breakfast'),
@@ -21,7 +19,8 @@ class Meal(models.Model):
 
 class Trip(models.Model):
 	Trip_ID = models.AutoField(primary_key=True)
-	User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	Username = models.ForeignKey(User, on_delete=models.CASCADE, blank=
+		True, null=True)
 	Contact_Person = models.CharField(max_length=200)
 	Place = models.CharField(max_length=200)
 	Purpose = models.CharField(max_length=200)

@@ -1,0 +1,28 @@
+.jumbotron {
+            background-color: #2f3f4f;
+            color: lightgrey;
+        }
+        /* Adds borders for tabs */
+        .tab-content {
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+        }
+        .nav-tabs {
+            margin-bottom: 0;
+        }
+        .navbar-custom {
+            background-color: indianred;
+            margin: 0 15px 0 15px;
+            color: white;
+        }
+        .center {
+            text-align: center;
+        }
+        .fix {
+        	width:auto;
+        }
+        .signout_panel > a {
+    float: left;
+}
