@@ -3,37 +3,29 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-# # Create your models here.
-class Traveler(models.Model):
-	SAP_ID = models.BigIntegerField(primary_key=True)
-	First_Name = models.CharField(max_length=200)
-	Last_Name = models.CharField(max_length=200)
-	Title = models.CharField(max_length=200)
-	Email = models.CharField(max_length=200)
-	Department_Name = models.CharField(max_length=200)
-
-	def __unicode__(self):
-		return self.First_Name
-
-
-
-
 CHOICES=(
-		('BR', 'Breakfast'),
-		('LUN', 'Lunch'),
-		('DIN', 'Dinner'),
+		('Breakfast', 'Breakfast'),
+		('Lunch', 'Lunch'),
+		('Dinner', 'Dinner'),
 
 	)
 
 class Meal(models.Model):
 	Meal_ID = models.AutoField(primary_key=True)
-	Meal_Category = models.CharField(max_length=3, choices=CHOICES, default='BR')
+	Meal_Category = models.CharField(max_length=30, choices=CHOICES, default='Breakfast')
 	Date = models.DateField()
 	Meal_No_Tip = models.FloatField()
 	Meal_Tip = models.FloatField()
-	# Breakfast_No_Tip = models.FloatField()
-	# Breakfast_Tip = models.FloatField()
-	# Lunch_No_Tip = models.FloatField()
-	# Lunch_Tip = models.FloatField()
-	# Dinner_No_Tip = models.FloatField()
-	# Dinner_Tip = models.FloatField()
+
+class Trip(models.Model):
+	Trip_ID = models.AutoField(primary_key=True)
+	Username = models.ForeignKey(User, on_delete=models.CASCADE, blank=
+		True, null=True)
+	Contact_Person = models.CharField(max_length=200)
+	Place = models.CharField(max_length=200)
+	Purpose = models.CharField(max_length=200)
+	Date_Left = models.DateField()
+	Date_Returned = models.DateField()
+	Time_Left = models.TimeField()
+	Time_Returned = models.TimeField()
+

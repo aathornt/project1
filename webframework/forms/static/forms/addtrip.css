@@ -1,0 +1,35 @@
+#createEmployee .form-input {
+    width: auto;
+    clear: both;
+}
+#createEmployee .submit-button {
+    margin-top: 20px;
+    text-align: center;
+}
+#createEmployee {
+    width: auto;
+}
+
+.jumbotron {
+
+	background-color:#2f3f4f;
+	color:lightgrey;
+}
+/* Adds borders for tabs */
+.tab-content {
+
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	padding: 10px;
+}
+.nav-tabs {
+
+	margin-bottom: 0;
+}
+.center {
+	text-align: center;
+}
+.signout_panel > a {
+    float: left;
+}
