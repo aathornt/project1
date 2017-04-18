@@ -1,9 +1,12 @@
 from django.http import HttpResponse
+from django.http import HttpRequest
 from django.shortcuts import render
+from django.shortcuts import redirect
 
 from .forms import TravelerForm
 from .forms import MealForm
 from .forms import UserForm
+from .forms import ConfirmForm
 from .models import Traveler
 from .models import Meal
 from .models import User
@@ -21,22 +24,34 @@ def register(request):
 	if request.method == 'POST':
 		# create a form instance and populate it with data from the request:
 		form = UserForm(request.POST)
+		confirm = UserForm(request.POST)
 		# check whether it's valid:
-		if form.is_valid():
+		if (form.is_valid() & confirm.is_valid()):
 			# save data as an instance in a database
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password']
+			confirm = confirm.cleaned_data['password']
 			first = form.cleaned_data['first_name']
 			last = form.cleaned_data['last_name']
 			email = form.cleaned_data['email']
-			user = User.objects.create_user(username, email, password, first_name=first, last_name=last)
-			user.save()
+			if (password == confirm):
+				user = User.objects.create_user(username, email, password, first_name=first, last_name=last)
+				user.save()
+				return redirect('../../')
+			else:
+				form = UserForm()
+				confirm = UserForm()
+				return render(request, 'register.html', {'form': form, 'confirm': confirm})
 			# reply with thank you, offer them a chance to enter again
-			return HttpResponse('Thank you! <a href="../../">Return</a>')
+		else:
+			form = UserForm()
+			confirm = UserForm()
+			return render(request, 'register.html', {'form': form, 'confirm': confirm})
 	else:
 		# We'll create a blank form if we have a GET
 		form = UserForm()
-	return render(request, 'register.html', {'form': form})
+		confirm = UserForm()
+		return render(request, 'register.html', {'form': form, 'confirm': confirm})
 
 def addtrip(request):
 	return render(request, 'addtrip.html', {})

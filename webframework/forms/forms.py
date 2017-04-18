@@ -15,12 +15,8 @@ class TravelerForm(ModelForm):
 		model = Traveler;
 		fields = ['SAP_ID', 'First_Name', 'Last_Name', 'Email', 'Title', 'Department_Name',]
 
-# class MealForm(ModelForm):
-# 	Date = forms.DateField(input_formats=['%m-%d-%y'])
-# 	class Meta:
-# 		model = Meal;
-# 		fields = ['Date', 'Breakfast_No_Tip', 'Breakfast_Tip', 'Lunch_No_Tip', 'Lunch_Tip', 'Dinner_No_Tip','Dinner_Tip',]
-
+class ConfirmForm(forms.Form):
+	confirm = forms.CharField(max_length=30)
 
 class MealForm(ModelForm):
 	Date = forms.DateField(input_formats=['%m-%d-%y'])
