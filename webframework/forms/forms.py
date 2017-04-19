@@ -17,12 +17,18 @@ def clean(self):
 	password = cleaned_data.get("password")
 	confirm_password = cleaned_data.get("confirm_password")
 
+		fields = ['username', 'password',  'email', 'first_name', 'last_name']
+
+
+
+class ConfirmForm(forms.Form):
+	confirm = forms.CharField(max_length=30)
 
 class MealForm(ModelForm):
 	Date = forms.DateField(input_formats=['%m-%d-%y'])
 	class Meta:
 		model = Meal;
-		fields = ['Meal_Category', 'Date', 'Meal_No_Tip', 'Meal_Tip']
+		fields = ['Meal_Category', 'Date', 'Meal_No_Tip', 'Meal_Tip', 'Trip_ID']
 
 class TripForm(ModelForm):
 	Date_Left = forms.DateField(input_formats=['%m-%d-%y'])
@@ -32,7 +38,5 @@ class TripForm(ModelForm):
 	is_active = forms.BooleanField(initial=True)
 	class Meta:
 		model = Trip;
-		fields = [ 'Username', 'Place', 'Purpose', 'Date_Left', 'Time_Left', 'Date_Returned', 'Time_Returned', 'Contact_Person', 'is_active']
- 
+		fields = [ 'Username', 'Place', 'Purpose', 'Date_Left', 'Time_Left', 'Date_Returned', 'Time_Returned', 'Contact_Person', 'Is_Active']
 
-		 

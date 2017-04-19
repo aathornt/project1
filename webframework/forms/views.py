@@ -1,12 +1,16 @@
 from django.http import HttpResponse
+from django.http import HttpRequest
 from django.shortcuts import render
+from django.shortcuts import redirect
+
 from .forms import MealForm
 from .forms import UserForm
+from .forms import ConfirmForm
 from .forms import TripForm
 from .models import Meal
 from .models import Trip
 from django.conf import settings
-from django.shortcuts import redirect 
+from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -17,32 +21,36 @@ def register(request):
 	if request.method == 'POST':
 		# create a form instance and populate it with data from the request:
 		form = UserForm(request.POST)
+		confirm = UserForm(request.POST)
 		# check whether it's valid:
-		
-		if form.is_valid():
-			
+
+		if (form.is_valid() & confirm.is_valid()):
+			# save data as an instance in a database
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password']
 			confirm_password = form.cleaned_data['confirm_password']
+			first = form.cleaned_data['first_name']
+			last = form.cleaned_data['last_name']
 			email = form.cleaned_data['email']
-			first_name = form.cleaned_data['first_name']
-			last_name = form.cleaned_data['last_name']
+
 			user = User.objects.create_user(username, email, password,  first_name = first_name, last_name  = last_name)
-					# save data as an instance in a database
+			# save data as an instance in a database
 			user.save()
-			return HttpResponse('Thank You! <a href="../../">Return</a>')
-			
+			# reply with thank you, offer them a chance to enter again
+			return HttpResponse('Thank you! <a href="../../">Return</a>')
 	else:
 		# We'll create a blank form if we have a GET
 		form = UserForm()
-		return render(request, 'register.html', {'form': form})
+		confirm = UserForm()
+		return render(request, 'register.html', {'form': form, 'confirm': confirm})
+
 
 @login_required(login_url='/')
 def addtrip(request):
 
 	# if this is a post request we need to process the form data
 	if request.method == 'POST':
-             
+
 		# create a form instance and populate it with data from the request:
 		form = TripForm(request.POST)
 		# check whether it's valid:
@@ -92,4 +100,6 @@ def addmeal(request):
 	else:
 		# We'll create a blank form if we have a GET
 		form = MealForm()
-	return render(request, 'addmeal.html', {'form': form})
+		current_user = request.user
+		active = Trip.objects.get(Is_Active = "True", Username=current_user.id)
+	return render(request, 'addmeal.html', {'form': form, 'active': active.Trip_ID})
