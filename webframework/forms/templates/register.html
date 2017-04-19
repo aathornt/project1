@@ -33,6 +33,11 @@
 		</div><br>
 
 		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Confirm Password</span>
+			{{ form.confirm_password|add_class:"form-control"|attr:"type:password" }}
+		</div><br>
+
+		<div class="input-group input-group-sm">
 		<span class="input-group-addon">First Name</span>
 				{{ form.first_name|add_class:"form-control" }}
 		</div><br>

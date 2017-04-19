@@ -18,22 +18,24 @@ def register(request):
 		# create a form instance and populate it with data from the request:
 		form = UserForm(request.POST)
 		# check whether it's valid:
+		
 		if form.is_valid():
+			
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password']
+			confirm_password = form.cleaned_data['confirm_password']
 			email = form.cleaned_data['email']
 			first_name = form.cleaned_data['first_name']
 			last_name = form.cleaned_data['last_name']
-
 			user = User.objects.create_user(username, email, password,  first_name = first_name, last_name  = last_name)
-			# save data as an instance in a database
+					# save data as an instance in a database
 			user.save()
 			return HttpResponse('Thank You! <a href="../../">Return</a>')
 			
 	else:
 		# We'll create a blank form if we have a GET
 		form = UserForm()
-	return render(request, 'register.html', {'form': form})
+		return render(request, 'register.html', {'form': form})
 
 @login_required(login_url='/')
 def addtrip(request):

@@ -28,4 +28,6 @@ class Trip(models.Model):
 	Date_Returned = models.DateField()
 	Time_Left = models.TimeField()
 	Time_Returned = models.TimeField()
+	is_active = models.BooleanField()
+
 
