@@ -24,7 +24,7 @@ class MealForm(ModelForm):
 	Date = forms.DateField(input_formats=['%m-%d-%y'])
 	class Meta:
 		model = Meal;
-		fields = ['Meal_Category', 'Date', 'Meal_No_Tip', 'Meal_Tip']
+		fields = ['Meal_Category', 'Date', 'Meal_No_Tip', 'Meal_Tip', 'Trip_ID']
 
 class TripForm(ModelForm):
 	Date_Left = forms.DateField(input_formats=['%m-%d-%y'])
@@ -33,4 +33,4 @@ class TripForm(ModelForm):
 	Time_Returned = forms.TimeField(input_formats=['%H:%M'])
 	class Meta:
 		model = Trip;
-		fields = [ 'Username', 'Place', 'Purpose', 'Date_Left', 'Time_Left', 'Date_Returned', 'Time_Returned', 'Contact_Person']
+		fields = [ 'Username', 'Place', 'Purpose', 'Date_Left', 'Time_Left', 'Date_Returned', 'Time_Returned', 'Contact_Person', 'Is_Active']

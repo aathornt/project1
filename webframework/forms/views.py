@@ -98,4 +98,6 @@ def addmeal(request):
 	else:
 		# We'll create a blank form if we have a GET
 		form = MealForm()
-	return render(request, 'addmeal.html', {'form': form})
+		current_user = request.user
+		active = Trip.objects.get(Is_Active = "True", Username=current_user.id)
+	return render(request, 'addmeal.html', {'form': form, 'active': active.Trip_ID})
