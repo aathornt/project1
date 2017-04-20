@@ -21,6 +21,7 @@
     <div class="container">
 
         <div class="page-header">
+        {% include 'signout_panel.html' %}
             <h1>Your Current Trip!</h1>
         </div>
 
@@ -35,7 +36,8 @@
                 </nav>-->
 
                 <div>
-                    <h2 class="center">{{ active }}</h2>
+                    <h2 class="center">{{ active.Place }}</h2>
+                    <h4 class="center">{{ active.Purpose }}</h4>
                 </div>
 
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">

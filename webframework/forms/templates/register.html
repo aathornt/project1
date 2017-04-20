@@ -26,26 +26,31 @@
 		<span class="input-group-addon">SAP ID</span>
 			{{ form.username|add_class:"form-control" }}
 		</div><br>
+
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">First Name</span>
 				{{ form.first_name|add_class:"form-control" }}
 		</div><br>
+		
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Last Name</span>
 				{{ form.last_name|add_class:"form-control" }}
 		</div></br>
+		
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Email</span>
 				{{ form.email|add_class:"form-control" }}
 		</div><br>
+
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Password</span>
 			{{ form.password|add_class:"form-control"|attr:"type:password" }}
 		</div><br>
-		<div class="input-group input-group-sm">
+
+		<!-- <div class="input-group input-group-sm">
 		<span class="input-group-addon">Confirm Password</span>
 			{{ confirm.password|add_class:"form-control"|attr:"type:password" }}
-		</div><br>
+		</div><br> -->
 
 	<div class="form-input submit-button">
 		<button type="submit" class="btn btn-danger" value="true">Submit Form</button>
