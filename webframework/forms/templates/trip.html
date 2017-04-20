@@ -35,7 +35,7 @@
                 </nav>-->
 
                 <div>
-                    <h2 class="center">Vegas!</h2>
+                    <h2 class="center">{{ active }}</h2>
                 </div>
 
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
@@ -74,7 +74,7 @@
                         <tbody>
 
                         {% for name in recent %}
-                          <div>                          
+                          <div>
                            <td> {{ name.Date }} </td>
                            <td> {{ name.Meal_Category }} </td>
                            <td> ${{ name.Meal_No_Tip }} </td>

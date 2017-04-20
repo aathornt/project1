@@ -65,8 +65,14 @@ def addtrip(request):
 @login_required(login_url='/')
 def index(request):
 	# recent = Traveler.objects.all().order_by('First_Name')[:3]
-	recent = Meal.objects.all().order_by('-Meal_ID')[:3]
-	return render(request, 'main.html', {'recent': recent})
+	current_user = request.user;
+	name = current_user.first_name;
+	if Trip.objects.all().exists():
+		active = Trip.objects.get(Is_Active = "True", Username=current_user.id)
+		recent = Meal.objects.all().order_by('-Meal_ID')[:3]
+		return render(request, 'main.html', {'recent': recent, 'name': name, 'active': active.Place})
+	else:
+		return render(request, 'main.html', {'name': name})
 
 def signout(request):
 	logout(request)
@@ -74,8 +80,10 @@ def signout(request):
 
 @login_required(login_url='/')
 def trip(request):
+	current_user = request.user;
+	active = Trip.objects.get(Is_Active = "True", Username=current_user.id)
 	recent = Meal.objects.all().order_by('-Meal_ID')[:3]
-	return render(request, 'trip.html', {'recent': recent})
+	return render(request, 'trip.html', {'recent': recent, 'active': active.Place})
 
 @login_required(login_url='/')
 def addexpense(request):
