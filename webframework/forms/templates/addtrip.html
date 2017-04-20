@@ -38,11 +38,6 @@
     <input type="hidden" name="Username" id="id_Username" value="{{ user.id }}" />
 
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">Current Trip</span>
-        {{ form.is_active|add_class:"form-control" }}
-    </div><br>
-
-    <div class="input-group input-group-sm">
         <span class="input-group-addon">Place</span>
          {{ form.Place|add_class:"form-control" }}
     </div><br>
@@ -77,7 +72,7 @@
         {{ form.Contact_Person|add_class:"form-control" }}
     </div><br>
 
-		<input type="hidden" name="Is_Active" id="Trip_Is_Active" value="True" />
+	<input type="hidden" name="Is_Active" id="Trip_Is_Active" value="True" />
 
         <div class="form-input submit-button">
         <button type="submit" class="btn btn-danger" value="true">Submit Form</button>

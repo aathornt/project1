@@ -7,22 +7,21 @@ from django.contrib.auth.models import User
 
 class UserForm(ModelForm):
 	password=forms.CharField(widget=forms.PasswordInput())
-	confirm_password=forms.CharField()
+	# confirm_password=forms.CharField()
 	class Meta:
 		model = User;
-		fields = ['username', 'password', 'confirm_password', 'email', 'first_name', 'last_name']
+		fields = ['username', 'password', 'email', 'first_name', 'last_name']
 
-def clean(self):
-	cleaned_data = super(UserForm, self).clean()
-	password = cleaned_data.get("password")
-	confirm_password = cleaned_data.get("confirm_password")
-
-		fields = ['username', 'password',  'email', 'first_name', 'last_name']
+# def clean(self):
+# 	cleaned_data = super(UserForm, self).clean()
+# 	password = cleaned_data.get("password")
+# 	confirm_password = cleaned_data.get("confirm_password")
 
 
 
-class ConfirmForm(forms.Form):
-	confirm = forms.CharField(max_length=30)
+
+# class ConfirmForm(forms.Form):
+# 	confirm = forms.CharField(max_length=30)
 
 class MealForm(ModelForm):
 	Date = forms.DateField(input_formats=['%m-%d-%y'])
@@ -35,7 +34,6 @@ class TripForm(ModelForm):
 	Date_Returned = forms.DateField(input_formats=['%m-%d-%y'])
 	Time_Left = forms.TimeField(input_formats=['%H:%M'])
 	Time_Returned = forms.TimeField(input_formats=['%H:%M'])
-	is_active = forms.BooleanField(initial=True)
 	class Meta:
 		model = Trip;
 		fields = [ 'Username', 'Place', 'Purpose', 'Date_Left', 'Time_Left', 'Date_Returned', 'Time_Returned', 'Contact_Person', 'Is_Active']
