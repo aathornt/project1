@@ -91,7 +91,7 @@ def trip(request):
 	if Trip.objects.filter(Is_Active = True, Username = current_user.id).exists():
 		active = Trip.objects.get(Is_Active = True, Username = current_user.id)
 		recent = Meal.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Meal_ID')[:3]
-		return render(request, 'trip.html', {'recent': recent})
+		return render(request, 'trip.html', {'recent': recent, 'active' : active})
 	else:
 		return redirect('/forms/')
 
