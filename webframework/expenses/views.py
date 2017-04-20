@@ -12,4 +12,3 @@ def index(request):
 			return render(request, '../forms/main.html', {})
 		else:
 			return render(request, 'index.html', {})
-
