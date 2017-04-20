@@ -22,7 +22,13 @@
 <div class="container">
 <div class="page-header">
 {% include 'signout_panel.html' %}
+<<<<<<< HEAD
+<h1>Welcome to TripExpenser, {{ name }}!</h1>
+||||||| merged common ancestors
+<h1>Welcome to TripExpenser!</h1>
+=======
 <h1>Welcome to TripExpenser, {{ name }}! </h1>
+>>>>>>> b7fbe98534a772ac611c3960ce447446170270d5
 </div>
 
 <div class="jumbotron">
@@ -32,7 +38,13 @@
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
 
+<<<<<<< HEAD
+                 <a href="/forms/trip/" class="btn btn-danger large" role="button">Your Current Trip:<br />{{ active }}</a>
+||||||| merged common ancestors
+                 <a href="/forms/trip/" class="btn btn-danger large" role="button">Your Current Trip:<br />Vegas!</a>
+=======
                  <a href="/forms/trip/" class="btn btn-danger large" role="button">Your Current Trip: {{ active.Place }}<br /></a>
+>>>>>>> b7fbe98534a772ac611c3960ce447446170270d5
 
             </div>
         </div><br />
@@ -57,13 +69,13 @@
                         <td>Breakfast</td>
                         <td>$8.46</td>
                         <td>3/11</td>-->
-{% for name in recent %}
+{% for expense in recent %}
                           <div>
-                            <td> {{ name.Meal_ID }}</td>
-                           <td> {{ name.Meal_Category }} </td>
-                           <td> {{ name.Date }} </td>
-                           <td> ${{ name.Meal_No_Tip }} </td>
-                           <td> ${{ name.Meal_Tip }}</td>
+                            <td> {{ expense.Meal_ID }}</td>
+                           <td> {{ expense.Meal_Category }} </td>
+                           <td> {{ expense.Date }} </td>
+                           <td> ${{ expense.Meal_No_Tip }} </td>
+                           <td> ${{ expense.Meal_Tip }}</td>
                            <tr></tr>
                           </div>{% endfor %}
 

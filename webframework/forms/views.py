@@ -32,14 +32,14 @@ def register(request):
 			# confirm_password = form.cleaned_data['confirm_password']
 			first_name = form.cleaned_data['first_name']
 			last_name = form.cleaned_data['last_name']
-			
+
 
 			user = User.objects.create_user(username, email, password,  first_name = first_name, last_name  = last_name)
 			# save data as an instance in a database
 			user.save()
 			# reply with thank you, offer them a chance to enter again
 			return HttpResponse('Thank you! <a href="../../">Return</a>')
-		
+
 	else:
 		# We'll create a blank form if we have a GET
 		form = UserForm()
@@ -69,7 +69,7 @@ def addtrip(request):
 			# We'll create a blank form if we have a GET
 			form = TripForm()
 		return render(request, 'addtrip.html', {'form': form})
-	
+
 @login_required(login_url='/')
 def index(request):
 	current_user = request.user;
@@ -91,7 +91,7 @@ def trip(request):
 	if Trip.objects.filter(Is_Active = True, Username = current_user.id).exists():
 		active = Trip.objects.get(Is_Active = True, Username = current_user.id)
 		recent = Meal.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Meal_ID')[:3]
-		return render(request, 'trip.html', {'recent': recent, 'active' : active})
+		return render(request, 'trip.html', {'recent': recent, 'active': active})
 	else:
 		return redirect('/forms/')
 

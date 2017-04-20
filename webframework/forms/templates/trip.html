@@ -28,13 +28,6 @@
         <div class="jumbotron">
 
             <p>
-                <!--<nav class="nav navbar-nav">
-                    <ul class="nav nav-pills nav-justified">
-                        <li role="presentation"><a href="#" class="navbar-custom">Your Current Trip:<br />Trip Name</a></li>
-                    </ul>
-                    <br />
-                </nav>-->
-
                 <div>
                     <h2 class="center">{{ active.Place }}!</h2>
                     <h4 class="center">{{ active.Purpose }}!</h4>
@@ -76,7 +69,7 @@
                         <tbody>
 
                         {% for name in recent %}
-                          <div>                          
+                          <div>
                            <td> {{ name.Date }} </td>
                            <td> {{ name.Meal_Category }} </td>
                            <td> ${{ name.Meal_No_Tip }} </td>
