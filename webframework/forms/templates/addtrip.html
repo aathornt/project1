@@ -38,6 +38,11 @@
     <input type="hidden" name="Username" id="id_Username" value="{{ user.id }}" />
 
     <div class="input-group input-group-sm">
+        <span class="input-group-addon">Department</span>
+         {{ form.Department|add_class:"form-control" }}
+    </div><br>
+
+    <div class="input-group input-group-sm">
         <span class="input-group-addon">Place</span>
          {{ form.Place|add_class:"form-control" }}
     </div><br>
@@ -58,12 +63,12 @@
     </div><br>
 
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">Date Returned</span>
+        <span class="input-group-addon">Date Returned (MM-DD-YY)</span>
         {{ form.Date_Returned|add_class:"form-control" }}
     </div><br>
 
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">Time Returned</span>
+        <span class="input-group-addon">Time Returned (HH:MM)</span>
         {{ form.Time_Returned|add_class:"form-control" }}
     </div><br>
 

@@ -13,6 +13,7 @@
 <body>
 	<div class="container">
 	<div class="page-header">
+	{% include 'register_panel.html' %}
 	<h1>Register Page</h1>
 	</div>
 	<div class="jumbotron">
@@ -59,4 +60,19 @@
 </p>
 </div>
 </div>
+{% if form.Username.errors %}
+    <ul class='form-errors'>
+        {% for error in form.Username.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if form.non_field_errors %}
+    <ul class='form-errors'>
+        {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 </body>

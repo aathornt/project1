@@ -34,10 +34,14 @@
 }
 tr {
     color:black;
+    text-align: center;
 }
 p {
   color:black;
 }
 .signout_panel > a {
     float: left;
+}
+th {
+    text-align: center;
 }
