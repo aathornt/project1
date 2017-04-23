@@ -19,7 +19,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import datetime
-from django.db.models import Q 
+
 
 #TODO copy views from expenses
 def register(request):
@@ -56,7 +56,22 @@ def register(request):
 		form = UserForm()
 		# confirm = UserForm()
 		return render(request, 'register.html', {'form': form})
-		 # 'confirm': confirm
+
+@login_required(login_url='/')
+def index(request):
+	current_user = request.user;
+	name = current_user.first_name;
+	if Trip.objects.filter(Is_Active = True, Username = current_user.id).exists():
+		active = Trip.objects.get(Is_Active = True, Username = current_user.id)
+		recent = Post.objects.select_related('meal', 'dailyexpenses').all().order_by('-Added')[:3]
+		return render(request, 'main.html', {'recent': recent, 'name' : name, 'active' : active})
+	else:
+		trip = 'None'
+		category = 'No Active Trip'
+		na = 'N/A'
+		return render(request, 'main.html', {'name' : name, 'trip': trip, 'category': category, 'na': na})
+
+
 
 
 @login_required(login_url='/')
@@ -80,22 +95,6 @@ def addtrip(request):
 			# We'll create a blank form if we have a GET
 			form = TripForm()
 		return render(request, 'addtrip.html', {'form': form})
-
-@login_required(login_url='/')
-def index(request):
-	current_user = request.user;
-	name = current_user.first_name;
-	if Trip.objects.filter(Username = current_user.id).exists():
-		active = Trip.objects.get(Is_Active = True, Username = current_user.id)
-		recent = Post.objects.select_related('meal', 'dailyexpenses').all().order_by('-Added')[:3]
-		return render(request, 'main.html', {'recent': recent, 'name' : name, 'active' : active})
-	else:
-		return render(request, 'main.html', {'name' : name})
-
-def signout(request):
-	logout(request)
-	return redirect('/')
-
 
 @login_required(login_url='/')
 def trip(request):
@@ -158,3 +157,28 @@ def dailyexpenses(request):
 		active = Trip.objects.get(Is_Active = "True", Username=current_user.id)
 		timestamp = DailyExpenses.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Added')
 		return render(request, 'dailyexpenses.html', {'form': form, 'active': active.Trip_ID, 'timestamp': timestamp })
+
+
+@login_required(login_url='/')
+def triplist(request):
+	current_user = request.user
+	trips = Trip.objects.filter(Username = current_user.id).order_by('-Trip_ID')
+	return render(request, 'triplist.html', {'trips': trips})
+
+
+@login_required(login_url='/')
+def finalconfirm(request):
+	return render(request, 'finalconfirm.html', {})
+
+
+def signout(request):
+	logout(request)
+	return redirect('/')
+
+def finalize(request):
+	current_user = request.user
+	active = Trip.objects.get(Is_Active = True, Username = current_user.id)
+	active.Is_Active = "False"
+	active.save()
+	return HttpResponse('Nice bro')
+	
