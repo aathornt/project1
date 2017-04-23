@@ -22,7 +22,7 @@
 <div class="container">
 <div class="page-header">
 {% include 'signout_panel.html' %}
-<h1>Welcome to TripExpenser, {{ name }}! </h1>
+<h1>Welcome to TripExpenser, {{ name }}!</h1>
 </div>
 
 <div class="jumbotron">
@@ -31,7 +31,6 @@
         <!--Current Trip Button-->
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
-
 
                  <a href="/forms/trip/" class="btn btn-danger large" role="button">Your Current Trip: {{ active.Place }}<br /></a>
 
@@ -46,46 +45,28 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Category</th>
-                        <th>Date</th>
-                        <th>Meal Before Tip</th>
-                        <th>Meal After Tip</th>
+                        <th class='center'>Category</th>
+                        <th class='center'>Date</th>
+                        <th class='center'>Cost</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr> -->
-                      <!--  <th scope="row">1</th>
-                        <td>Breakfast</td>
-                        <td>$8.46</td>
-                        <td>3/11</td>-->
-{% for expense in recent %}
+                        {% for expense in recent %}
                           <div>
-                            <td> {{ expense.Meal_ID }}</td>
-                           <td> {{ expense.Meal_Category }} </td>
-                           <td> {{ expense.Date }} </td>
-                           <td> ${{ expense.Meal_No_Tip }} </td>
-                           <td> ${{ expense.Meal_Tip }}</td>
-                           <tr></tr>
-                          </div>{% endfor %}
+                                {% if expense.meal %}
+                           <td> {{ expense.meal.Meal_Category }} </td>
+                                {% else %}
+                            <td>{{ expense.dailyexpenses.Category }}</td>
+                                {% endif %}
 
-                    <!-- </tr> -->
-                    <!-- <tr>
-                        <th scope="row">2</th>
-                        <td>Gas</td>
-                        <td>$19.67</td>
-                        <td>3/10</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Dinner</td>
-                        <td>$16.78</td>
-                        <td>3/10</td>
-                    </tr> -->
+                           <td> {{ expense.Date }} </td>
+                           <td> ${{ expense.Cost|floatformat:2 }} </td>
+                           <tr></tr>
+                          </div>
+                        {% endfor %}
                 </tbody>
             </table>
             </div>
-
-
 
             <div>
                 <tr></tr>

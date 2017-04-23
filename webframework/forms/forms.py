@@ -1,6 +1,8 @@
 from django.forms import ModelForm
 from .models import Meal
 from .models import Trip
+from .models import DailyExpenses
+from .models import Post
 from django import forms
 from django.contrib.auth.models import User
 
@@ -12,22 +14,21 @@ class UserForm(ModelForm):
 		model = User;
 		fields = ['username', 'password', 'email', 'first_name', 'last_name']
 
-# def clean(self):
-# 	cleaned_data = super(UserForm, self).clean()
-# 	password = cleaned_data.get("password")
-# 	confirm_password = cleaned_data.get("confirm_password")
-
-
-
-
-# class ConfirmForm(forms.Form):
-# 	confirm = forms.CharField(max_length=30)
 
 class MealForm(ModelForm):
 	Date = forms.DateField(input_formats=['%m-%d-%y'])
+	Cost = forms.FloatField()
 	class Meta:
 		model = Meal;
-		fields = ['Meal_Category', 'Date', 'Meal_No_Tip', 'Meal_Tip', 'Trip_ID']
+		fields = ['Meal_Category', 'Date', 'Cost', 'Added', 'Tip', 'Trip_ID']
+
+
+class DailyExpensesForm(ModelForm):
+	Date = forms.DateField(input_formats=['%m-%d-%y'])
+	Cost = forms.FloatField()
+	class Meta:
+		model = DailyExpenses;
+		fields = ['Category', 'Date', 'Cost', 'Added', 'Trip_ID']
 
 class TripForm(ModelForm):
 	Date_Left = forms.DateField(input_formats=['%m-%d-%y'])
@@ -36,5 +37,5 @@ class TripForm(ModelForm):
 	Time_Returned = forms.TimeField(input_formats=['%H:%M'])
 	class Meta:
 		model = Trip;
-		fields = [ 'Username', 'Place', 'Purpose', 'Date_Left', 'Time_Left', 'Date_Returned', 'Time_Returned', 'Contact_Person', 'Is_Active']
+		fields = [ 'Username', 'Department', 'Place', 'Purpose', 'Date_Left', 'Time_Left', 'Date_Returned', 'Time_Returned', 'Contact_Person', 'Is_Active']
 
