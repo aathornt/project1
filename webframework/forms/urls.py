@@ -12,7 +12,8 @@ url(r'^trip/', views.trip, name='trip'),
 url(r'^addmeal/', views.addmeal, name='addmeal'),
 url(r'^addexpense/', views.addexpense, name='addexpense'),
 url(r'^signout/', views.signout, name='signout'),
-url(r'^dailyexpenses/', views.dailyexpenses, name='dailyexpenses')
+url(r'^dailyexpenses/', views.dailyexpenses, name='dailyexpenses'),
+url(r'^finalize/', views.finalize, name='finalize'),
+url(r'^triplist/', views.triplist, name='triplist'),
+url(r'^finalconfirm/', views.finalconfirm, name ='finalconfirm')
 ]
-# ,
-# url(r'^finalizetrip/', views.finalizetrip, name='finalizetrip')

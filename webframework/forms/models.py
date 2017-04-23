@@ -28,9 +28,9 @@ class Trip(models.Model):
 	Department = models.CharField(max_length=200)
 	Place = models.CharField(max_length=200)
 	Purpose = models.CharField(max_length=200)
-	Date_Left = models.DateField()
+	Date_Departed = models.DateField()
 	Date_Returned = models.DateField()
-	Time_Left = models.TimeField()
+	Time_Departed = models.TimeField()
 	Time_Returned = models.TimeField()
 	Is_Active = models.CharField(max_length=5)
 
