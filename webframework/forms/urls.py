@@ -15,5 +15,11 @@ url(r'^signout/', views.signout, name='signout'),
 url(r'^dailyexpenses/', views.dailyexpenses, name='dailyexpenses'),
 url(r'^finalize/', views.finalize, name='finalize'),
 url(r'^triplist/', views.triplist, name='triplist'),
-url(r'^finalconfirm/', views.finalconfirm, name ='finalconfirm')
+url(r'^finalconfirm/', views.finalconfirm, name ='finalconfirm'),
+url(r'^failregistration/', views.failregistration, name='failregistration'),
+url(r'^expenselist/', views.expenselist, name='expenselist'),
+url(r'^edittrip/', views.edittrip, name='edittrip'),
+url(r'^deletetrip/', views.deletetrip, name='deletetrip')
+
 ]
+# url(r'^activate/', views.activate, name='activate')

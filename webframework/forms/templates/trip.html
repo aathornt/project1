@@ -40,9 +40,7 @@
                             <a href="/forms/addexpense/" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Expense</a>
                     </div>
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-list" area-hidden="true"></span> Your Expenses
-                        </button>
+                        <a href="/forms/expenselist/" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Your Expenses</a>
                     </div>
                 </div><br />
 
@@ -64,7 +62,7 @@
 
                         {% for name in recent %}
                           <div>
-                           <td> {{ name.Date }} </td>
+                           <td> {{ name.Date|date:"SHORT_DATE_FORMAT"}} </td>
                            <td> {{ name.Meal_Category }} </td>
                            <td> ${{ name.Cost|floatformat:2 }} </td>
                            <td> ${{ name.Tip|floatformat:2 }}</td>

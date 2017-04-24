@@ -60,7 +60,7 @@
                             <td>{{ expense.dailyexpenses.Category }}</td>
                                 {% endif %}
 
-                           <td> {{ expense.Date }} </td>
+                           <td> {{ expense.Date|date:"SHORT_DATE_FORMAT" }} </td>
                            <td> ${{ expense.Cost|floatformat:2 }} </td>
                            <tr></tr>
                           </div>
