@@ -9,7 +9,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="/static/forms/addmeal.css">
-
+</head>
 <body>
 	<div class="container">
 	<div class="page-header">
@@ -51,3 +51,19 @@
 </div>
 </div>
 </body>
+{% if form.Date.errors %}
+    <ul class='form-errors'>
+        {% for error in form.Date.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if form.non_field_errors %}
+    <ul class='form-errors'>
+        {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+</html>

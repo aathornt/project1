@@ -14,11 +14,12 @@
 	<div class="container">
 	<div class="page-header">
 	{% include 'register_panel.html' %}
-	<h1>Register Page</h1>
+	<br />
+	<h1>Registration</h1>
 	</div>
 	<div class="jumbotron">
 <!-- Tells browser to return the form data to the URL /forms/, using the POST method. -->
-	<p>Register</p>
+	<p>Please Sign Up With Your Respective SAP ID Number.</p>
 	<p>
 	<form id="createEmployee" action="/forms/register/" method="POST">
 {% csrf_token %}

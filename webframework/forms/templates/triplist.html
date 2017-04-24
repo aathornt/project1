@@ -48,25 +48,48 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                        {% if trips %}
                         {% for name in trips %}
                           <div>
-                           <td> {{ name.Place }} </td>
-                           {% if name.Is_Active == 'True' %}
-                           <td>Yes</td>
-                           {% else %}
-                           <td>No</td>
-                        {% endif %}
 
-                            <td class="bottom"><div class='btn-toolbar fix'><a href='/forms/' id='Home_Page' class="btn btn-danger small" role="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                             <a href='/forms/' id='Home_Page' class="btn btn-danger small" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></div></td>
+                           <td>{{ name.Place }}  </td>
+
+                           {% if name.Is_Active == 'True' %}
+                                <td>Yes</td>
+                           {% else %}
+                                <td>No</td>
+
+                            {% endif %}
+
+                            {% if name.Is_Active == 'True' %}
+                            <td class="bottom"><div class='btn-toolbar fix'>
+                            <a href='/forms/edittrip/' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
+                             <a href='/forms/deletetrip.html?id={{ name.Trip_ID }}' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                             {% else %}
+                              <td class="bottom"><div class='btn-toolbar fix'>
+                            <a href='/forms/activate/' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-open" aria-hidden="true"></span></a>
+
+                            <a href='/forms/deletetrip?id= {{ name.Trip_ID }}' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                             {% endif %}
+
+
+                             </div></td>
                            <tr></tr>
                           </div>{% endfor %}
+
+                        {% else %}
+                          <div>
+                          <td> {{ place }}</td>
+                          <td> {{ na }}</td>
+                          <td> {{ na }}</td>
+                        {% endif %}
                         </tbody>
                     </table>
                 </div>
-                <p><span class='glyphicon glyphicon-edit' aria-hidden='true'></span> = Edit Trip</p>
+                <p><span class='glyphicon glyphicon-open' aria-hidden='true'></span> = Activate Trip</p>
+                <p><span class='glyphicon glyphicon-wrench' aria-hidden='true'></span> = Edit Trip</p>
                 <p><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> = Delete Trip</p>
+
 
         </div>
         </p>
