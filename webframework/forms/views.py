@@ -44,7 +44,7 @@ def register(request):
 
 			user = User.objects.create_user(username, email, password,  first_name = first_name, last_name  = last_name)
 			# save data as an instance in a database
-			
+
 			user.save()
 			# reply with thank you, offer them a chance to enter again
 			return redirect('/')
@@ -66,10 +66,11 @@ def index(request):
 		recent = Post.objects.select_related('meal', 'dailyexpenses').all().order_by('-Added')[:3]
 		return render(request, 'main.html', {'recent': recent, 'name' : name, 'active' : active})
 	else:
+		popuperror= 'True'
 		trip = 'None'
 		category = 'No Active Trip'
 		na = 'N/A'
-		return render(request, 'main.html', {'name' : name, 'trip': trip, 'category': category, 'na': na})
+		return render(request, 'main.html', {'name' : name, 'trip': trip, 'category': category, 'na': na, 'popuperror': popuperror})
 
 
 
@@ -181,4 +182,3 @@ def finalize(request):
 	active.Is_Active = "False"
 	active.save()
 	return HttpResponse('Nice bro')
-	

@@ -7,7 +7,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <title>Main Page</title>
-
+<script type="text/JavaScript">
+  function popupError() {
+    alert("Invalid entry and/or selection.");
+  }
+</script>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -32,9 +36,8 @@
         <!--Current Trip Button-->
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
-
-                 <a href="/forms/trip/" class="btn btn-danger large" role="button">Your Current Trip:<br />{{ trip }}{{ active.Place }}</a>
-
+                 <a href="/forms/trip/" class="btn btn-danger large" role="button"
+                 {% if popuperror %} onclick="popupError()" {% endif %}>Your Current Trip:<br />{{ trip }}{{ active.Place }}</a>
             </div>
         </div><br />
 
