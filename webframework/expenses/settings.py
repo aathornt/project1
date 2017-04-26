@@ -98,6 +98,8 @@ DATABASES = {
         'USER': 'factorial',
         'PASSWORD': 'factorial123',
         'HOST': 'turing.cs.olemiss.edu',
+        'TEST': {
+          NAME: 'factorial$test_factorial',
     }
 }
 
