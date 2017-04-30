@@ -8,10 +8,12 @@ from .forms import UserForm
 # from .forms import ConfirmForm
 from .forms import TripForm
 from .forms import DailyExpensesForm
+from .forms import RegistrationFeesForm
 from .models import Meal
 from .models import Trip
 from .models import Post
 from .models import DailyExpenses
+from .models import RegistrationFees
 from django.conf import settings
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
@@ -20,6 +22,10 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import datetime
 from django.utils.formats import date_format
+from django.utils import formats
+from django.utils.dateformat import DateFormat
+from django.utils.formats import get_format
+
 
 
 #TODO copy views from expenses
@@ -64,8 +70,9 @@ def index(request):
 	name = current_user.first_name;
 	if Trip.objects.filter(Is_Active = True, Username = current_user.id).exists():
 		active = Trip.objects.get(Is_Active = True, Username = current_user.id)
-		recent = Post.objects.select_related('meal', 'dailyexpenses').filter(Trip_ID_id = active.Trip_ID).order_by('-Added')[:3]
-		return render(request, 'main.html', {'recent': recent, 'name' : name, 'active' : active})
+		recent = Post.objects.select_related('meal', 'dailyexpenses', 'registrationfees').filter(Trip_ID_id = active.Trip_ID).order_by('-Added')[:3]
+		popuperror2= 'True'
+		return render(request, 'main.html', {'recent': recent, 'name' : name, 'active' : active, 'popuperror2': popuperror2})
 	else:
 		popuperror= 'True'
 		trip = 'None'
@@ -88,10 +95,32 @@ def trip(request):
 		return redirect('/forms/')
 
 
+
+@login_required(login_url='/')
+def addtrip(request):
+	current_user = request.user;
+	if Trip.objects.filter(Is_Active = True, Username = current_user.id).exists():
+		# if this is a post request we need to process the form data
+		return redirect('/forms/')
+	else:
+		if request.method == 'POST':
+
+			# create a form instance and populate it with data from the request:
+			form = TripForm(request.POST)
+			# check whether it's valid:
+			if form.is_valid():
+				# save data as an instance in a database
+				form.save()
+				# reply with thank you, offer them a chance to enter again
+				return redirect('/forms/trip/')
+		else:
+			# We'll create a blank form if we have a GET
+			form = TripForm()
+		return render(request, 'addtrip.html', {'form': form})
+
+
 @login_required(login_url='/')
 def addexpense(request):
-	# if not request.user.is_authenticated:
-	# 	return redirect('/')
 	return render(request, 'addexpenses.html', {})
 
 @login_required(login_url='/')
@@ -140,6 +169,28 @@ def dailyexpenses(request):
 
 
 @login_required(login_url='/')
+def registrationfees(request):
+	# if this is a post request we need to process the form data
+	if request.method == 'POST':
+		# create a form instance and populate it with data from the request:
+		form = RegistrationFeesForm(request.POST)
+		# check whether it's valid:
+		if form.is_valid():
+			# save data as an instance in a database
+			form.save()
+			# reply with thank you, offer them a chance to enter again
+			return redirect('/forms/trip/')
+			# return HttpResponse('Thank you! <a href="/forms/trip/">Return</a>')
+	else:
+		# We'll create a blank form if we have a GET
+		form = RegistrationFeesForm()
+		current_user = request.user
+		active = Trip.objects.get(Is_Active = "True", Username=current_user.id)
+		timestamp = RegistrationFees.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Added')
+		return render(request, 'registrationfees.html', {'form': form, 'active': active.Trip_ID, 'timestamp': timestamp })
+
+
+@login_required(login_url='/')
 def triplist(request):
 	current_user = request.user
 	if Trip.objects.filter(Is_Active=True, Username = current_user.id).exists():
@@ -157,7 +208,7 @@ def expenselist(request):
 	current_user = request.user
 	active = Trip.objects.get(Is_Active = True, Username = current_user.id)
 	if Post.objects.select_related('meal', 'dailyexpenses').filter(Trip_ID_id = active.Trip_ID).exists():
-		recent = Post.objects.select_related('meal', 'dailyexpenses').filter(Trip_ID_id = active.Trip_ID).order_by('-Added')
+		recent = Post.objects.select_related('meal', 'dailyexpenses', 'registrationfees').filter(Trip_ID_id = active.Trip_ID).order_by('-Added')
 		return render(request, 'expenselist.html', {'active': active, 'recent': recent})
 
 	else:
@@ -178,6 +229,7 @@ def signout(request):
 	logout(request)
 	return redirect('/')
 
+@login_required(login_url='/')
 def finalize(request):
 	current_user = request.user
 	active = Trip.objects.get(Is_Active = True, Username = current_user.id)
@@ -185,12 +237,7 @@ def finalize(request):
 	active.save()
 	return redirect('/forms/finalconfirm/')
 
-# def activate(request):
-# 	current_user = request.user
-# 	active = Trip.objects.get(Is_Active = True, Username = current_user.id)
-# 	active.Is_Active = "True"
-# 	active.save()
-# 	return redirect('/forms/')
+
 @login_required(login_url='/')
 def edittrip(request):
 	current_user = request.user
@@ -205,40 +252,113 @@ def edittrip(request):
 			form.save()
 			return redirect('/forms/triplist/')
 	else:
+		#add current user
 		my_record = Trip.objects.get(Trip_ID = active.Trip_ID)
 		form = TripForm(instance=my_record)
+		# date = formats.date_format(my_record.Date_Departed, "SHORT_DATE_FORMAT")
+		# # date.format(get_format("SHORT_DATE_FORMAT"))
+		# form.Date_Departed = date;
 		return render(request, 'edittrip.html', {'form' : form})
+
+@login_required(login_url='/')
+def editexpense(request):
+	current_user = request.user
+	active = Trip.objects.get(Is_Active=True, Username = current_user.id)
+	inst = request.GET.get('category',"")
+	ins = str(inst)
+	post_id = request.GET.get('id',"")
+	edit = "True"
+	
+	
+	if request.method == "POST":
+		if request.POST.get("PCategory", "") == 'Meal':
+			form = MealForm(request.POST)
+			if form.is_valid():
+				mealid = request.POST.get("Meal_ID", "")
+				instance = form.save(commit=False)
+				meal = Meal.objects.get(Meal_ID = mealid)
+				instance.Trip_ID = meal.Trip_ID
+				instance.post_ptr_id = meal.post_ptr_id
+				instance.Meal_ID = meal.Meal_ID
+				form.save()
+				return redirect('/forms/expenselist/')
+		elif request.POST.get("PCategory", "") == 'DailyExpense':
+			form = DailyExpensesForm(request.POST)
+			if form.is_valid():
+				dailyexp = request.POST.get("DailyExpense_ID", "")
+				instance = form.save(commit=False)
+				daily = DailyExpenses.objects.get(DailyExpense_ID = dailyexp)
+				instance.Trip_ID = daily.Trip_ID
+				instance.post_ptr_id = daily.post_ptr_id
+				instance.DailyExpense_ID = daily.DailyExpense_ID
+				form.save()
+				return redirect('/forms/expenselist/')
+		else: 
+			form = RegistrationFeesForm(request.POST)
+			if form.is_valid():
+				regis = request.POST.get("RegistrationFee_ID", "")
+				instance = form.save(commit=False)
+				reg = RegistrationFees.objects.get(RegistrationFee_ID = regis)
+				instance.Trip_ID = reg.Trip_ID
+				instance.post_ptr_id = reg.post_ptr_id
+				instance.RegistrationFee_ID = reg.RegistrationFee_ID
+				form.save()
+				return redirect('/forms/expenselist/')
+
+
+	else:
+		if ins == "Meal":
+			meal = Meal.objects.get(post_ptr_id = post_id)
+			record = Meal.objects.get(Meal_ID =meal.Meal_ID)
+			form = MealForm(instance = record)
+			return render(request, 'addmeal.html', {'form' : form, 'edit' : edit, 'record' : record.Meal_ID, 'active' : active.Trip_ID})
+		elif ins == "DailyExpense":
+			daily = DailyExpenses.objects.get(post_ptr_id = post_id)
+			record = DailyExpenses.objects.get(DailyExpense_ID =daily.DailyExpense_ID)
+			form = DailyExpensesForm(instance = record)
+			return render(request, 'dailyexpenses.html', {'form' : form, 'edit' : edit, 'record' : record.DailyExpense_ID, 'active' : active.Trip_ID})
+		else:
+			reg = RegistrationFees.objects.get(post_ptr_id = post_id)
+			record = RegistrationFees.objects.get(RegistrationFee_ID = reg.RegistrationFee_ID)
+			form = RegistrationFeesForm(instance = record)
+			return render(request, 'registrationfees.html', {'form' : form, 'edit' : edit, 'record' : record.RegistrationFee_ID, 'active' : active.Trip_ID})
+
+
 
 @login_required(login_url='/')
 def deletetrip(request):
 	current_user = request.user
 	# active = Trip.objects.get(Is_Active = True, Username = current_user.id)
+
 	ins =request.GET.get('id', "")
 	instance = Trip.objects.get(Trip_ID = ins)
 	instance.delete()
-	return HttpResponse("good job")
-
-
-
+	return redirect('/forms/triplist/')
 
 @login_required(login_url='/')
-def addtrip(request):
-	current_user = request.user;
-	if Trip.objects.filter(Is_Active = True, Username = current_user.id).exists():
-		# if this is a post request we need to process the form data
-		return redirect('/forms/')
-	else:
-		if request.method == 'POST':
+def deleteexpense(request):
+	current_user = request.user
 
-			# create a form instance and populate it with data from the request:
-			form = TripForm(request.POST)
-			# check whether it's valid:
-			if form.is_valid():
-				# save data as an instance in a database
-				form.save()
-				# reply with thank you, offer them a chance to enter again
-				return redirect('/forms/trip/')
-		else:
-			# We'll create a blank form if we have a GET
-			form = TripForm()
-		return render(request, 'addtrip.html', {'form': form})
+	ins = request.GET.get('id', "")
+	instance = Post.objects.get(id = ins)
+	instance.delete()
+	return redirect('/forms/expenselist/')
+
+@login_required(login_url='/')
+def activate(request):
+	current_user = request.user
+	if Trip.objects.filter(Is_Active=True, Username = current_user.id).exists():
+		active = Trip.objects.get(Is_Active = True, Username = current_user.id)
+		active.Is_Active = "False"
+		active.save()
+		ins = request.GET.get('id',"")
+		instance = Trip.objects.get(Trip_ID = ins)
+		instance.Is_Active = "True"
+		instance.save()
+	else :
+		ins = request.GET.get('id',"")
+		instance = Trip.objects.get(Trip_ID = ins)
+		instance.Is_Active = "True"
+		instance.save()
+	return redirect('/forms/')
+

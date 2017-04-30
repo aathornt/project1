@@ -19,7 +19,9 @@ url(r'^finalconfirm/', views.finalconfirm, name ='finalconfirm'),
 url(r'^failregistration/', views.failregistration, name='failregistration'),
 url(r'^expenselist/', views.expenselist, name='expenselist'),
 url(r'^edittrip/', views.edittrip, name='edittrip'),
-url(r'^deletetrip/', views.deletetrip, name='deletetrip')
-
+url(r'^deletetrip/', views.deletetrip, name='deletetrip'),
+url(r'^activate/', views.activate, name='activate'),
+url(r'^deleteexpense/', views.deleteexpense, name='deleteexpense'),
+url(r'^registrationfees/', views.registrationfees, name='registrationfees'),
+url(r'^editexpense/', views.editexpense, name='editexpense')
 ]
-# url(r'^activate/', views.activate, name='activate')

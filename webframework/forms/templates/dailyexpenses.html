@@ -22,23 +22,37 @@
 	<p>Daily Expenses
 	</p>
 	<p>
+	{% if edit %}
+	<form id="createEmployee" action="/forms/editexpense/" method="POST">
+	{% else %}
 	<form id="createEmployee" action="/forms/dailyexpenses/" method="POST">
+	{% endif %}
 {% csrf_token %}
 {% load widget_tweaks %}
+{{ form.media }}
 		<div class="dropdown">
 				{{ form.Category|add_class:"form-control" }}
-		</div><br>
-		<div class="input-group input-group-sm">
-		<span class="input-group-addon">Date (MM-DD-YY)</span>
-				{{ form.Date|add_class:"form-control" }}
 		</div><br>
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Cost</span>
 				{{ form.Cost|add_class:"form-control" }}
 		</div><br>
-		<input type="hidden" name="Trip_ID" id="id_Trip_ID" value="{{ active }}" />
-	<div class="form-input submit-button">
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Date</span>
+				{{ form.Date|add_class:"form-control"}}
+		</div><br>
 
+		<input type="hidden" name="Trip_ID" id="id_Trip_ID" value="{{ active }}" />
+		<input type="hidden" name="PCategory" id="id_PCategory" value="DailyExpense" />
+	<div class="form-input submit-button">
+<<<<<<< HEAD
+
+=======
+		{% if edit %}
+		<input type='hidden' name="DailyExpense_ID" value="{{ record }}"/>
+		{% endif %}
+
+>>>>>>> 684a4ec1028c6a81e789ff1bb18ca29a852ef8ea
 		<button type="submit" class="btn btn-danger" value="true">Submit Form</button>
 	</div>
 	</form>

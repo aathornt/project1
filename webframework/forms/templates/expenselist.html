@@ -49,16 +49,23 @@
 
                         {% for name in recent %}
                           <div>
-                           <td>{{ name.Date|date:"SHORT_DATE_FORMAT" }}</td>
+                           <td>{{ name.Date|date:"m/d/y" }}</td>
                            {% if name.meal %}
                            <td> {{ name.meal.Meal_Category }}</td>
-                           {% else %}
+                           {% elif name.dailyexpenses %}
                            <td> {{ name.dailyexpenses.Category }}</td>
+                           {% else %}
+                           <td> {{ name.registrationfees.Category }}</td>
                            {% endif %}
                            <td>${{ name.Cost|floatformat:2 }}</td>
 
+<<<<<<< HEAD
                             <td class="bottom"><div class='btn-toolbar fix'><a href='/forms/' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
                              <a href='/forms/' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+=======
+                            <td class="bottom"><div class='btn-toolbar fix'><a href='/forms/editexpense?id={{ name.id }}&category={{ name.PCategory }}' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
+                             <a href='/forms/deleteexpense?id={{ name.id }}' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+>>>>>>> 684a4ec1028c6a81e789ff1bb18ca29a852ef8ea
                              </div></td>
                            <tr></tr>
                           </div>{% endfor %}
