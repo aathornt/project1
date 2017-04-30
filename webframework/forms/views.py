@@ -20,6 +20,10 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import datetime
 from django.utils.formats import date_format
+from django.utils import formats
+from django.utils.dateformat import DateFormat
+from django.utils.formats import get_format
+
 
 
 #TODO copy views from expenses
@@ -205,8 +209,12 @@ def edittrip(request):
 			form.save()
 			return redirect('/forms/triplist/')
 	else:
+		#add current user
 		my_record = Trip.objects.get(Trip_ID = active.Trip_ID)
 		form = TripForm(instance=my_record)
+		# date = formats.date_format(my_record.Date_Departed, "SHORT_DATE_FORMAT")
+		# # date.format(get_format("SHORT_DATE_FORMAT"))
+		# form.Date_Departed = date;
 		return render(request, 'edittrip.html', {'form' : form})
 
 @login_required(login_url='/')

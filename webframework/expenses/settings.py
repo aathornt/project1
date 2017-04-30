@@ -129,7 +129,8 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-SHORT_DATE_FORMAT = 'm/d/y', 'Y/m/d'
+SHORT_DATE_FORMAT = 'm/d/y'
+# , 'Y-m-d'
 
 USE_I18N = True
 
