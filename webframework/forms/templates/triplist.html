@@ -5,6 +5,7 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, intitial-scale=1.0">
 
     <title>Main Page</title>
     <script type="text/JavaScript">
@@ -67,7 +68,7 @@
                              <a href='/forms/deletetrip.html?id={{ name.Trip_ID }}' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                              {% else %}
                               <td class="bottom"><div class='btn-toolbar fix'>
-                            <a href='/forms/activate/' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-open" aria-hidden="true"></span></a>
+                            <a href='/forms/activate?id={{ name.Trip_ID }}' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-open" aria-hidden="true"></span></a>
 
                             <a href='/forms/deletetrip?id= {{ name.Trip_ID }}' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                              {% endif %}
@@ -87,8 +88,9 @@
                     </table>
                 </div>
                 <p><span class='glyphicon glyphicon-open' aria-hidden='true'></span> = Activate Trip</p>
-                <p><span class='glyphicon glyphicon-wrench' aria-hidden='true'></span> = Edit Trip</p>
+                <p><span class='glyphicon glyphicon-wrench' aria-hidden='true'></span> = Edit Trip*</p>
                 <p><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> = Delete Trip</p>
+                <h5>*Please note that a trip must be active to be able to edit.</h5>
 
 
         </div>

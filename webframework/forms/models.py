@@ -19,6 +19,12 @@ CATEGORIES=(
 		('Gasoline', 'Gasoline'),
 		('Business Calls', 'Business Calls'),
 	)
+FEES=(
+		('Conference Fees', 'Conference Fees'),
+		('Banquet Fees', 'Banquet Fees'),
+		('Dues', 'Dues'),
+		('Other', 'Other'),
+	)
 
 class Trip(models.Model):
 	Trip_ID = models.AutoField(primary_key=True)
@@ -38,6 +44,7 @@ class Post(models.Model):
 	Date = models.DateField()
 	Cost = models.FloatField()
 	Added = models.DateTimeField(default=datetime.now, blank=True)
+	PCategory = models.CharField(max_length=30)
 	def __published_today(self):
 		return self.Added.date() == datetime.date.today()
 	Trip_ID = models.ForeignKey(Trip, on_delete=models.CASCADE, blank=True, null=True)
@@ -55,3 +62,7 @@ class DailyExpenses(Post):
 	DailyExpense_ID = models.AutoField(primary_key=True)
 	Category = models.CharField(max_length=30, choices = CATEGORIES, default='Lodging')
 	
+class RegistrationFees(Post):
+	RegistrationFee_ID = models.AutoField(primary_key = True)
+	Category = models.CharField(max_length=30, choices = FEES, default='Conference Fees')
+	Other = models.CharField(max_length=30)

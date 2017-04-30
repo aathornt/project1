@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, intitial-scale=1.0">
 <title>Register Page</title>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -21,16 +22,18 @@
 	<p>Meal Expense
 	</p>
 	<p>
+	{% if edit %}
+	<form id="createEmployee" action="/forms/editexpense/" method="POST">
+	{% else %}
 	<form id="createEmployee" action="/forms/addmeal/" method="POST">
+	{% endif %}
 {% csrf_token %}
 {% load widget_tweaks %}
+{{ form.media }}
 		<div class="dropdown">
 				{{ form.Meal_Category|add_class:"form-control" }}
 		</div><br>
-		<div class="input-group input-group-sm">
-		<span class="input-group-addon">Date (MM-DD-YY)</span>
-				{{ form.Date|add_class:"form-control" }}
-		</div><br>
+		
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Cost (No Tip)</span>
 				{{ form.Cost|add_class:"form-control" }}
@@ -39,11 +42,18 @@
 		<span class="input-group-addon">Tip</span>
 				{{ form.Tip|add_class:"form-control" }}
 		</div></br>		
-
-		<!-- <input type="hidden" name="Added" id="Added_ID" value="{{ timestamp.Added }}" /> -->
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Date</span>
+				{{ form.Date|add_class:"form-control" }}
+		</div><br>
 
 		<input type="hidden" name="Trip_ID" id="id_Trip_ID" value="{{ active }}" />
+		<input type="hidden" name="PCategory" id="id_PCategory" value="Meal" />
 	<div class="form-input submit-button">
+		{% if edit %}
+		<input type='hidden' name="Meal_ID" value="{{ record }}"/>
+		{% endif %}
+
 		<button type="submit" class="btn btn-danger" value="true">Submit Form</button>
 	</div>
 	</form>

@@ -5,6 +5,7 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, intitial-scale=1.0">
 
     <title>Main Page</title>
 
@@ -62,7 +63,7 @@
 
                         {% for name in recent %}
                           <div>
-                           <td> {{ name.Date|date:"SHORT_DATE_FORMAT"}} </td>
+                           <td> {{ name.Date|date:"m/d/y" }} </td>
                            <td> {{ name.Meal_Category }} </td>
                            <td> ${{ name.Cost|floatformat:2 }} </td>
                            <td> ${{ name.Tip|floatformat:2 }}</td>
@@ -89,7 +90,7 @@
                         <tbody>
                         {% for exp in recentexp %}
                         <div>
-                            <td> {{ exp.Date }} </td>
+                            <td> {{ exp.Date|date:"m/d/y" }} </td>
                             <td> {{ exp.Category }} </td>
                            <td> ${{ exp.Cost|floatformat:2 }} </td>
                            

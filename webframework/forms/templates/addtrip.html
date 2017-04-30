@@ -5,11 +5,15 @@
 
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, intitial-scale=1.0">
 
 <title>Trip Page</title>
 
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js">
+        </script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.js">
+        </script>
 <link rel="stylesheet" href="/static/forms/addtrip.css">
 
 </head>
@@ -30,6 +34,7 @@
     <form id="createEmployee" action="/forms/addtrip/" method="POST">
     {% csrf_token %}
     {% load widget_tweaks %}
+    {{ form.media }}
 
        <!--   <div class="input-group input-group-sm">
         <span class="input-group-addon">SAP ID</span>
@@ -51,30 +56,29 @@
         <span class="input-group-addon">Purpose</span>
          {{ form.Purpose|add_class:"form-control" }}
     </div><br>
+     <div class="input-group input-group-sm">
+        <span class="input-group-addon">Contact Person</span>
+        {{ form.Contact_Person|add_class:"form-control" }}
+    </div><br>
 
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">Date Departed (MM-DD-YY)</span>
+        <span class="input-group-addon">Date Departed</span>
         {{ form.Date_Departed|add_class:"form-control" }}
     </div><br>
 
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">Time Departed (H:M)</span>
+        <span class="input-group-addon">Time Departed</span>
         {{ form.Time_Departed|add_class:"form-control" }}
     </div><br>
 
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">Date Returned (MM-DD-YY)</span>
+        <span class="input-group-addon">Date Returned</span>
         {{ form.Date_Returned|add_class:"form-control" }}
     </div><br>
 
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">Time Returned (HH:MM)</span>
+        <span class="input-group-addon">Time Returned</span>
         {{ form.Time_Returned|add_class:"form-control" }}
-    </div><br>
-
-    <div class="input-group input-group-sm">
-        <span class="input-group-addon">Contact Person</span>
-        {{ form.Contact_Person|add_class:"form-control" }}
     </div><br>
 
 	<input type="hidden" name="Is_Active" id="Trip_Is_Active" value="True" />
