@@ -67,11 +67,13 @@
                             <td>{{ expense.dailyexpenses.Category }}</td>
                               {% elif expense.registrationfees %}
                             <td>{{ expense.registrationfees.Category }}</td>
+                            {% elif expense.financial %}
+                            <td>{{ expense.financial.Category }}</td>
                             {% else %}
                             <td>{{ expense.transportation.Category }}</td>
                                 {% endif %}
-                            
-                                
+
+
 
                            <td> {{ expense.Date|date:"m/d/y" }} </td>
                            <td> ${{ expense.Cost|floatformat:2 }} </td>

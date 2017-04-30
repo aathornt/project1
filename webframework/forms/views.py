@@ -9,12 +9,14 @@ from .forms import TransportationForm
 from .forms import TripForm
 from .forms import DailyExpensesForm
 from .forms import RegistrationFeesForm
+from .forms import FinancialForm
 from .models import Transportation
 from .models import Meal
 from .models import Trip
 from .models import Post
 from .models import DailyExpenses
 from .models import RegistrationFees
+from .models import Financial
 from django.conf import settings
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
@@ -71,7 +73,7 @@ def index(request):
 	name = current_user.first_name;
 	if Trip.objects.filter(Is_Active = True, Username = current_user.id).exists():
 		active = Trip.objects.get(Is_Active = True, Username = current_user.id)
-		recent = Post.objects.select_related('meal', 'dailyexpenses', 'registrationfees').filter(Trip_ID_id = active.Trip_ID).order_by('-Added')[:3]
+		recent = Post.objects.select_related('meal', 'dailyexpenses', 'registrationfees', 'financial').filter(Trip_ID_id = active.Trip_ID).order_by('-Added')[:3]
 		popuperror2= 'True'
 		return render(request, 'main.html', {'recent': recent, 'name' : name, 'active' : active, 'popuperror2': popuperror2})
 	else:
@@ -285,8 +287,8 @@ def editexpense(request):
 	ins = str(inst)
 	post_id = request.GET.get('id',"")
 	edit = "True"
-	
-	
+
+
 	if request.method == "POST":
 		if request.POST.get("PCategory", "") == 'Meal':
 			form = MealForm(request.POST)
@@ -297,6 +299,17 @@ def editexpense(request):
 				instance.Trip_ID = meal.Trip_ID
 				instance.post_ptr_id = meal.post_ptr_id
 				instance.Meal_ID = meal.Meal_ID
+				form.save()
+				return redirect('/forms/expenselist/')
+		elif request.POST.get("PCategory", "") == 'Financial':
+			form = FinancialForm(request.POST)
+			if form.is_valid():
+				financial = request.POST.get("Financial_ID", "")
+				instance = form.save(commit=False)
+				finance = Financial.objects.get(Financial_ID = financial)
+				instance.Trip_ID = finance.Trip_ID
+				instance.post_ptr_id = finance.post_ptr_id
+				instance.Financial_ID = finance.Financial_ID
 				form.save()
 				return redirect('/forms/expenselist/')
 		elif request.POST.get("PCategory", "") == 'DailyExpense':
@@ -310,7 +323,7 @@ def editexpense(request):
 				instance.DailyExpense_ID = daily.DailyExpense_ID
 				form.save()
 				return redirect('/forms/expenselist/')
-		elif request.POST.get("PCategory", "") == 'RegistrationFees': 
+		elif request.POST.get("PCategory", "") == 'RegistrationFees':
 			form = RegistrationFeesForm(request.POST)
 			if form.is_valid():
 				regis = request.POST.get("RegistrationFee_ID", "")
@@ -340,6 +353,11 @@ def editexpense(request):
 			record = Meal.objects.get(Meal_ID =meal.Meal_ID)
 			form = MealForm(instance = record)
 			return render(request, 'addmeal.html', {'form' : form, 'edit' : edit, 'record' : record.Meal_ID, 'active' : active.Trip_ID})
+		elif ins == "Financial":
+			finance = Financial.objects.get(post_ptr_id = post_id)
+			record = Financial.objects.get(Financial_ID = finance.Financial_ID)
+			form = FinancialForm(instance = record)
+			return render(request, 'addfinancial.html', {'form': form, 'edit':edit, 'record': record.Financial_ID, 'active': active.Trip_ID})
 		elif ins == "DailyExpense":
 			daily = DailyExpenses.objects.get(post_ptr_id = post_id)
 			record = DailyExpenses.objects.get(DailyExpense_ID =daily.DailyExpense_ID)
@@ -394,3 +412,23 @@ def activate(request):
 		instance.save()
 	return redirect('/forms/')
 
+@login_required(login_url='/')
+def addfinancial(request):
+	# if this is a post request we need to process the form data
+	if request.method == 'POST':
+		# create a form instance and populate it with data from the request:
+		form = FinancialForm(request.POST)
+		# check whether it's valid:
+		if form.is_valid():
+			# save data as an instance in a database
+			form.save()
+			# reply with thank you, offer them a chance to enter again
+			return redirect('/forms/trip/')
+			# return HttpResponse('Thank you! <a href="/forms/trip/">Return</a>')
+	else:
+		# We'll create a blank form if we have a GET
+		form = FinancialForm()
+		current_user = request.user
+		active = Trip.objects.get(Is_Active = "True", Username=current_user.id)
+		timestamp = DailyExpenses.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Added')
+		return render(request, 'addfinancial.html', {'form': form, 'active': active.Trip_ID, 'timestamp': timestamp})

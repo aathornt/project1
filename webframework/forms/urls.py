@@ -24,5 +24,6 @@ url(r'^activate/', views.activate, name='activate'),
 url(r'^deleteexpense/', views.deleteexpense, name='deleteexpense'),
 url(r'^registrationfees/', views.registrationfees, name='registrationfees'),
 url(r'^editexpense/', views.editexpense, name='editexpense'),
-url(r'^transportation/', views.transportation, name='transportation')
+url(r'^transportation/', views.transportation, name='transportation'),
+url(r'^addfinancial/', views.addfinancial, name='addfinancial')
 ]

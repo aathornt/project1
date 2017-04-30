@@ -29,6 +29,10 @@ VEHICLES=(
 		('Rental Car','Rental Car'),
 		('Bus/Train','Bus/Train'),
 	)
+FINANCIAL=(
+		('Cost Center', 'Cost Center'),
+		('Internal Order', 'Internal Order'),
+)
 
 class Trip(models.Model):
 	Trip_ID = models.AutoField(primary_key=True)
@@ -65,7 +69,7 @@ class Meal(Post):
 class DailyExpenses(Post):
 	DailyExpense_ID = models.AutoField(primary_key=True)
 	Category = models.CharField(max_length=30, choices = CATEGORIES, default='Lodging')
-	
+
 class RegistrationFees(Post):
 	RegistrationFee_ID = models.AutoField(primary_key = True)
 	Category = models.CharField(max_length=30, choices = FEES, default='Conference Fees')
@@ -73,3 +77,8 @@ class RegistrationFees(Post):
 class Transportation(Post):
 	Transportation_ID = models.AutoField(primary_key = True)
 	Category = models.CharField(max_length=30, choices = VEHICLES, default='Airfare')
+
+class Financial(Post):
+	Financial_ID = models.AutoField(primary_key = True)
+	Category = models.CharField(max_length=30, choices = FINANCIAL, default='Cost Center')
+	Number = models.CharField(max_length=30)

@@ -97,12 +97,9 @@ WSGI_APPLICATION = 'expenses.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'factorial$factorial',
-        'USER': 'factorial',
-        'PASSWORD': 'factorial123',
-        'HOST': 'turing.cs.olemiss.edu',
-        'TEST': {
-          NAME: 'factorial$test_factorial',
+        'NAME': 'expensedb',
+        'USER': 'root',
+        'PASSWORD': 'custom',
     }
 }
 
