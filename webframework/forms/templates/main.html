@@ -9,7 +9,10 @@
 <title>Main Page</title>
 <script type="text/JavaScript">
   function popupError() {
-    alert("Invalid entry and/or selection.");
+    alert("Please Activate a Trip to Proceed.");
+  }
+  function popupError2() {
+    alert("Please Finalize a Trip Before Adding a New One");
   }
 </script>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -59,11 +62,14 @@
                           <div>
                                 {% if expense.meal %}
                            <td> {{ expense.meal.Meal_Category }} </td>
-                                {% else %}
+                                {% elif expense.dailyexpenses %}
                             <td>{{ expense.dailyexpenses.Category }}</td>
+                              {% else %}
+                            <td>{{ expense.registrationfees.Category }}</td>
                                 {% endif %}
+                                
 
-                           <td> {{ expense.Date|date:"SHORT_DATE_FORMAT" }} </td>
+                           <td> {{ expense.Date|date:"m/d/y" }} </td>
                            <td> ${{ expense.Cost|floatformat:2 }} </td>
                            <tr></tr>
                           </div>
@@ -92,7 +98,7 @@
             <div class="btn-group" role="group">
                 <!-- <button type="button" class="btn btn-danger"> -->
 
-                   <a href="/forms/addtrip" class="btn btn-danger" role="button"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Trip</a>
+                   <a href="/forms/addtrip" class="btn btn-danger" role="button" {% if popuperror2 %} onclick="popupError2()" {% endif %}> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Trip</a>
 
             </div>
             <div class="btn-group" role="group">
