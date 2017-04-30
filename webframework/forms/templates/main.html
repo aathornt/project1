@@ -5,7 +5,7 @@
 
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, intitial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Main Page</title>
 <script type="text/JavaScript">
@@ -27,7 +27,7 @@
 <body>
 
 
-<div>
+<div class="container">
 <div class="page-header">
 {% include 'signout_panel.html' %}
 <br />
@@ -65,9 +65,12 @@
                            <td> {{ expense.meal.Meal_Category }} </td>
                                 {% elif expense.dailyexpenses %}
                             <td>{{ expense.dailyexpenses.Category }}</td>
-                              {% else %}
+                              {% elif expense.registrationfees %}
                             <td>{{ expense.registrationfees.Category }}</td>
+                            {% else %}
+                            <td>{{ expense.transportation.Category }}</td>
                                 {% endif %}
+                            
                                 
 
                            <td> {{ expense.Date|date:"m/d/y" }} </td>

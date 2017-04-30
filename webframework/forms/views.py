@@ -5,10 +5,11 @@ from django.shortcuts import redirect
 
 from .forms import MealForm
 from .forms import UserForm
-# from .forms import ConfirmForm
+from .forms import TransportationForm
 from .forms import TripForm
 from .forms import DailyExpensesForm
 from .forms import RegistrationFeesForm
+from .models import Transportation
 from .models import Meal
 from .models import Trip
 from .models import Post
@@ -147,6 +148,27 @@ def addmeal(request):
 		return render(request, 'addmeal.html', {'form': form, 'active': active.Trip_ID, 'timestamp': timestamp})
 
 @login_required(login_url='/')
+def transportation(request):
+	if request.method == "POST":
+		form = TransportationForm(request.POST)
+		# check whether it's valid:
+		if form.is_valid():
+			# save data as an instance in a database
+			form.save()
+			# reply with thank you, offer them a chance to enter again
+			return redirect('/forms/trip/')
+			# return HttpResponse('Thank you! <a href="/forms/trip/">Return</a>')
+	else:
+		# We'll create a blank form if we have a GET
+		form = TransportationForm()
+		current_user = request.user
+		active = Trip.objects.get(Is_Active = "True", Username=current_user.id)
+		timestamp = Transportation.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Added')
+		return render(request, 'transportation.html', {'form': form, 'active': active.Trip_ID, 'timestamp': timestamp })
+
+
+
+@login_required(login_url='/')
 def dailyexpenses(request):
 	# if this is a post request we need to process the form data
 	if request.method == 'POST':
@@ -245,19 +267,14 @@ def edittrip(request):
 
 	if request.method == "POST":
 		form = TripForm(request.POST)
-		# form = TripForm(request.POST)
 		if form.is_valid():
 			instance = form.save(commit=False)
 			instance.Trip_ID = active.Trip_ID
 			form.save()
 			return redirect('/forms/triplist/')
 	else:
-		#add current user
 		my_record = Trip.objects.get(Trip_ID = active.Trip_ID)
 		form = TripForm(instance=my_record)
-		# date = formats.date_format(my_record.Date_Departed, "SHORT_DATE_FORMAT")
-		# # date.format(get_format("SHORT_DATE_FORMAT"))
-		# form.Date_Departed = date;
 		return render(request, 'edittrip.html', {'form' : form})
 
 @login_required(login_url='/')
@@ -293,7 +310,7 @@ def editexpense(request):
 				instance.DailyExpense_ID = daily.DailyExpense_ID
 				form.save()
 				return redirect('/forms/expenselist/')
-		else: 
+		elif request.POST.get("PCategory", "") == 'RegistrationFees': 
 			form = RegistrationFeesForm(request.POST)
 			if form.is_valid():
 				regis = request.POST.get("RegistrationFee_ID", "")
@@ -302,6 +319,17 @@ def editexpense(request):
 				instance.Trip_ID = reg.Trip_ID
 				instance.post_ptr_id = reg.post_ptr_id
 				instance.RegistrationFee_ID = reg.RegistrationFee_ID
+				form.save()
+				return redirect('/forms/expenselist/')
+		else:
+			form = TransportationForm(request.POST)
+			if form.is_valid():
+				trans = request.POST.get("Transportation_ID", "")
+				instance = form.save(commit=False)
+				tran = Transportation.objects.get(Transportation_ID = trans)
+				instance.Trip_ID = tran.Trip_ID
+				instance.post_ptr_id = tran.post_ptr_id
+				instance.Transportation_ID = tran.Transportation_ID
 				form.save()
 				return redirect('/forms/expenselist/')
 
@@ -317,12 +345,16 @@ def editexpense(request):
 			record = DailyExpenses.objects.get(DailyExpense_ID =daily.DailyExpense_ID)
 			form = DailyExpensesForm(instance = record)
 			return render(request, 'dailyexpenses.html', {'form' : form, 'edit' : edit, 'record' : record.DailyExpense_ID, 'active' : active.Trip_ID})
-		else:
+		elif ins == "RegistrationFees":
 			reg = RegistrationFees.objects.get(post_ptr_id = post_id)
 			record = RegistrationFees.objects.get(RegistrationFee_ID = reg.RegistrationFee_ID)
 			form = RegistrationFeesForm(instance = record)
 			return render(request, 'registrationfees.html', {'form' : form, 'edit' : edit, 'record' : record.RegistrationFee_ID, 'active' : active.Trip_ID})
-
+		else:
+			trans = Transportation.objects.get(post_ptr_id = post_id)
+			record = Transportation.objects.get(Transportation_ID = trans.Transportation_ID)
+			form = TransportationForm(instance = record)
+			return render(request, 'transportation.html', {'form' : form, 'edit' : edit, 'record' : record.Transportation_ID, 'active' : active.Trip_ID})
 
 
 @login_required(login_url='/')

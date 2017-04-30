@@ -23,7 +23,11 @@ FEES=(
 		('Conference Fees', 'Conference Fees'),
 		('Banquet Fees', 'Banquet Fees'),
 		('Dues', 'Dues'),
-		('Other', 'Other'),
+	)
+VEHICLES=(
+		('Airfare', 'Airfare'),
+		('Rental Car','Rental Car'),
+		('Bus/Train','Bus/Train'),
 	)
 
 class Trip(models.Model):
@@ -65,4 +69,7 @@ class DailyExpenses(Post):
 class RegistrationFees(Post):
 	RegistrationFee_ID = models.AutoField(primary_key = True)
 	Category = models.CharField(max_length=30, choices = FEES, default='Conference Fees')
-	Other = models.CharField(max_length=30)
+
+class Transportation(Post):
+	Transportation_ID = models.AutoField(primary_key = True)
+	Category = models.CharField(max_length=30, choices = VEHICLES, default='Airfare')
