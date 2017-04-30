@@ -6,6 +6,7 @@ from .models import RegistrationFees
 from .models import Post
 from .models import Transportation
 from .models import Financial
+from .models import PersonalCar
 from django import forms
 from django.contrib.auth.models import User
 from time import strftime
@@ -62,3 +63,9 @@ class FinancialForm(ModelForm):
 	class Meta:
 		model = Financial;
 		fields = ['Category', 'Date', 'Cost', 'Added', 'Number', 'Trip_ID', 'PCategory']
+
+class PersonalCarForm(ModelForm):
+	Date = forms.DateField(widget=DateWidget(usel10n=True, bootstrap_version=3))
+	class Meta:
+		model = PersonalCar;
+		fields = ['From', 'To', 'Category', 'Mileage', 'Date', 'Cost', 'Added', 'Trip_ID', 'PCategory']

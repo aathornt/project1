@@ -57,6 +57,11 @@
          {{ form.Purpose|add_class:"form-control" }}
     </div><br>
 
+		<div class="input-group input-group-sm">
+        <span class="input-group-addon">Contact Person</span>
+        {{ form.Contact_Person|add_class:"form-control" }}
+    </div><br>
+		
     <div class="input-group input-group-sm">
         <span class="input-group-addon">Date Departed (MM-DD-YY)</span>
         {{ form.Date_Departed|add_class:"form-control" }}
@@ -76,16 +81,6 @@
         <span class="input-group-addon">Time Returned (HH:MM)</span>
         {{ form.Time_Returned|add_class:"form-control" }}
     </div><br>
-
-    <div class="input-group input-group-sm">
-        <span class="input-group-addon">Contact Person</span>
-        {{ form.Contact_Person|add_class:"form-control" }}
-    </div><br>
-
-		<div class="input-group input-group-sm">
-			<span class="input-group-addon">Date</span>
-				{{ date }}
-			</div><br>
 
 	<input type="hidden" name="Is_Active" id="Trip_Is_Active" value="True" />
 

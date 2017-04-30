@@ -82,3 +82,10 @@ class Financial(Post):
 	Financial_ID = models.AutoField(primary_key = True)
 	Category = models.CharField(max_length=30, choices = FINANCIAL, default='Cost Center')
 	Number = models.CharField(max_length=30)
+
+class PersonalCar(Post):
+	PersonalCar_ID = models.AutoField(primary_key = True)
+	Category = models.CharField(max_length=40)
+	From = models.CharField(max_length=45)
+	To = models.CharField(max_length=45)
+	Mileage = models.FloatField()
