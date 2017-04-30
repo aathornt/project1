@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'widget_tweaks',
     'datetimewidget',
-    'bootstrap3_datetime'
+    'bootstrap3'
 ]
 
 MIDDLEWARE = [

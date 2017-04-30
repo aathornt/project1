@@ -4,6 +4,7 @@ from .models import Trip
 from .models import DailyExpenses
 from .models import RegistrationFees
 from .models import Post
+from .models import Transportation
 from django import forms
 from django.contrib.auth.models import User
 from time import strftime
@@ -47,4 +48,10 @@ class RegistrationFeesForm(ModelForm):
 	Date = forms.DateField(widget=DateWidget(usel10n=True, bootstrap_version=3))
 	class Meta:
 		model = RegistrationFees;
-		fields = ['Category', 'Other', 'Date', 'Cost', 'Added', 'Trip_ID', 'PCategory']
+		fields = ['Category', 'Date', 'Cost', 'Added', 'Trip_ID', 'PCategory']
+
+class TransportationForm(ModelForm):
+	Date = forms.DateField(widget=DateWidget(usel10n=True, bootstrap_version=3))
+	class Meta:
+		model = Transportation;
+		fields = ['Category', 'Date', 'Cost', 'Added', 'Trip_ID', 'PCategory']
