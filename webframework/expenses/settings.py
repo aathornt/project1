@@ -26,7 +26,7 @@ SECRET_KEY = 'e)-_rm+omrc=1t+biq#&0!$2wys6a5m!2jd5ei(mvlxeijtoe6'
 DEBUG = True
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['factorial.pythonanywhere.com']
 
 
 # Application definition
@@ -96,9 +96,10 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         'ENGINE': 'django.db.backends.mysql',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': 'expensedb',
-        'USER': 'root',
-        'PASSWORD': 'custom',
+        'NAME': 'factorial$expensedb',
+        'USER': 'factorial',
+        'PASSWORD': 'custom123',
+        'HOST': 'factorial.mysql.pythonanywhere-services.com',
     }
 }
 

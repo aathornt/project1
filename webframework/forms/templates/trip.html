@@ -5,6 +5,7 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Main Page</title>
 
@@ -83,7 +84,7 @@
                                 <th class='center'>Date</th>
                                 <th class='center'>Category</th>
                                 <th class='center'>Cost</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
@@ -92,10 +93,10 @@
                             <td> {{ exp.Date }} </td>
                             <td> {{ exp.Category }} </td>
                            <td> ${{ exp.Cost|floatformat:2 }} </td>
-                           
+
                            <tr></tr>
                         </div>{% endfor %}
-                           
+
                         </tbody>
                     </table>
                 </div>
