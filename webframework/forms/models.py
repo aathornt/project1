@@ -73,3 +73,10 @@ class RegistrationFees(Post):
 class Transportation(Post):
 	Transportation_ID = models.AutoField(primary_key = True)
 	Category = models.CharField(max_length=30, choices = VEHICLES, default='Airfare')
+
+class PersonalCar(Post):
+	PersonalCar_ID = models.AutoField(primary_key = True)
+	Category = models.CharField(max_length=40)
+	From = models.CharField(max_length=45)
+	To = models.CharField(max_length=45)
+	Mileage = models.FloatField()

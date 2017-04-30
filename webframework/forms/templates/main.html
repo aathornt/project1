@@ -63,13 +63,22 @@
                           <div>
                                 {% if expense.meal %}
                            <td> {{ expense.meal.Meal_Category }} </td>
+
                                 {% elif expense.dailyexpenses %}
                             <td>{{ expense.dailyexpenses.Category }}</td>
+
                               {% elif expense.registrationfees %}
                             <td>{{ expense.registrationfees.Category }}</td>
-                            {% else %}
+
+                            {% elif expense.transportation %}
                             <td>{{ expense.transportation.Category }}</td>
+
+                            {% else %}
+                            <td> {{ expense.personalcar.Category }}
                                 {% endif %}
+                            
+                            
+                            
                             
                                 
 

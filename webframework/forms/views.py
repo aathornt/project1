@@ -9,6 +9,8 @@ from .forms import TransportationForm
 from .forms import TripForm
 from .forms import DailyExpensesForm
 from .forms import RegistrationFeesForm
+from .forms import PersonalCarForm
+from .models import PersonalCar
 from .models import Transportation
 from .models import Meal
 from .models import Trip
@@ -146,6 +148,28 @@ def addmeal(request):
 		active = Trip.objects.get(Is_Active = "True", Username=current_user.id)
 		timestamp = Meal.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Added')
 		return render(request, 'addmeal.html', {'form': form, 'active': active.Trip_ID, 'timestamp': timestamp})
+
+
+@login_required(login_url='/')
+def personalcar(request):
+	if request.method == "POST":
+		form = PersonalCarForm(request.POST)
+		# check whether it's valid:
+		if form.is_valid():
+			# save data as an instance in a database
+			form.save()
+			# reply with thank you, offer them a chance to enter again
+			return redirect('/forms/trip/')
+			# return HttpResponse('Thank you! <a href="/forms/trip/">Return</a>')
+	else:
+		# We'll create a blank form if we have a GET
+		form = PersonalCarForm()
+		current_user = request.user
+		active = Trip.objects.get(Is_Active = "True", Username=current_user.id)
+		timestamp = PersonalCar.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Added')
+		return render(request, 'personalcar.html', {'form': form, 'active': active.Trip_ID, 'timestamp': timestamp })
+
+
 
 @login_required(login_url='/')
 def transportation(request):
@@ -299,6 +323,7 @@ def editexpense(request):
 				instance.Meal_ID = meal.Meal_ID
 				form.save()
 				return redirect('/forms/expenselist/')
+
 		elif request.POST.get("PCategory", "") == 'DailyExpense':
 			form = DailyExpensesForm(request.POST)
 			if form.is_valid():
@@ -310,6 +335,7 @@ def editexpense(request):
 				instance.DailyExpense_ID = daily.DailyExpense_ID
 				form.save()
 				return redirect('/forms/expenselist/')
+
 		elif request.POST.get("PCategory", "") == 'RegistrationFees': 
 			form = RegistrationFeesForm(request.POST)
 			if form.is_valid():
@@ -321,7 +347,7 @@ def editexpense(request):
 				instance.RegistrationFee_ID = reg.RegistrationFee_ID
 				form.save()
 				return redirect('/forms/expenselist/')
-		else:
+		elif request.POST.get("PCategory", "") == 'Transportation':
 			form = TransportationForm(request.POST)
 			if form.is_valid():
 				trans = request.POST.get("Transportation_ID", "")
@@ -330,6 +356,17 @@ def editexpense(request):
 				instance.Trip_ID = tran.Trip_ID
 				instance.post_ptr_id = tran.post_ptr_id
 				instance.Transportation_ID = tran.Transportation_ID
+				form.save()
+				return redirect('/forms/expenselist/')
+		else:
+			form = PersonalCarForm(request.POST)
+			if form.is_valid():
+				pers = request.POST.get("PersonalCar_ID", "")
+				instance = form.save(commit=False)
+				per = PersonalCar.objects.get(PersonalCar_ID = pers)
+				instance.Trip_ID = per.Trip_ID
+				instance.post_ptr_id = per.post_ptr_id
+				instance.PersonalCar_ID = per.PersonalCar_ID
 				form.save()
 				return redirect('/forms/expenselist/')
 
@@ -350,11 +387,16 @@ def editexpense(request):
 			record = RegistrationFees.objects.get(RegistrationFee_ID = reg.RegistrationFee_ID)
 			form = RegistrationFeesForm(instance = record)
 			return render(request, 'registrationfees.html', {'form' : form, 'edit' : edit, 'record' : record.RegistrationFee_ID, 'active' : active.Trip_ID})
-		else:
+		elif ins == "Transportation":
 			trans = Transportation.objects.get(post_ptr_id = post_id)
 			record = Transportation.objects.get(Transportation_ID = trans.Transportation_ID)
 			form = TransportationForm(instance = record)
 			return render(request, 'transportation.html', {'form' : form, 'edit' : edit, 'record' : record.Transportation_ID, 'active' : active.Trip_ID})
+		else:
+			pers = PersonalCar.objects.get(post_ptr_id = post_id)
+			record = PersonalCar.objects.get(PersonalCar_ID = pers.PersonalCar_ID)
+			form = PersonalCarForm(instance = record)
+			return render(request, 'personalcar.html', {'form' : form, 'edit' : edit, 'record' : record.PersonalCar_ID, 'active' : active.Trip_ID})
 
 
 @login_required(login_url='/')

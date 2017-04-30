@@ -52,12 +52,18 @@
                            <td>{{ name.Date|date:"m/d/y" }}</td>
                            {% if name.meal %}
                            <td> {{ name.meal.Meal_Category }}</td>
+
                            {% elif name.dailyexpenses %}
                            <td> {{ name.dailyexpenses.Category }}</td>
+
                            {% elif name.registrationfees %}
                            <td> {{ name.registrationfees.Category }}</td>
-                           {% else %}
+
+                           {% elif name.transportation %}
                            <td> {{ name.transportation.Category }}</td>
+
+                           {% else %}
+                           <td> {{ name.personalcar.Category }}</td>
                            {% endif %}
                            <td>${{ name.Cost|floatformat:2 }}</td>
 
