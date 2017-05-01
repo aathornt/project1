@@ -77,7 +77,7 @@ def index(request):
 	name = current_user.first_name;
 	if Trip.objects.filter(Is_Active = True, Username = current_user.id).exists():
 		active = Trip.objects.get(Is_Active = True, Username = current_user.id)
-		recent = Post.objects.select_related('meal', 'dailyexpenses', 'registrationfees', 'financial').filter(Trip_ID_id = active.Trip_ID).order_by('-Added')[:3]
+		recent = Post.objects.select_related('meal', 'dailyexpenses', 'registrationfees', 'financial').filter(Trip_ID_id = active.Trip_ID).order_by('-Added')[:6]
 		popuperror2= 'True'
 		na = 'N/A'
 		return render(request, 'main.html', {'recent': recent, 'name' : name, 'active' : active, 'popuperror2': popuperror2, 'na': na})
