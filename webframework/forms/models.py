@@ -13,7 +13,6 @@ CHOICES=(
 	)
 CATEGORIES=(
 		('Lodging', 'Lodging'),
-		('Meal Tips', 'Meal Tips'),
 		('Taxi', 'Taxi'),
 		('Parking, Tolls', 'Parking, Tolls'),
 		('Gasoline', 'Gasoline'),

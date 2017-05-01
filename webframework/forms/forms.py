@@ -16,7 +16,6 @@ from datetimewidget.widgets import DateWidget, TimeWidget
 
 class UserForm(ModelForm):
 	password=forms.CharField(widget=forms.PasswordInput())
-	# confirm_password=forms.CharField()
 	class Meta:
 		model = User;
 		fields = ['username', 'password', 'email', 'first_name', 'last_name']
