@@ -16,7 +16,7 @@
 	<div class="page-header">
 	{% include 'signout_panel.html' %}
 	<br />
-	<h1>Add A Meal!</h1>
+	<h1>Cost Center/Internal Order</h1>
 	</div>
 	<div class="jumbotron">
 <!-- Tells browser to return the form data to the URL /forms/, using the POST method. -->
@@ -26,40 +26,34 @@
 	{% if edit %}
 	<form id="createEmployee" action="/forms/editexpense/" method="POST">
 	{% else %}
-	<form id="createEmployee" action="/forms/addmeal/" method="POST">
+	<form id="createEmployee" action="/forms/addfinancial/" method="POST">
 	{% endif %}
 {% csrf_token %}
 {% load widget_tweaks %}
 {{ form.media }}
 		<div class="dropdown">
-				{{ form.Meal_Category|add_class:"form-control" }}
+				{{ form.Category|add_class:"form-control" }}
 		</div><br>
 
 		<div class="input-group input-group-sm">
-		<span class="input-group-addon">Cost (No Tip)</span>
+		<span class="input-group-addon">Number</span>
+				{{ form.Number|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Amount</span>
 				{{ form.Cost|add_class:"form-control" }}
-		</div><br>
-		<div class="input-group input-group-sm">
-		<span class="input-group-addon">Tip</span>
-				{{ form.Tip|add_class:"form-control" }}
-<<<<<<< HEAD
 		</div></br>
 
-		<!-- <input type="hidden" name="Added" id="Added_ID" value="{{ timestamp.Added }}" /> -->
-=======
-		</div></br>
-		<div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
 		<span class="input-group-addon">Date</span>
 				{{ form.Date|add_class:"form-control" }}
 		</div><br>
->>>>>>> 684a4ec1028c6a81e789ff1bb18ca29a852ef8ea
-
-		<input type="hidden" name="Trip_ID" id="id_Trip_ID" value="{{ active }}" />
-		<input type="hidden" name="PCategory" id="id_PCategory" value="Meal" />
-	<div class="form-input submit-button">
-		{% if edit %}
-		<input type='hidden' name="Meal_ID" value="{{ record }}"/>
+    {% if edit %}
+		<input type='hidden' name="Financial_ID" value="{{ record }}"/>
 		{% endif %}
+    <input type="hidden" name="PCategory" id="id_PCategory" value="Financial" />
+		<input type="hidden" name="Trip_ID" id="id_Trip_ID" value="{{ active }}" />
+	<div class="form-input submit-button">
 
 		<button type="submit" class="btn btn-danger" value="true">Submit Form</button>
 	</div>

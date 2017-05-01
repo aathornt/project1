@@ -20,12 +20,14 @@
 <div class="container">
 
 <div class="page-header">
+{% include 'signout_panel.html' %}
+<br />
 <h1 class='center'>Log A Registration Fee!</h1>
 </div>
 
 <div class="jumbotron">
 
-	<p>Fees</p>
+	<p>Fill Out The Following Fields</p>
 
     <p>
 			{% block content %}
@@ -44,11 +46,6 @@
 							<div class="input-group input-group-sm">
 							<span class="input-group-addon">Cost</span>
 								{{ form.Cost|add_class:"form-control" }}
-							</div><br>
-
-							<div class="input-group input-group-sm">
-							<span class="input-group-addon">Other</span>
-								{{ form.Other|add_class:"form-control" }}
 							</div><br>
 
 						<div class="input-group input-group-sm">

@@ -4,63 +4,64 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Register Page</title>
+<title>Personal Car Page</title>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="/static/forms/addmeal.css">
-</head>
+<link rel="stylesheet" href="/static/forms/transportation.css">
+
 <body>
 	<div class="container">
 	<div class="page-header">
 	{% include 'signout_panel.html' %}
 	<br />
-	<h1>Add A Meal!</h1>
+	<h1>Add A Car Expense!</h1>
 	</div>
 	<div class="jumbotron">
 <!-- Tells browser to return the form data to the URL /forms/, using the POST method. -->
-	<p>Fill Out The Following Fields
+	<p>Fill Out The Following Fields</p>
 	</p>
 	<p>
 	{% if edit %}
 	<form id="createEmployee" action="/forms/editexpense/" method="POST">
 	{% else %}
-	<form id="createEmployee" action="/forms/addmeal/" method="POST">
+	<form id="createEmployee" action="/forms/personalcar/" method="POST">
 	{% endif %}
 {% csrf_token %}
 {% load widget_tweaks %}
 {{ form.media }}
-		<div class="dropdown">
-				{{ form.Meal_Category|add_class:"form-control" }}
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Mileage</span>
+				{{ form.Mileage|add_class:"form-control" }}
 		</div><br>
 
 		<div class="input-group input-group-sm">
-		<span class="input-group-addon">Cost (No Tip)</span>
+		<span class="input-group-addon">From</span>
+				{{ form.From|add_class:"form-control" }}
+		</div><br>
+
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">To</span>
+				{{ form.To|add_class:"form-control" }}
+		</div><br>
+		<div class="input-group input-group-sm">
+		<span class="input-group-addon">Amount</span>
 				{{ form.Cost|add_class:"form-control" }}
 		</div><br>
 		<div class="input-group input-group-sm">
-		<span class="input-group-addon">Tip</span>
-				{{ form.Tip|add_class:"form-control" }}
-<<<<<<< HEAD
-		</div></br>
-
-		<!-- <input type="hidden" name="Added" id="Added_ID" value="{{ timestamp.Added }}" /> -->
-=======
-		</div></br>
-		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Date</span>
-				{{ form.Date|add_class:"form-control" }}
+				{{ form.Date|add_class:"form-control"}}
 		</div><br>
->>>>>>> 684a4ec1028c6a81e789ff1bb18ca29a852ef8ea
-
+		
 		<input type="hidden" name="Trip_ID" id="id_Trip_ID" value="{{ active }}" />
-		<input type="hidden" name="PCategory" id="id_PCategory" value="Meal" />
+		<input type="hidden" name="PCategory" id="id_PCategory" value="PersonalCar" />
+		<input type="hidden" name="Category" id="id_Category" value="Personal Car"/>
 	<div class="form-input submit-button">
 		{% if edit %}
-		<input type='hidden' name="Meal_ID" value="{{ record }}"/>
+		<input type='hidden' name="PersonalCar_ID" value="{{ record }}"/>
 		{% endif %}
-
+	
 		<button type="submit" class="btn btn-danger" value="true">Submit Form</button>
 	</div>
 	</form>
@@ -68,19 +69,3 @@
 </div>
 </div>
 </body>
-{% if form.Date.errors %}
-    <ul class='form-errors'>
-        {% for error in form.Date.errors %}
-            <li>{{ error }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-
-{% if form.non_field_errors %}
-    <ul class='form-errors'>
-        {% for error in form.non_field_errors %}
-            <li>{{ error }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-</html>

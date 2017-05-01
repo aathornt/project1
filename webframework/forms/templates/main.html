@@ -27,7 +27,7 @@
 <body>
 
 
-<div>
+<div class="container">
 <div class="page-header">
 {% include 'signout_panel.html' %}
 <br />
@@ -59,28 +59,43 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% if recent %}
                         {% for expense in recent %}
                           <div>
                                 {% if expense.meal %}
                            <td> {{ expense.meal.Meal_Category }} </td>
+
                                 {% elif expense.dailyexpenses %}
                             <td>{{ expense.dailyexpenses.Category }}</td>
-                              {% else %}
-                            <td>{{ expense.registrationfees.Category }}</td>
-                                {% endif %}
 
+                              {% elif expense.registrationfees %}
+                            <td>{{ expense.registrationfees.Category }}</td>
+
+                            {% elif expense.financial %}
+                            <td>{{ expense.financial.Category }}</td>
+
+                            {% elif expense.miscellaneous %}
+                            <td>{{ expense.miscellaneous.Description }}</td>
+
+                            {% elif expense.transportation %}
+                            <td>{{ expense.transportation.Category }}</td>
+
+                            {% else %}
+                            <td> {{ expense.personalcar.Category }}
+                            {% endif %}
 
                            <td> {{ expense.Date|date:"m/d/y" }} </td>
                            <td> ${{ expense.Cost|floatformat:2 }} </td>
                            <tr></tr>
                           </div>
                         {% endfor %}
-
+                    {% else %}
                         <div>
-                        <td>{{ category }}</td>
+                        <td>{{ na }}</td>
                         <td>{{ na }}</td>
                         <td>{{ na }}</td>
                         </div>
+                    {% endif %}
                 </tbody>
             </table>
             </div>

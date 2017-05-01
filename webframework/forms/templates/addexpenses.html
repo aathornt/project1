@@ -16,12 +16,13 @@
     <div class="container">
         <div class="page-header">
         {% include 'signout_panel.html' %}
+        <br />
             <h1 class='center'>Select An Expense Type</h1>
         </div>
         <div class="jumbotron">
             <p>
                 <div>
-                    <h2 class="center">Trip Name</h2>
+                    <h2 class="center">{{ active.Place }}</h2>
                 </div>
                 <div class="container">
                 <div class="row">
@@ -31,35 +32,23 @@
                         <a href="/forms/dailyexpenses/" class="btn btn-danger btn-block" role="button">Daily Expenses</a>
                   </div><br>
                 <div class="row">
-                        <button type="button" class="btn btn-danger btn-block">
-                            Personal Car
-                        </button>
+                        <a href="/forms/personalcar/" class="btn btn-danger btn-block" role="button">Personal Car</a>
                 </div><br>
                   <div class="row">
-                        <button type="button" class="btn btn-danger btn-block">
-                            Transportation
-                        </button>
+                        <a href="/forms/transportation/" class="btn btn-danger btn-block" role="button">Public Transportation</a>
                   </div><br>
+
+                  <div class="row">
+                        <a href="/forms/miscellaneous/" class="btn btn-danger btn-block" role="button">Miscellaneous</a>
+                      </div><br>
 
                     <div class="row">
                         <a href="/forms/registrationfees/" class="btn btn-danger btn-block" role="button">Registration Fees</a>
                       </div><br>
+                      
                       <div class="row">
-                        <button type="button" class="btn btn-danger btn-block">
-                             Cost Center
-                        </button>
+                        <a href="/forms/addfinancial/" class="btn btn-danger btn-block" role="button">Cost Center / Internal Order</a>
                     </div><br>
-                  <div class="row">
-                        <button type="button" class="btn btn-danger btn-block">
-                            Internal Order
-                        </button>
-                    </div><br>
-
-                    <div class="row">
-                        <button type="button" class="btn btn-danger btn-block">
-                            Miscellaneous
-                        </button>
-                    </div>
 
         </div>
         </p>

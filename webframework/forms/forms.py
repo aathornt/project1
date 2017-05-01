@@ -4,6 +4,10 @@ from .models import Trip
 from .models import DailyExpenses
 from .models import RegistrationFees
 from .models import Post
+from .models import Transportation
+from .models import Financial
+from .models import PersonalCar
+from .models import Miscellaneous
 from django import forms
 from django.contrib.auth.models import User
 from time import strftime
@@ -12,7 +16,6 @@ from datetimewidget.widgets import DateWidget, TimeWidget
 
 class UserForm(ModelForm):
 	password=forms.CharField(widget=forms.PasswordInput())
-	# confirm_password=forms.CharField()
 	class Meta:
 		model = User;
 		fields = ['username', 'password', 'email', 'first_name', 'last_name']
@@ -47,4 +50,28 @@ class RegistrationFeesForm(ModelForm):
 	Date = forms.DateField(widget=DateWidget(usel10n=True, bootstrap_version=3))
 	class Meta:
 		model = RegistrationFees;
-		fields = ['Category', 'Other', 'Date', 'Cost', 'Added', 'Trip_ID', 'PCategory']
+		fields = ['Category', 'Date', 'Cost', 'Added', 'Trip_ID', 'PCategory']
+
+class TransportationForm(ModelForm):
+	Date = forms.DateField(widget=DateWidget(usel10n=True, bootstrap_version=3))
+	class Meta:
+		model = Transportation;
+		fields = ['Category', 'Date', 'Cost', 'Added', 'Trip_ID', 'PCategory']
+
+class FinancialForm(ModelForm):
+	Date = forms.DateField(widget=DateWidget(usel10n=True, bootstrap_version=3))
+	class Meta:
+		model = Financial;
+		fields = ['Category', 'Date', 'Cost', 'Added', 'Number', 'Trip_ID', 'PCategory']
+
+class PersonalCarForm(ModelForm):
+	Date = forms.DateField(widget=DateWidget(usel10n=True, bootstrap_version=3))
+	class Meta:
+		model = PersonalCar;
+		fields = ['From', 'To', 'Category', 'Mileage', 'Date', 'Cost', 'Added', 'Trip_ID', 'PCategory']
+
+class MiscellaneousForm(ModelForm):
+	Date = forms.DateField(widget=DateWidget(usel10n=True, bootstrap_version=3))
+	class Meta:
+		model = Miscellaneous;
+		fields = ['Date', 'Cost', 'Added', 'Trip_ID', 'Description', 'PCategory']

@@ -13,7 +13,6 @@ CHOICES=(
 	)
 CATEGORIES=(
 		('Lodging', 'Lodging'),
-		('Meal Tips', 'Meal Tips'),
 		('Taxi', 'Taxi'),
 		('Parking, Tolls', 'Parking, Tolls'),
 		('Gasoline', 'Gasoline'),
@@ -23,8 +22,16 @@ FEES=(
 		('Conference Fees', 'Conference Fees'),
 		('Banquet Fees', 'Banquet Fees'),
 		('Dues', 'Dues'),
-		('Other', 'Other'),
 	)
+VEHICLES=(
+		('Airfare', 'Airfare'),
+		('Rental Car','Rental Car'),
+		('Bus/Train','Bus/Train'),
+	)
+FINANCIAL=(
+		('Cost Center', 'Cost Center'),
+		('Internal Order', 'Internal Order'),
+)
 
 class Trip(models.Model):
 	Trip_ID = models.AutoField(primary_key=True)
@@ -61,8 +68,28 @@ class Meal(Post):
 class DailyExpenses(Post):
 	DailyExpense_ID = models.AutoField(primary_key=True)
 	Category = models.CharField(max_length=30, choices = CATEGORIES, default='Lodging')
-	
+
 class RegistrationFees(Post):
 	RegistrationFee_ID = models.AutoField(primary_key = True)
 	Category = models.CharField(max_length=30, choices = FEES, default='Conference Fees')
-	Other = models.CharField(max_length=30)
+
+class Transportation(Post):
+	Transportation_ID = models.AutoField(primary_key = True)
+	Category = models.CharField(max_length=30, choices = VEHICLES, default='Airfare')
+
+class Financial(Post):
+	Financial_ID = models.AutoField(primary_key = True)
+	Category = models.CharField(max_length=30, choices = FINANCIAL, default='Cost Center')
+	Number = models.CharField(max_length=30)
+
+class PersonalCar(Post):
+	PersonalCar_ID = models.AutoField(primary_key = True)
+	Category = models.CharField(max_length=40)
+	From = models.CharField(max_length=45)
+	To = models.CharField(max_length=45)
+	Mileage = models.FloatField()
+
+class Miscellaneous(Post):
+	Miscellaneous_ID = models.AutoField(primary_key = True)
+	Description = models.CharField(max_length=30)
+	
