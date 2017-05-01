@@ -42,14 +42,18 @@
 		<span class="input-group-addon">Date</span>
 				{{ form.Date|add_class:"form-control"}}
 		</div><br>
-		
+
 		<input type="hidden" name="Trip_ID" id="id_Trip_ID" value="{{ active }}" />
 		<input type="hidden" name="PCategory" id="id_PCategory" value="DailyExpense" />
 	<div class="form-input submit-button">
+<<<<<<< HEAD
+
+=======
 		{% if edit %}
 		<input type='hidden' name="DailyExpense_ID" value="{{ record }}"/>
 		{% endif %}
-	
+
+>>>>>>> 684a4ec1028c6a81e789ff1bb18ca29a852ef8ea
 		<button type="submit" class="btn btn-danger" value="true">Submit Form</button>
 	</div>
 	</form>

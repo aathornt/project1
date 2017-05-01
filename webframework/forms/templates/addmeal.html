@@ -34,7 +34,7 @@
 		<div class="dropdown">
 				{{ form.Meal_Category|add_class:"form-control" }}
 		</div><br>
-		
+
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Cost (No Tip)</span>
 				{{ form.Cost|add_class:"form-control" }}
@@ -42,11 +42,17 @@
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Tip</span>
 				{{ form.Tip|add_class:"form-control" }}
-		</div></br>		
+<<<<<<< HEAD
+		</div></br>
+
+		<!-- <input type="hidden" name="Added" id="Added_ID" value="{{ timestamp.Added }}" /> -->
+=======
+		</div></br>
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Date</span>
 				{{ form.Date|add_class:"form-control" }}
 		</div><br>
+>>>>>>> 684a4ec1028c6a81e789ff1bb18ca29a852ef8ea
 
 		<input type="hidden" name="Trip_ID" id="id_Trip_ID" value="{{ active }}" />
 		<input type="hidden" name="PCategory" id="id_PCategory" value="Meal" />
