@@ -11,6 +11,8 @@ from .forms import DailyExpensesForm
 from .forms import RegistrationFeesForm
 from .forms import FinancialForm
 from .forms import PersonalCarForm
+from .forms import MiscellaneousForm
+from .models import Miscellaneous
 from .models import PersonalCar
 from .models import Transportation
 from .models import Meal
@@ -77,7 +79,8 @@ def index(request):
 		active = Trip.objects.get(Is_Active = True, Username = current_user.id)
 		recent = Post.objects.select_related('meal', 'dailyexpenses', 'registrationfees', 'financial').filter(Trip_ID_id = active.Trip_ID).order_by('-Added')[:3]
 		popuperror2= 'True'
-		return render(request, 'main.html', {'recent': recent, 'name' : name, 'active' : active, 'popuperror2': popuperror2})
+		na = 'N/A'
+		return render(request, 'main.html', {'recent': recent, 'name' : name, 'active' : active, 'popuperror2': popuperror2, 'na': na})
 	else:
 		popuperror= 'True'
 		trip = 'None'
@@ -95,7 +98,15 @@ def trip(request):
 		active = Trip.objects.get(Is_Active = True, Username = current_user.id)
 		recent = Meal.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Meal_ID')[:3]
 		recentexp = DailyExpenses.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-DailyExpense_ID')[:3]
-		return render(request, 'trip.html', {'recent': recent, 'active': active, 'recentexp': recentexp})
+		recentcar = PersonalCar.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-PersonalCar_ID')[:3]
+		recentpub = Transportation.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Transportation_ID')[:3]
+		recentreg = RegistrationFees.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-RegistrationFee_ID')[:3]
+		recentcos = Financial.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Financial_ID')[:3]
+		recentmis = Miscellaneous.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Miscellaneous_ID')[:3]
+
+		na = 'N/A'
+		no = 'No Recent Expense'
+		return render(request, 'trip.html', {'recent': recent, 'no': no, 'na': na, 'active': active, 'recentexp': recentexp, 'recentcar': recentcar, 'recentpub': recentpub, 'recentreg': recentreg, 'recentcos': recentcos, 'recentmis': recentmis})
 	else:
 		return redirect('/forms/')
 
@@ -214,6 +225,28 @@ def dailyexpenses(request):
 		active = Trip.objects.get(Is_Active = "True", Username=current_user.id)
 		timestamp = DailyExpenses.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Added')
 		return render(request, 'dailyexpenses.html', {'form': form, 'active': active.Trip_ID, 'timestamp': timestamp })
+
+
+@login_required(login_url='/')
+def miscellaneous(request):
+	# if this is a post request we need to process the form data
+	if request.method == 'POST':
+		# create a form instance and populate it with data from the request:
+		form = MiscellaneousForm(request.POST)
+		# check whether it's valid:
+		if form.is_valid():
+			# save data as an instance in a database
+			form.save()
+			# reply with thank you, offer them a chance to enter again
+			return redirect('/forms/trip/')
+	else:
+		# We'll create a blank form if we have a GET
+		form = MiscellaneousForm()
+		current_user = request.user
+		active = Trip.objects.get(Is_Active = "True", Username=current_user.id)
+		timestamp = Miscellaneous.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Added')
+		return render(request, 'miscellaneous.html', {'form': form, 'active': active.Trip_ID, 'timestamp': timestamp })
+
 
 
 @login_required(login_url='/')
@@ -367,6 +400,17 @@ def editexpense(request):
 				instance.Trip_ID = tran.Trip_ID
 				instance.post_ptr_id = tran.post_ptr_id
 				instance.Transportation_ID = tran.Transportation_ID
+				form.save()
+				return redirect('/forms/expenselist/')
+		elif request.POST.get("PCategory", "") == 'Miscellaneous':
+			form = MiscellaneousForm(request.POST)
+			if form.is_valid():
+				misc = request.POST.get("Miscellaneous_ID", "")
+				instance = form.save(commit=False)
+				mis = Miscellaneous.objects.get(Miscellaneous_ID = misc)
+				instance.Trip_ID = mis.Trip_ID
+				instance.post_ptr_id = mis.post_ptr_id
+				instance.Miscellaneous_ID = mis.Miscellaneous_ID
 				form.save()
 				return redirect('/forms/expenselist/')
 		else:

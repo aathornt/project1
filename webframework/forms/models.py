@@ -89,3 +89,8 @@ class PersonalCar(Post):
 	From = models.CharField(max_length=45)
 	To = models.CharField(max_length=45)
 	Mileage = models.FloatField()
+
+class Miscellaneous(Post):
+	Miscellaneous_ID = models.AutoField(primary_key = True)
+	Description = models.CharField(max_length=30)
+	

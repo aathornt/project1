@@ -61,6 +61,7 @@
                         </thead>
                         <tbody>
 
+                    {% if recent %}
                         {% for name in recent %}
                           <div>
                            <td> {{ name.Date|date:"m/d/y" }} </td>
@@ -68,7 +69,18 @@
                            <td> ${{ name.Cost|floatformat:2 }} </td>
                            <td> ${{ name.Tip|floatformat:2 }}</td>
                            <tr></tr>
-                          </div>{% endfor %}
+                          </div>
+                        {% endfor %}
+                    {% else %}
+                     <div>
+                           <td> {{ no }} </td>
+                           <td> {{ na }} </td>
+                           <td> {{ na }} </td>
+                           <td> {{ na }}</td>
+                           <tr></tr>
+                          </div>
+                    {% endif %}
+
                         </tbody>
                     </table>
                 </div>
@@ -88,6 +100,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                    {% if recentexp %}    
                         {% for exp in recentexp %}
                         <div>
                             <td> {{ exp.Date|date:"m/d/y" }} </td>
@@ -95,11 +108,229 @@
                            <td> ${{ exp.Cost|floatformat:2 }} </td>
                            
                            <tr></tr>
-                        </div>{% endfor %}
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                           <div>
+                            <td> {{ no }} </td>
+                            <td> {{ na }} </td>
+                           <td> {{ na }} </td>
                            
+                           <tr></tr>
+                        </div>
+                    {% endif %}
                         </tbody>
+                    
                     </table>
                 </div>
+
+
+                 <div class="panel panel-default">
+                    <!-- Default panel contents containg Recent Expenses-->
+                    <div class="panel-heading">Most Recent Personal Car Expenses</div>
+
+                    <!-- Table for Recent Expenses-->
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class='center'>Date</th>
+                                <th class='center'>To</th>
+                                <th class='center'>From</th>
+                                <th class='center'>Cost</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                    {% if recentcar %}    
+                        {% for expcar in recentcar %}
+                        <div>
+                            <td> {{ expcar.Date|date:"m/d/y" }} </td>
+                            <td> {{ expcar.To }} </td>
+                           <td> {{ expcar.From }} </td>
+                           <td> ${{ expcar.Cost|floatformat:2 }} </td>
+                           
+                           <tr></tr>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                           <div>
+                            <td> {{ no }} </td>
+                            <td> {{ na }} </td>
+                           <td> {{ na }} </td>
+                           <td> {{ na }} </td>
+                           
+                           <tr></tr>
+                        </div>
+                    {% endif %}
+                        </tbody>
+                    
+                    </table>
+                </div>
+
+                <div class="panel panel-default">
+                    <!-- Default panel contents containg Recent Expenses-->
+                    <div class="panel-heading">Most Recent Public Transportation Expenses</div>
+
+                    <!-- Table for Recent Expenses-->
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class='center'>Date</th>
+                                <th class='center'>Category</th>
+                                <th class='center'>Cost</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                    {% if recentpub %}    
+                        {% for exppub in recentpub %}
+                        <div>
+                            <td> {{ exppub.Date|date:"m/d/y" }} </td>
+                            <td> {{ exppub.Category }} </td>
+                           <td> ${{ exppub.Cost|floatformat:2 }} </td>
+                           
+                           <tr></tr>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                           <div>
+                            <td> {{ no }} </td>
+                            <td> {{ na }} </td>
+                           <td> {{ na }} </td>
+                           
+                           <tr></tr>
+                        </div>
+                    {% endif %}
+                        </tbody>
+                    
+                    </table>
+                </div>
+
+
+                    <div class="panel panel-default">
+                    <!-- Default panel contents containg Recent Expenses-->
+                    <div class="panel-heading">Most Recent Miscellaneous Expenses</div>
+
+                    <!-- Table for Recent Expenses-->
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class='center'>Date</th>
+                                <th class='center'>Description</th>
+                                <th class='center'>Cost</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                    {% if recentmis %}    
+                        {% for expmis in recentmis %}
+                        <div>
+                            <td> {{ expmis.Date|date:"m/d/y" }} </td>
+                           <td> {{ expmis.Description }} </td>
+                           <td> ${{ expmis.Cost|floatformat:2 }}</td>
+                           
+                           <tr></tr>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                           <div>
+                            <td> {{ no }} </td>
+                           <td> {{ na }} </td>
+                           <td> {{ na }} </td>
+                           
+                           <tr></tr>
+                        </div>
+                    {% endif %}
+                        </tbody>
+                    
+                    </table>
+                </div>
+
+
+
+                <div class="panel panel-default">
+                    <!-- Default panel contents containg Recent Expenses-->
+                    <div class="panel-heading">Most Recent Registration Fees Expenses</div>
+
+                    <!-- Table for Recent Expenses-->
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class='center'>Date</th>
+                                <th class='center'>Category</th>
+                                <th class='center'>Cost</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                    {% if recentreg %}    
+                        {% for expreg in recentreg %}
+                        <div>
+                            <td> {{ expreg.Date|date:"m/d/y" }} </td>
+                            <td> {{ expreg.Category }} </td>
+                           <td> ${{ expreg.Cost|floatformat:2 }} </td>
+                           
+                           <tr></tr>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                           <div>
+                            <td> {{ no }} </td>
+                            <td> {{ na }} </td>
+                           <td> {{ na }} </td>
+                           
+                           <tr></tr>
+                        </div>
+                    {% endif %}
+                        </tbody>
+                    
+                    </table>
+                </div>
+
+
+                <div class="panel panel-default">
+                    <!-- Default panel contents containg Recent Expenses-->
+                    <div class="panel-heading">Cost Center / Internal Order Expenses</div>
+
+                    <!-- Table for Recent Expenses-->
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class='center'>Category</th>
+                                <th class='center'>Cost</th>
+                                <th class='center'>Number</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                    {% if recentcos %}    
+                        {% for expcos in recentcos %}
+                        <div>
+                            <td> {{ expcos.Category }} </td>
+                           <td> ${{ expcos.Cost|floatformat:2 }} </td>
+                           <td> {{ expcos.Number }}</td>
+                           
+                           <tr></tr>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                           <div>
+                            <td> {{ no }} </td>
+                           <td> {{ na }} </td>
+                           <td> {{ na }} </td>
+                           
+                           <tr></tr>
+                        </div>
+                    {% endif %}
+                        </tbody>
+                    
+                    </table>
+                </div>
+
+
+
+
+
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
                         <a href='/forms/finalize/' id='Finalize' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-saved" aria-hidden="true"></span> Finalize Trip</a>

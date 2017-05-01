@@ -7,6 +7,7 @@ from .models import Post
 from .models import Transportation
 from .models import Financial
 from .models import PersonalCar
+from .models import Miscellaneous
 from django import forms
 from django.contrib.auth.models import User
 from time import strftime
@@ -69,3 +70,9 @@ class PersonalCarForm(ModelForm):
 	class Meta:
 		model = PersonalCar;
 		fields = ['From', 'To', 'Category', 'Mileage', 'Date', 'Cost', 'Added', 'Trip_ID', 'PCategory']
+
+class MiscellaneousForm(ModelForm):
+	Date = forms.DateField(widget=DateWidget(usel10n=True, bootstrap_version=3))
+	class Meta:
+		model = Miscellaneous;
+		fields = ['Date', 'Cost', 'Added', 'Trip_ID', 'Description', 'PCategory']

@@ -65,6 +65,9 @@
                            {% elif name.transportation %}
                            <td> {{ name.transportation.Category }}</td>
 
+                           {% elif name.miscellaneous %}
+                           <td> {{ name.miscellaneous.Description }}</td>
+
                            {% else %}
                            <td> {{ name.personalcar.Category }}</td>
                            {% endif %}

@@ -59,6 +59,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% if recent %}
                         {% for expense in recent %}
                           <div>
                                 {% if expense.meal %}
@@ -73,6 +74,9 @@
                             {% elif expense.financial %}
                             <td>{{ expense.financial.Category }}</td>
 
+                            {% elif expense.miscellaneous %}
+                            <td>{{ expense.miscellaneous.Description }}</td>
+
                             {% elif expense.transportation %}
                             <td>{{ expense.transportation.Category }}</td>
 
@@ -85,12 +89,13 @@
                            <tr></tr>
                           </div>
                         {% endfor %}
-
+                    {% else %}
                         <div>
-                        <td>{{ category }}</td>
+                        <td>{{ na }}</td>
                         <td>{{ na }}</td>
                         <td>{{ na }}</td>
                         </div>
+                    {% endif %}
                 </tbody>
             </table>
             </div>
