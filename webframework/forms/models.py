@@ -41,6 +41,8 @@ class Trip(models.Model):
 	Department = models.CharField(max_length=200)
 	Place = models.CharField(max_length=200)
 	Purpose = models.CharField(max_length=200)
+	Accompanied_By = models.CharField(max_length = 200)
+	Phone_Number = models.CharField(max_length = 20)
 	Date_Departed = models.DateField()
 	Time_Departed = models.TimeField()
 	Date_Returned = models.DateField()
@@ -92,4 +94,3 @@ class PersonalCar(Post):
 class Miscellaneous(Post):
 	Miscellaneous_ID = models.AutoField(primary_key = True)
 	Description = models.CharField(max_length=30)
-	

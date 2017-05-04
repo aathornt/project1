@@ -15,13 +15,18 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.js">
         </script>
 <link rel="stylesheet" href="/static/forms/addtrip.css">
-
+<script type="text/JavaScript">
+  function popupError() {
+    alert("Your returned date and time is before your departed date and time.");
+  }
+</script>
 </head>
-<body>
+<body {% if popuperror %} onload="popupError()" {% endif %}>
 
 <div class="container">
 
 <div class="page-header">
+  <a href='/forms/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
 {% include 'signout_panel.html' %}
 <h1 class='center'>Add A Trip!</h1>
 </div>
@@ -51,6 +56,14 @@
     <div class="input-group input-group-sm">
         <span class="input-group-addon">Purpose</span>
          {{ form.Purpose|add_class:"form-control" }}
+    </div><br>
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">Accompanied By</span>
+         {{ form.Accompanied_By|add_class:"form-control" }}
+    </div><br>
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">Phone Number</span>
+         {{ form.Phone_Number|add_class:"form-control" }}
     </div><br>
      <div class="input-group input-group-sm">
         <span class="input-group-addon">Contact Person</span>

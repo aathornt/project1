@@ -12,16 +12,21 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <script type="text/JavaScript">
+      function popupError() {
+        alert("The date you entered is outside of your trip date range.");
+      }
+    </script>
     <link rel="stylesheet" href="/static/forms/triplist.css">
 
 </head>
 
-<body>
+<body {% if editerror %} onload="popupError()" {% endif %}>
 
     <div class="container">
 
         <div class="page-header">
+          <a href='/forms/trip/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
         {% include 'signout_panel.html' %}
         <br />
             <h1>Your Expenses!</h1>
@@ -72,8 +77,6 @@
                            <td> {{ name.personalcar.Category }}</td>
                            {% endif %}
                            <td>${{ name.Cost|floatformat:2 }}</td>
-
-                            <td class="bottom"><div class='btn-toolbar fix'><a href='/forms/editexpense?id={{ name.id }}&category={{ name.PCategory }}' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
 
                             <td class="bottom"><div class='btn-toolbar fix'><a href='/forms/editexpense?id={{ name.id }}&category={{ name.PCategory }}' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
 

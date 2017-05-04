@@ -27,5 +27,7 @@ url(r'^editexpense/', views.editexpense, name='editexpense'),
 url(r'^addfinancial/', views.addfinancial, name='addfinancial'),
 url(r'^transportation/', views.transportation, name='transportation'),
 url(r'^personalcar/', views.personalcar, name='personalcar'),
-url(r'^miscellaneous/', views.miscellaneous, name='miscellaneous')
+url(r'^miscellaneous/', views.miscellaneous, name='miscellaneous'),
+url(r'^pdf/', views.pdf, name = 'pdf'),
+url(r'^reportlist/', views.reportlist, name='reportlist')
 ]

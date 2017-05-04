@@ -8,12 +8,24 @@
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script type="text/JavaScript">
+  function popupError() {
+    alert("The date you entered is outside of your trip date range.");
+  }
+  function existError() {
+    alert("An expense for that date and category already exist. Go to the expense list page if you need to make any changes.");
+  }
+</script>
 <link rel="stylesheet" href="/static/forms/addmeal.css">
 
-<body>
+<body {% if popuperror %} onload="popupError()" {% endif %} {% if existerror %} onload="existError()" {% endif %}>
 	<div class="container">
 	<div class="page-header">
+		{% if edit %}
+		<a href='/forms/expenselist/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
+		{% else %}
+	<a href='/forms/addexpense/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
+		{% endif %}
 	{% include 'signout_panel.html' %}
 	<br />
 	<h1>Add A Daily Expense!</h1>
@@ -46,14 +58,9 @@
 		<input type="hidden" name="Trip_ID" id="id_Trip_ID" value="{{ active }}" />
 		<input type="hidden" name="PCategory" id="id_PCategory" value="DailyExpense" />
 	<div class="form-input submit-button">
-<<<<<<< HEAD
-
-=======
 		{% if edit %}
 		<input type='hidden' name="DailyExpense_ID" value="{{ record }}"/>
 		{% endif %}
-
->>>>>>> 684a4ec1028c6a81e789ff1bb18ca29a852ef8ea
 		<button type="submit" class="btn btn-danger" value="true">Submit Form</button>
 	</div>
 	</form>

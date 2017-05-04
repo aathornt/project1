@@ -44,7 +44,7 @@ class TripForm(ModelForm):
 
 	class Meta:
 		model = Trip;
-		fields = [ 'Username', 'Department', 'Place', 'Purpose', 'Date_Departed', 'Time_Departed', 'Date_Returned', 'Time_Returned', 'Contact_Person', 'Is_Active']
+		fields = [ 'Username', 'Department', 'Place', 'Purpose', 'Accompanied_By', 'Phone_Number', 'Date_Departed', 'Time_Departed', 'Date_Returned', 'Time_Returned', 'Contact_Person', 'Is_Active']
 
 class RegistrationFeesForm(ModelForm):
 	Date = forms.DateField(widget=DateWidget(usel10n=True, bootstrap_version=3))
