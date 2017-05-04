@@ -43,6 +43,7 @@ class Trip(models.Model):
 	Purpose = models.CharField(max_length=200)
 	Accompanied_By = models.CharField(max_length = 200)
 	Phone_Number = models.CharField(max_length = 20)
+	Exchange = models.CharField(max_length = 20)
 	Date_Departed = models.DateField()
 	Time_Departed = models.TimeField()
 	Date_Returned = models.DateField()

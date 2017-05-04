@@ -19,11 +19,10 @@
 	<div class="container">
 	<div class="page-header">
 		{% if edit %}
-		<a href='/forms/expenselist/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
+		{% include 'expenseedit_panel.html' %}
 		{% else %}
-	<a href='/forms/addexpense/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
+		{% include 'expense_panel.html' %}
 		{% endif %}
-	{% include 'signout_panel.html' %}
 	<br />
 	<h1>Add A Car Expense!</h1>
 	</div>
@@ -42,21 +41,21 @@
 {{ form.media }}
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Mileage</span>
-				{{ form.Mileage|add_class:"form-control" }}
+				{{ form.Mileage|add_class:"form-control"|attr:"placeholder:Mileage" }}
 		</div><br>
 
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">From</span>
-				{{ form.From|add_class:"form-control" }}
+				{{ form.From|add_class:"form-control"|attr:"placeholder:From" }}
 		</div><br>
 
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">To</span>
-				{{ form.To|add_class:"form-control" }}
+				{{ form.To|add_class:"form-control"|attr:"placeholder:To" }}
 		</div><br>
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Amount</span>
-				{{ form.Cost|add_class:"form-control" }}
+				{{ form.Cost|add_class:"form-control"|attr:"placeholder:Amount" }}
 		</div><br>
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Date</span>

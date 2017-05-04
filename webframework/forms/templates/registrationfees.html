@@ -24,12 +24,11 @@
 <div class="container">
 
 <div class="page-header">
-  {% if edit %}
-  <a href='/forms/expenselist/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
-  {% else %}
-  <a href='/forms/addexpense/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
-  {% endif %}
-{% include 'signout_panel.html' %}
+ {% if edit %}
+		{% include 'expenseedit_panel.html' %}
+		{% else %}
+		{% include 'expense_panel.html' %}
+		{% endif %}
 <br />
 <h1 class='center'>Log A Registration Fee!</h1>
 </div>
@@ -54,7 +53,7 @@
 
 							<div class="input-group input-group-sm">
 							<span class="input-group-addon">Cost</span>
-								{{ form.Cost|add_class:"form-control" }}
+								{{ form.Cost|add_class:"form-control"|attr:"placeholder:Cost" }}
 							</div><br>
 
 						<div class="input-group input-group-sm">

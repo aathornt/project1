@@ -13,20 +13,23 @@
     alert("The date you entered is outside of your trip date range.");
   }
   function existError() {
-    alert("An expense for that date and category already exist. Go to the expense list page if you need to make any changes.");
+    alert("An expense for that date and category already exists. Go to the expense list page if you need to make any changes.");
+  }
+  function tipError() {
+  	alert("A tip must not exceed 20% of the meal total.");
   }
 </script>
 <link rel="stylesheet" href="/static/forms/addmeal.css">
 </head>
-<body {% if popuperror %} onload="popupError()" {% endif %} {% if existerror %} onload="existError()" {% endif %}>
+<body {% if popuperror %} onload="popupError()" {% endif %} {% if existerror %} onload="existError()" {% endif %} {% if tiperror %} onload="tipError()" {% endif %}>
 	<div class="container">
 	<div class="page-header">
 		{% if edit %}
-		<a href='/forms/expenselist/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
+		{% include 'expenseedit_panel.html' %}
 		{% else %}
-	<a href='/forms/addexpense/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
+		{% include 'expense_panel.html' %}
 		{% endif %}
-	{% include 'signout_panel.html' %}
+	
 	<br />
 	<h1>Add A Meal!</h1>
 	</div>
@@ -48,12 +51,12 @@
 		</div><br>
 
 		<div class="input-group input-group-sm">
-		<span class="input-group-addon">Cost (No Tip)</span>
-				{{ form.Cost|add_class:"form-control" }}
+		<span class="input-group-addon">Cost</span>
+				{{ form.Cost|add_class:"form-control"|attr:"placeholder:Cost Without Tip"  }}
 		</div><br>
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Tip</span>
-				{{ form.Tip|add_class:"form-control" }}
+				{{ form.Tip|add_class:"form-control"|attr:"placeholder:Tip"  }}
 		</div></br>
 
 		<!-- <input type="hidden" name="Added" id="Added_ID" value="{{ timestamp.Added }}" /> -->

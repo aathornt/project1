@@ -13,27 +13,31 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/JavaScript">
-      function popupError() {
-        alert("The date you entered is outside of your trip date range.");
+      function deleteconfirm() {
+        var x = confirm("Are you sure you want to delete")
+        if (x) 
+          return true;
+        else
+          return false;
+
       }
     </script>
+
     <link rel="stylesheet" href="/static/forms/triplist.css">
 
 </head>
 
-<body {% if editerror %} onload="popupError()" {% endif %}>
+<body>
 
     <div class="container">
 
         <div class="page-header">
-          <a href='/forms/trip/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
-        {% include 'signout_panel.html' %}
+        {% include 'current_panel.html' %}
         <br />
             <h1>Your Expenses!</h1>
         </div>
 
         <div class="jumbotron">
-
             <p>
 
                 <div class="panel panel-default">
@@ -51,7 +55,7 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                  {% if recent %}
                         {% for name in recent %}
                           <div>
                            <td>{{ name.Date|date:"m/d/y" }}</td>
@@ -79,24 +83,36 @@
                            <td>${{ name.Cost|floatformat:2 }}</td>
 
                             <td class="bottom"><div class='btn-toolbar fix'><a href='/forms/editexpense?id={{ name.id }}&category={{ name.PCategory }}' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
-
-                             <a href='/forms/deleteexpense?id={{ name.id }}' id='Home_Page' class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                             <a href='/forms/deleteexpense?id={{ name.id }}' id='Home_Page' onclick="return deleteconfirm()" class="btn btn-danger btn-sm" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                              </div></td>
                            <tr></tr>
                           </div>{% endfor %}
-
-                          <diV>
-                          <td> {{ category }}</td>
-                          <td> {{ na }}</td>
-                          <td> {{ na }}</td>
-                          <td> {{ na }}</td>
-                          </diV>
-                        </tbody>
+                        </tbody> 
                     </table>
                 </div>
+                <br />
+                <p></p>
                 <p><span class='glyphicon glyphicon-wrench' aria-hidden='true'></span> = Edit Expense</p>
                 <p><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> = Delete Expense</p>
+
                 <p>
+                {% else %}
+                <td>{{ category }}</td>
+                <td>{{ na }}</td>
+                <td>{{ na }}</td>
+                <td>{{ na }}</td>
+                <tr></tr>
+                </div>
+                </tbody>
+                </table>
+                </div>
+                 <p>You Have No Expenses For This Trip, Add One:</p>
+
+                 <a href='/forms/addexpense' id='adde' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Expense</a>
+                {% endif %}
+
+
+
 
         </div>
         </p>
@@ -108,3 +124,4 @@
 
 </body>
 </html>
+

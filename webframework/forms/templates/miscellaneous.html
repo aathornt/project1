@@ -19,11 +19,10 @@
 	<div class="container">
 	<div class="page-header">
 		{% if edit %}
-		<a href='/forms/expenselist/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
+		{% include 'expenseedit_panel.html' %}
 		{% else %}
-	<a href='/forms/addexpense/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
+		{% include 'expense_panel.html' %}
 		{% endif %}
-	{% include 'signout_panel.html' %}
 	<br />
 	<h1>Add A Miscellaneous Expense!</h1>
 	</div>
@@ -42,12 +41,12 @@
 {{ form.media }}
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Description</span>
-				{{ form.Description|add_class:"form-control" }}
+				{{ form.Description|add_class:"form-control"|attr:"placeholder:Description" }}
 		</div><br>
 
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Cost</span>
-				{{ form.Cost|add_class:"form-control" }}
+				{{ form.Cost|add_class:"form-control"|attr:"placeholder:Cost" }}
 		</div><br>
 
 		<div class="input-group input-group-sm">

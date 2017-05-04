@@ -74,14 +74,15 @@ def index(request):
 		active = Trip.objects.get(Is_Active = True, Username = current_user.id)
 		recent = Post.objects.select_related('meal', 'dailyexpenses', 'registrationfees', 'financial').filter(Trip_ID_id = active.Trip_ID).order_by('-Added')[:6]
 		popuperror2= 'True'
+		yea = 'Your Most Recent Expenses'
 		na = 'N/A'
-		return render(request, 'main.html', {'recent': recent, 'name' : name, 'active' : active, 'popuperror2': popuperror2, 'na': na})
+		return render(request, 'main.html', {'recent': recent, 'name' : name, 'yea': yea, 'active' : active, 'popuperror2': popuperror2, 'na': na})
 	else:
 		popuperror= 'True'
 		trip = 'None'
-		category = 'No Active Trip'
 		na = 'N/A'
-		return render(request, 'main.html', {'name' : name, 'trip': trip, 'category': category, 'na': na, 'popuperror': popuperror})
+		no = 'No Active Trip'
+		return render(request, 'main.html', {'name' : name, 'no': no, 'trip': trip, 'na': na, 'popuperror': popuperror})
 
 
 @login_required(login_url='/')
@@ -96,9 +97,10 @@ def trip(request):
 		recentreg = RegistrationFees.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-RegistrationFee_ID')[:3]
 		recentcos = Financial.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Financial_ID')[:3]
 		recentmis = Miscellaneous.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-Miscellaneous_ID')[:3]
+		post = Post.objects.filter(Trip_ID_id = active.Trip_ID).order_by('-id')
 		na = 'N/A'
 		no = 'No Recent Expense'
-		return render(request, 'trip.html', {'recent': recent, 'no': no, 'na': na, 'active': active, 'recentexp': recentexp, 'recentcar': recentcar, 'recentpub': recentpub, 'recentreg': recentreg, 'recentcos': recentcos, 'recentmis': recentmis})
+		return render(request, 'trip.html', {'recent': recent, 'no': no, 'na': na, 'post': post, 'active': active, 'recentexp': recentexp, 'recentcar': recentcar, 'recentpub': recentpub, 'recentreg': recentreg, 'recentcos': recentcos, 'recentmis': recentmis})
 	else:
 		return redirect('/forms/')
 
@@ -152,6 +154,9 @@ def addmeal(request):
 			if Meal.objects.filter(Meal_Category = form.cleaned_data['Meal_Category'], Date = form.cleaned_data['Date']).exists():
 				existerror = 'True'
 				return render(request, 'addmeal.html', {'form': form, 'active':active.Trip_ID, 'existerror':existerror})
+			if (form.cleaned_data['Tip'] > (form.cleaned_data['Cost'] * 0.2)):
+					tiperror = 'True'
+					return render(request, 'addmeal.html', {'form': form, 'active':active.Trip_ID, 'tiperror': tiperror})
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
@@ -304,15 +309,31 @@ def registrationfees(request):
 @login_required(login_url='/')
 def triplist(request):
 	current_user = request.user
+	name = "All Trips for " + current_user.first_name
+	none = "No Trips for " + current_user.first_name
 	if Trip.objects.filter(Is_Active=True, Username = current_user.id).exists():
 		trip = Trip.objects.get(Is_Active = True, Username = current_user.id)
 		trips = Trip.objects.filter(Username = current_user.id).order_by('-Trip_ID')
-		return render(request, 'triplist.html', {'trips': trips, 'trip': trip})
+		return render(request, 'triplist.html', {'trips': trips, 'trip': trip, 'name': name})
 	else:
 		place = 'None'
 		na = 'N/A'
 		trips = Trip.objects.filter(Username = current_user.id).order_by('-Trip_ID')
-		return render(request, 'triplist.html', {'trips': trips, 'place': place, 'na': na})
+		return render(request, 'triplist.html', {'trips': trips, 'none': none, 'place': place, 'na': na})
+
+@login_required(login_url='/')
+def reportlist(request):
+	current_user = request.user
+	name = "All Trips for " + current_user.first_name
+	none = "No Trips for " + current_user.first_name
+	if Trip.objects.filter(Username = current_user.id).exists():
+		trips = Trip.objects.filter(Username = current_user.id).order_by('-Trip_ID')
+		return render(request, 'reportlist.html', {'trips': trips, 'trip': trip, 'name': name})
+	else:
+		place = 'None'
+		na = 'N/A'
+		return render(request, 'reportlist.html', {'place': place, 'na': na, 'none': none})
+
 
 @login_required(login_url='/')
 def expenselist(request):
@@ -825,13 +846,3 @@ def pdf(request):
 		expense_total = expense_total + missum['Cost__sum']
 	return render(request, 'expensepages.htm', {'current_user': current_user, 'active': active, 'date_list': date_list, 'breakfast_costs': breakfast_costs, 'lunch_costs':lunch_costs, 'dinner_costs': dinner_costs, 'day_total': day_total, 'breakfast_total': breakfast_total, 'lunch_total': lunch_total, 'dinner_total': dinner_total, 'lodging_costs': lodging_costs, 'lodging_total': lodging_total, 'meal_total': meal_total, 'meal_and_lodging': meal_and_lodging, 'mealtips': mealtips, 'taxi_costs': taxi_costs, 'tips_total':tips_total, 'taxi_total':taxi_total, 'parking_costs': parking_costs, 'parking_total': parking_total, 'gasoline_costs':gasoline_costs, 'gasoline_total':gasoline_total, 'businesscall_costs':businesscall_costs, 'businesscall_total':businesscall_total, 'other_total': other_total, 'missum': missum, 'pertotal': pertotal, 'regtotal': regtotal, 'dues': dues, 'conf': conf, 'banq': banq, 'mis': mis, 'mis1' : mis1, 'mis2': mis2, 'mis3': mis3, 'recentcar': recentcar, 'airfare': airfare, 'rental_car': rental_car, 'bus_train': bus_train, 'recentcar1': recentcar1 , 'recentcar2': recentcar2 , 'recentcar3': recentcar3 , 'recentcar4': recentcar4 , 'recentcar5': recentcar5 , 'recentcar6': recentcar6 , 'recentcar7': recentcar7, 'expense_total': expense_total, 'cos':cos, 'into':into, 'cos1':cos1,'into1':into1,'cos2':cos2,'into2':into2})
 
-@login_required(login_url='/')
-def reportlist(request):
-	current_user = request.user
-	if Trip.objects.filter(Username = current_user.id).exists():
-		trips = Trip.objects.filter(Username = current_user.id).order_by('-Trip_ID')
-		return render(request, 'reportlist.html', {'trips': trips, 'trip': trip})
-	else:
-		place = 'None'
-		na = 'N/A'
-		return render(request, 'reportlist.html', {'place': place, 'na': na})

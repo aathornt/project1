@@ -21,7 +21,6 @@
     <div class="container">
 
         <div class="page-header">
-          <a href='/forms/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
         {% include 'signout_panel.html' %}
         <br />
             <h1>Generate an Expense Report!</h1>
@@ -33,7 +32,7 @@
 
                 <div class="panel panel-default">
                     <!-- Default panel contents containg Recent Expenses-->
-                    <div class="panel-heading">All Trips!</div>
+                    <div class="panel-heading">{{ none }} {{ name }}</div>
 
                     <!-- Table for Recent Expenses-->
                     <table class="table table-striped">
@@ -66,12 +65,6 @@
                            <tr></tr>
                           </div>{% endfor %}
 
-                        {% else %}
-                          <div>
-                          <td> {{ place }}</td>
-                          <td> {{ na }}</td>
-                          <td> {{ na }}</td>
-                        {% endif %}
                         </tbody>
                     </table>
                 </div>
@@ -81,7 +74,23 @@
 
         </div>
         </p>
+        {% else %}
+                          <div>
+                          <td> {{ place }}</td>
+                          <td> {{ na }}</td>
+                          <td> {{ na }}</td>
+                          <td> {{ na }}</td>
+                          </div>
+                          </tbody>
+                          </table>
+                          </div>
+                          <p> You Have No Trips, Add One:</p>
 
+                        <a href='/forms/addtrip' id='adde' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Trip</a>
+
+                        {% endif %}
+
+                
     </div>
     </div>
 

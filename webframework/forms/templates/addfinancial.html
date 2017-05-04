@@ -18,12 +18,11 @@
 <body {% if popuperror %} onload="popupError()" {% endif %}>
 	<div class="container">
 	<div class="page-header">
-    {% if edit %}
-    <a href='/forms/expenselist/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
-    {% else %}
-  <a href='/forms/addexpense/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
-    {% endif %}
-	{% include 'signout_panel.html' %}
+   {% if edit %}
+		{% include 'expenseedit_panel.html' %}
+		{% else %}
+		{% include 'expense_panel.html' %}
+		{% endif %}
 	<br />
 	<h1>Cost Center/Internal Order</h1>
 	</div>
@@ -46,11 +45,11 @@
 
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Number</span>
-				{{ form.Number|add_class:"form-control" }}
+				{{ form.Number|add_class:"form-control"|attr:"placeholder:Number" }}
 		</div><br>
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Amount</span>
-				{{ form.Cost|add_class:"form-control" }}
+				{{ form.Cost|add_class:"form-control"|attr:"placeholder:Amount" }}
 		</div></br>
 
     <div class="input-group input-group-sm">
