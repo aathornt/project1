@@ -22,6 +22,7 @@
     <div class="container">
 
         <div class="page-header">
+          <a href='/forms/' id='Home_Page' class="btn btn-danger large" role="button"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
         {% include 'signout_panel.html' %}
         <br />
             <h1>Current Trip!</h1>
@@ -102,17 +103,17 @@
                                 <th class='center'>Date</th>
                                 <th class='center'>Category</th>
                                 <th class='center'>Cost</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
-                    {% if recentexp %}    
+                    {% if recentexp %}
                         {% for exp in recentexp %}
                         <div>
                             <td> {{ exp.Date|date:"m/d/y" }} </td>
                             <td> {{ exp.Category }} </td>
                            <td> ${{ exp.Cost|floatformat:2 }} </td>
-                           
+
                            <tr></tr>
                         </div>
                         {% endfor %}
@@ -121,12 +122,12 @@
                             <td> {{ no }} </td>
                             <td> {{ na }} </td>
                            <td> {{ na }} </td>
-                           
+
                            <tr></tr>
                         </div>
                     {% endif %}
                         </tbody>
-                    
+
                     </table>
                 </div>
 {% else %}
@@ -144,18 +145,18 @@
                                 <th class='center'>To</th>
                                 <th class='center'>From</th>
                                 <th class='center'>Cost</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
-                    {% if recentcar %}    
+                    {% if recentcar %}
                         {% for expcar in recentcar %}
                         <div>
                             <td> {{ expcar.Date|date:"m/d/y" }} </td>
                             <td> {{ expcar.To }} </td>
                            <td> {{ expcar.From }} </td>
                            <td> ${{ expcar.Cost|floatformat:2 }} </td>
-                           
+
                            <tr></tr>
                         </div>
                         {% endfor %}
@@ -165,12 +166,12 @@
                             <td> {{ na }} </td>
                            <td> {{ na }} </td>
                            <td> {{ na }} </td>
-                           
+
                            <tr></tr>
                         </div>
                     {% endif %}
                         </tbody>
-                    
+
                     </table>
                 </div>
 {% else %}
@@ -188,17 +189,17 @@
                                 <th class='center'>Date</th>
                                 <th class='center'>Category</th>
                                 <th class='center'>Cost</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
-                    {% if recentpub %}    
+                    {% if recentpub %}
                         {% for exppub in recentpub %}
                         <div>
                             <td> {{ exppub.Date|date:"m/d/y" }} </td>
                             <td> {{ exppub.Category }} </td>
                            <td> ${{ exppub.Cost|floatformat:2 }} </td>
-                           
+
                            <tr></tr>
                         </div>
                         {% endfor %}
@@ -207,12 +208,12 @@
                             <td> {{ no }} </td>
                             <td> {{ na }} </td>
                            <td> {{ na }} </td>
-                           
+
                            <tr></tr>
                         </div>
                     {% endif %}
                         </tbody>
-                    
+
                     </table>
                 </div>
 
@@ -232,17 +233,17 @@
                                 <th class='center'>Date</th>
                                 <th class='center'>Description</th>
                                 <th class='center'>Cost</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
-                    {% if recentmis %}    
+                    {% if recentmis %}
                         {% for expmis in recentmis %}
                         <div>
                             <td> {{ expmis.Date|date:"m/d/y" }} </td>
                            <td> {{ expmis.Description }} </td>
                            <td> ${{ expmis.Cost|floatformat:2 }}</td>
-                           
+
                            <tr></tr>
                         </div>
                         {% endfor %}
@@ -251,12 +252,12 @@
                             <td> {{ no }} </td>
                            <td> {{ na }} </td>
                            <td> {{ na }} </td>
-                           
+
                            <tr></tr>
                         </div>
                     {% endif %}
                         </tbody>
-                    
+
                     </table>
                 </div>
 
@@ -275,17 +276,17 @@
                                 <th class='center'>Date</th>
                                 <th class='center'>Category</th>
                                 <th class='center'>Cost</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
-                    {% if recentreg %}    
+                    {% if recentreg %}
                         {% for expreg in recentreg %}
                         <div>
                             <td> {{ expreg.Date|date:"m/d/y" }} </td>
                             <td> {{ expreg.Category }} </td>
                            <td> ${{ expreg.Cost|floatformat:2 }} </td>
-                           
+
                            <tr></tr>
                         </div>
                         {% endfor %}
@@ -294,12 +295,12 @@
                             <td> {{ no }} </td>
                             <td> {{ na }} </td>
                            <td> {{ na }} </td>
-                           
+
                            <tr></tr>
                         </div>
                     {% endif %}
                         </tbody>
-                    
+
                     </table>
                 </div>
 {% endif %}
@@ -315,17 +316,17 @@
                                 <th class='center'>Category</th>
                                 <th class='center'>Cost</th>
                                 <th class='center'>Number</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
-                    {% if recentcos %}    
+                    {% if recentcos %}
                         {% for expcos in recentcos %}
                         <div>
                             <td> {{ expcos.Category }} </td>
                            <td> ${{ expcos.Cost|floatformat:2 }} </td>
                            <td> {{ expcos.Number }}</td>
-                           
+
                            <tr></tr>
                         </div>
                         {% endfor %}
@@ -334,19 +335,19 @@
                             <td> {{ no }} </td>
                            <td> {{ na }} </td>
                            <td> {{ na }} </td>
-                           
+
                            <tr></tr>
                         </div>
                     {% endif %}
                         </tbody>
-                    
+
                     </table>
                 </div>
 
 {% endif %}
 
 {% else %}
-                            
+
                     <div class="panel panel-default">
                     <!-- Default panel contents containg Recent Expenses-->
                     <div class="panel-heading">You Have No Recent Expenses!</div>
@@ -358,7 +359,7 @@
                                 <th class='center'>Category</th>
                                 <th class='center'>Cost</th>
                                 <th class='center'>Number</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
@@ -366,11 +367,11 @@
                             <td> {{ no }} </td>
                            <td> {{ na }} </td>
                            <td> {{ na }} </td>
-                           
+
                            <tr></tr>
                         </div>
                          </tbody>
-                    
+
                     </table>
                 </div>
         {% endif %}
