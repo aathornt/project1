@@ -20,6 +20,11 @@ class UserForm(ModelForm):
 		model = User;
 		fields = ['username', 'password', 'email', 'first_name', 'last_name']
 
+class ConfirmForm(ModelForm):
+	password=forms.CharField(widget=forms.PasswordInput())
+	class Meta:
+		model = User;
+		fields = ['password']
 
 class MealForm(ModelForm):
 	Date = forms.DateField(widget=DateWidget(usel10n=True, bootstrap_version=3))

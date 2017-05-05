@@ -15,9 +15,13 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.js">
         </script>
 <link rel="stylesheet" href="/static/forms/addtrip.css">
-
+<script type="text/JavaScript">
+  function popupError() {
+    alert("Your returned date and time is before your departed date and time.");
+  }
+</script>
 </head>
-<body>
+<body {% if popuperror %} onload="popupError()" {% endif %}>
 
 <div class="container">
 
@@ -56,29 +60,36 @@
         <span class="input-group-addon">Purpose</span>
          {{ form.Purpose|add_class:"form-control" }}
     </div><br>
-
-		<div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">Accompanied By</span>
+         {{ form.Accompanied_By|add_class:"form-control" }}
+    </div><br>
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">Phone Number</span>
+         {{ form.Phone_Number|add_class:"form-control" }}
+    </div><br>
+     <div class="input-group input-group-sm">
         <span class="input-group-addon">Contact Person</span>
         {{ form.Contact_Person|add_class:"form-control" }}
     </div><br>
-		
+
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">Date Departed (MM-DD-YY)</span>
+        <span class="input-group-addon">Date Departed</span>
         {{ form.Date_Departed|add_class:"form-control" }}
     </div><br>
 
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">Time Departed (H:M)</span>
+        <span class="input-group-addon">Time Departed</span>
         {{ form.Time_Departed|add_class:"form-control" }}
     </div><br>
 
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">Date Returned (MM-DD-YY)</span>
+        <span class="input-group-addon">Date Returned</span>
         {{ form.Date_Returned|add_class:"form-control" }}
     </div><br>
 
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">Time Returned (HH:MM)</span>
+        <span class="input-group-addon">Time Returned</span>
         {{ form.Time_Returned|add_class:"form-control" }}
     </div><br>
 

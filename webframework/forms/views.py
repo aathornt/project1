@@ -13,6 +13,7 @@ from .forms import RegistrationFeesForm
 from .forms import FinancialForm
 from .forms import PersonalCarForm
 from .forms import MiscellaneousForm
+from .forms import ConfirmForm
 
 from .models import Meal
 from .models import Transportation
@@ -64,6 +65,7 @@ def register(request):
 	else:
 		# We'll create a blank form if we have a GET
 		form = UserForm()
+		# confirm = ConfirmForm()
 		return render(request, 'register.html', {'form': form})
 
 @login_required(login_url='/')
@@ -154,9 +156,12 @@ def addmeal(request):
 			if Meal.objects.filter(Meal_Category = form.cleaned_data['Meal_Category'], Date = form.cleaned_data['Date']).exists():
 				existerror = 'True'
 				return render(request, 'addmeal.html', {'form': form, 'active':active.Trip_ID, 'existerror':existerror})
+			if ((form.cleaned_data['Cost'] < 0) | (form.cleaned_data['Tip'] < 0)):
+				zeroerror = 'True'
+				return render(request, 'addmeal.html', {'form': form, 'active':active.Trip_ID, 'zeroerror': zeroerror})
 			if (form.cleaned_data['Tip'] > (form.cleaned_data['Cost'] * 0.2)):
-					tiperror = 'True'
-					return render(request, 'addmeal.html', {'form': form, 'active':active.Trip_ID, 'tiperror': tiperror})
+				tiperror = 'True'
+				return render(request, 'addmeal.html', {'form': form, 'active':active.Trip_ID, 'tiperror': tiperror})
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
@@ -184,6 +189,9 @@ def personalcar(request):
 			if (form.cleaned_data['Date'] < active.Date_Departed) | (form.cleaned_data['Date'] > active.Date_Returned):
 				popuperror = 'True'
 				return render(request, 'personalcar.html', {'form': form, 'active':active.Trip_ID, 'popuperror':popuperror})
+			if form.cleaned_data['Cost'] < 0:
+				zeroerror = 'True'
+				return render(request, 'personalcar.html', {'form': form, 'active':active.Trip_ID, 'zeroerror': zeroerror})
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
@@ -208,6 +216,9 @@ def transportation(request):
 			if (form.cleaned_data['Date'] < active.Date_Departed) | (form.cleaned_data['Date'] > active.Date_Returned):
 				popuperror = 'True'
 				return render(request, 'transportation.html', {'form': form, 'active':active.Trip_ID, 'popuperror':popuperror})
+			if form.cleaned_data['Cost'] < 0:
+				zeroerror = 'True'
+				return render(request, 'transportation.html', {'form': form, 'active':active.Trip_ID, 'zeroerror': zeroerror})
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
@@ -238,6 +249,9 @@ def dailyexpenses(request):
 			if DailyExpenses.objects.filter(Category = form.cleaned_data['Category'], Date = form.cleaned_data['Date']).exists():
 				existerror = 'True'
 				return render(request, 'dailyexpenses.html', {'form': form, 'active':active.Trip_ID, 'existerror':existerror})
+			if form.cleaned_data['Cost'] < 0:
+				zeroerror = 'True'
+				return render(request, 'dailyexpenses.html', {'form': form, 'active':active.Trip_ID, 'zeroerror': zeroerror})
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
@@ -265,6 +279,9 @@ def miscellaneous(request):
 			if (form.cleaned_data['Date'] < active.Date_Departed) | (form.cleaned_data['Date'] > active.Date_Returned):
 				popuperror = 'True'
 				return render(request, 'miscellaneous.html', {'form': form, 'active':active.Trip_ID, 'popuperror':popuperror})
+			if form.cleaned_data['Cost'] < 0:
+					zeroerror = 'True'
+					return render(request, 'miscellaneous.html', {'form': form, 'active':active.Trip_ID, 'zeroerror': zeroerror})
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
@@ -292,6 +309,9 @@ def registrationfees(request):
 			if (form.cleaned_data['Date'] < active.Date_Departed) | (form.cleaned_data['Date'] > active.Date_Returned):
 				popuperror = 'True'
 				return render(request, 'registrationfees.html', {'form': form, 'active':active.Trip_ID, 'popuperror':popuperror})
+			if form.cleaned_data['Cost'] < 0:
+				zeroerror = 'True'
+				return render(request, 'registrationfees.html', {'form': form, 'active':active.Trip_ID, 'zeroerror': zeroerror})
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
@@ -378,14 +398,21 @@ def edittrip(request):
 	if request.method == "POST":
 		form = TripForm(request.POST)
 		if form.is_valid():
+			if form.cleaned_data['Date_Returned'] < form.cleaned_data['Date_Departed']:
+				popuperror = 'True'
+				return render(request, 'edittrip.html', {'form': form, 'popuperror':popuperror})
+			if (form.cleaned_data['Date_Returned'] == form.cleaned_data['Date_Departed']) & (form.cleaned_data['Time_Returned'] < form.cleaned_data['Time_Departed']):
+				popuperror = 'True'
+				return render(request, 'edittrip.html', {'form': form, 'popuperror':popuperror})
 			instance = form.save(commit=False)
 			instance.Trip_ID = active.Trip_ID
 			form.save()
 			return redirect('/forms/triplist/')
 	else:
+		edit = 'True'
 		my_record = Trip.objects.get(Trip_ID = active.Trip_ID)
 		form = TripForm(instance=my_record)
-		return render(request, 'edittrip.html', {'form' : form})
+		return render(request, 'edittrip.html', {'form' : form, 'edit':edit})
 
 @login_required(login_url='/')
 def editexpense(request):

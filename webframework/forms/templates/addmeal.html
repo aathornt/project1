@@ -18,10 +18,13 @@
   function tipError() {
   	alert("A tip must not exceed 20% of the meal total.");
   }
+	function zeroError() {
+  	alert("The amount entered must be greater than 0 dollars.");
+  }
 </script>
 <link rel="stylesheet" href="/static/forms/addmeal.css">
 </head>
-<body {% if popuperror %} onload="popupError()" {% endif %} {% if existerror %} onload="existError()" {% endif %} {% if tiperror %} onload="tipError()" {% endif %}>
+<body {% if popuperror %} onload="popupError()" {% endif %} {% if existerror %} onload="existError()" {% endif %} {% if tiperror %} onload="tipError()" {% endif %} {% if zeroerror %} onload="zeroError()" {% endif %}>
 	<div class="container">
 	<div class="page-header">
 		{% if edit %}
@@ -29,7 +32,7 @@
 		{% else %}
 		{% include 'expense_panel.html' %}
 		{% endif %}
-	
+
 	<br />
 	<h1>Add A Meal!</h1>
 	</div>

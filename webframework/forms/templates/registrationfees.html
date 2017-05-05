@@ -16,10 +16,13 @@
   function popupError() {
     alert("The date you entered is outside of your trip date range.");
   }
+  function zeroError() {
+  	alert("The amount entered must be greater than 0 dollars.");
+  }
 </script>
 <link rel="stylesheet" href="/static/forms/registrationfees.css">
 </head>
-<body {% if popuperror %} onload="popupError()" {% endif %}>
+<body {% if popuperror %} onload="popupError()" {% endif %} {% if zeroerror %} onload="zeroError()" {% endif %}>
 
 <div class="container">
 
