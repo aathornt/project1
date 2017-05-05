@@ -45,29 +45,33 @@
 
     <div class="input-group input-group-sm">
         <span class="input-group-addon">Department</span>
-         {{ form.Department|add_class:"form-control" }}
+         {{ form.Department|add_class:"form-control"|attr:"placeholder:Department" }}
     </div><br>
 
     <div class="input-group input-group-sm">
         <span class="input-group-addon">Place</span>
-         {{ form.Place|add_class:"form-control" }}
+         {{ form.Place|add_class:"form-control"|attr:"placeholder:Place" }}
     </div><br>
 
     <div class="input-group input-group-sm">
         <span class="input-group-addon">Purpose</span>
-         {{ form.Purpose|add_class:"form-control" }}
+         {{ form.Purpose|add_class:"form-control"|attr:"placeholder:Purpose" }}
     </div><br>
     <div class="input-group input-group-sm">
         <span class="input-group-addon">Accompanied By</span>
-         {{ form.Accompanied_By|add_class:"form-control" }}
+         {{ form.Accompanied_By|add_class:"form-control"|attr:"placeholder:Accompanied By"  }}
     </div><br>
     <div class="input-group input-group-sm">
         <span class="input-group-addon">Phone Number</span>
-         {{ form.Phone_Number|add_class:"form-control" }}
+         {{ form.Phone_Number|add_class:"form-control"|attr:"placeholder:Phone Number"  }}
     </div><br>
      <div class="input-group input-group-sm">
         <span class="input-group-addon">Contact Person</span>
-        {{ form.Contact_Person|add_class:"form-control" }}
+        {{ form.Contact_Person|add_class:"form-control"|attr:"placeholder:Contact Person"  }}
+    </div><br>
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">Exchange Rate</span>
+        {{ form.Exchange|add_class:"form-control"|attr:"placeholder:Ex. 0.92 Euros"  }}
     </div><br>
     <div class="input-group input-group-sm">
         <span class="input-group-addon">Date Departed</span>
