@@ -13,6 +13,7 @@ from .forms import RegistrationFeesForm
 from .forms import FinancialForm
 from .forms import PersonalCarForm
 from .forms import MiscellaneousForm
+from .forms import ConfirmForm
 
 from .models import Meal
 from .models import Transportation
@@ -23,6 +24,7 @@ from .models import RegistrationFees
 from .models import Financial
 from .models import PersonalCar
 from .models import Miscellaneous
+from .models import Confirm
 
 from django.conf import settings
 from django.shortcuts import redirect
@@ -44,18 +46,26 @@ def register(request):
 	if request.method == 'POST':
 		# create a form instance and populate it with data from the request:
 		form = UserForm(request.POST)
+		confirm = ConfirmForm(request.POST)
 		# check whether it's valid:
-		if  form.is_valid():
+		if  form.is_valid() and confirm.is_valid():
 			# save data as an instance in a database
 			username = form.cleaned_data['username']
 			email = form.cleaned_data['email']
 			password = form.cleaned_data['password']
 			first_name = form.cleaned_data['first_name']
 			last_name = form.cleaned_data['last_name']
+			confirm = confirm.cleaned_data['confirm']
 
-			user = User.objects.create_user(username, email, password,  first_name = first_name, last_name  = last_name)
 			# save data as an instance in a database
-			user.save()
+			if password != confirm:
+				popuperror = True
+				form = UserForm()
+				confirm = ConfirmForm()
+				return render(request, 'register.html', {'form': form, 'confirm': confirm, 'popuperror': popuperror})
+			else:
+				user = User.objects.create_user(username, email, password,  first_name = first_name, last_name  = last_name)
+				user.save()
 			# redirect to home
 			return redirect('/')
 		else:
@@ -64,7 +74,8 @@ def register(request):
 	else:
 		# We'll create a blank form if we have a GET
 		form = UserForm()
-		return render(request, 'register.html', {'form': form})
+		confirm = ConfirmForm()
+		return render(request, 'register.html', {'form': form, 'confirm': confirm})
 
 @login_required(login_url='/')
 def index(request):
@@ -382,6 +393,8 @@ def edittrip(request):
 			instance.Trip_ID = active.Trip_ID
 			form.save()
 			return redirect('/forms/triplist/')
+		else:
+			return HttpResponse('nope')
 	else:
 		my_record = Trip.objects.get(Trip_ID = active.Trip_ID)
 		form = TripForm(instance=my_record)

@@ -8,10 +8,17 @@
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+function popupError()
+{
+	alert("Your password and confirm password do not match. Please try again.")
+}
+</script>
+
 
 <link rel="stylesheet" href="/static/forms/register.css">
 
-<body>
+<body {% if popuperror %} onload="popupError()"" {% endif %}">
 	<div class="container">
 	<div class="page-header">
 	{% include 'register_panel.html' %}
@@ -47,13 +54,13 @@
 
 		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Password</span>
-			{{ form.password|add_class:"form-control"|attr:"type:password" }}
+			{{ form.password|add_class:"form-control"|attr:"type:password" }} 
 		</div><br>
 
-		<!-- <div class="input-group input-group-sm">
+		<div class="input-group input-group-sm">
 		<span class="input-group-addon">Confirm Password</span>
-			{{ confirm.password|add_class:"form-control"|attr:"type:password" }}
-		</div><br> -->
+			{{ confirm.confirm|add_class:"form-control"|attr:"type:password" }} 
+		</div><br>
 
 
 	<div class="form-input submit-button">

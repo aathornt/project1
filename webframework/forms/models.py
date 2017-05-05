@@ -50,6 +50,10 @@ class Trip(models.Model):
 	Time_Returned = models.TimeField()
 	Is_Active = models.CharField(max_length=5)
 
+class Confirm(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE, blank = True)
+	confirm = models.CharField(max_length = 30)
+
 class Post(models.Model):
 	Date = models.DateField()
 	Cost = models.FloatField()

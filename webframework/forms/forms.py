@@ -8,6 +8,7 @@ from .models import Transportation
 from .models import Financial
 from .models import PersonalCar
 from .models import Miscellaneous
+from .models import Confirm
 from django import forms
 from django.contrib.auth.models import User
 from time import strftime
@@ -19,6 +20,13 @@ class UserForm(ModelForm):
 	class Meta:
 		model = User;
 		fields = ['username', 'password', 'email', 'first_name', 'last_name']
+
+class ConfirmForm(ModelForm):
+	confirm = forms.CharField(widget=forms.PasswordInput())
+	class Meta:
+		model = Confirm;
+		fields = ['user', 'confirm']
+
 
 
 class MealForm(ModelForm):

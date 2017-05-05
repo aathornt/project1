@@ -45,6 +45,7 @@
                         <thead>
                             <tr>
                                 <th class='center'>Place</th>
+                                <th class='center'>Departed</th>
                                 <th class='center'>Current Trip?</th>
                                 <th class='center'>Actions</th>
                             </tr>
@@ -61,6 +62,9 @@
                            {{ name.Place }}
                            {% endif %}
 
+                           </td>
+                           <td>
+                           {{ name.Date_Departed|date:'m/d/y'}}
                            </td>
 
                            {% if name.Is_Active == 'True' %}
