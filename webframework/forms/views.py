@@ -165,9 +165,12 @@ def addmeal(request):
 			if Meal.objects.filter(Meal_Category = form.cleaned_data['Meal_Category'], Date = form.cleaned_data['Date']).exists():
 				existerror = 'True'
 				return render(request, 'addmeal.html', {'form': form, 'active':active.Trip_ID, 'existerror':existerror})
+			if ((form.cleaned_data['Cost'] < 0) | (form.cleaned_data['Tip'] < 0)):
+				zeroerror = 'True'
+				return render(request, 'addmeal.html', {'form': form, 'active':active.Trip_ID, 'zeroerror': zeroerror})
 			if (form.cleaned_data['Tip'] > (form.cleaned_data['Cost'] * 0.2)):
-					tiperror = 'True'
-					return render(request, 'addmeal.html', {'form': form, 'active':active.Trip_ID, 'tiperror': tiperror})
+				tiperror = 'True'
+				return render(request, 'addmeal.html', {'form': form, 'active':active.Trip_ID, 'tiperror': tiperror})
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
@@ -195,6 +198,9 @@ def personalcar(request):
 			if (form.cleaned_data['Date'] < active.Date_Departed) | (form.cleaned_data['Date'] > active.Date_Returned):
 				popuperror = 'True'
 				return render(request, 'personalcar.html', {'form': form, 'active':active.Trip_ID, 'popuperror':popuperror})
+			if form.cleaned_data['Cost'] < 0:
+				zeroerror = 'True'
+				return render(request, 'personalcar.html', {'form': form, 'active':active.Trip_ID, 'zeroerror': zeroerror})
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
@@ -219,6 +225,9 @@ def transportation(request):
 			if (form.cleaned_data['Date'] < active.Date_Departed) | (form.cleaned_data['Date'] > active.Date_Returned):
 				popuperror = 'True'
 				return render(request, 'transportation.html', {'form': form, 'active':active.Trip_ID, 'popuperror':popuperror})
+			if form.cleaned_data['Cost'] < 0:
+				zeroerror = 'True'
+				return render(request, 'transportation.html', {'form': form, 'active':active.Trip_ID, 'zeroerror': zeroerror})
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
@@ -249,6 +258,9 @@ def dailyexpenses(request):
 			if DailyExpenses.objects.filter(Category = form.cleaned_data['Category'], Date = form.cleaned_data['Date']).exists():
 				existerror = 'True'
 				return render(request, 'dailyexpenses.html', {'form': form, 'active':active.Trip_ID, 'existerror':existerror})
+			if form.cleaned_data['Cost'] < 0:
+				zeroerror = 'True'
+				return render(request, 'dailyexpenses.html', {'form': form, 'active':active.Trip_ID, 'zeroerror': zeroerror})
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
@@ -276,6 +288,9 @@ def miscellaneous(request):
 			if (form.cleaned_data['Date'] < active.Date_Departed) | (form.cleaned_data['Date'] > active.Date_Returned):
 				popuperror = 'True'
 				return render(request, 'miscellaneous.html', {'form': form, 'active':active.Trip_ID, 'popuperror':popuperror})
+			if form.cleaned_data['Cost'] < 0:
+					zeroerror = 'True'
+					return render(request, 'miscellaneous.html', {'form': form, 'active':active.Trip_ID, 'zeroerror': zeroerror})
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
@@ -303,6 +318,9 @@ def registrationfees(request):
 			if (form.cleaned_data['Date'] < active.Date_Departed) | (form.cleaned_data['Date'] > active.Date_Returned):
 				popuperror = 'True'
 				return render(request, 'registrationfees.html', {'form': form, 'active':active.Trip_ID, 'popuperror':popuperror})
+			if form.cleaned_data['Cost'] < 0:
+				zeroerror = 'True'
+				return render(request, 'registrationfees.html', {'form': form, 'active':active.Trip_ID, 'zeroerror': zeroerror})
 			# save data as an instance in a database
 			form.save()
 			# reply with thank you, offer them a chance to enter again
@@ -389,6 +407,12 @@ def edittrip(request):
 	if request.method == "POST":
 		form = TripForm(request.POST)
 		if form.is_valid():
+			if form.cleaned_data['Date_Returned'] < form.cleaned_data['Date_Departed']:
+				popuperror = 'True'
+				return render(request, 'edittrip.html', {'form': form, 'popuperror':popuperror})
+			if (form.cleaned_data['Date_Returned'] == form.cleaned_data['Date_Departed']) & (form.cleaned_data['Time_Returned'] < form.cleaned_data['Time_Departed']):
+				popuperror = 'True'
+				return render(request, 'edittrip.html', {'form': form, 'popuperror':popuperror})
 			instance = form.save(commit=False)
 			instance.Trip_ID = active.Trip_ID
 			form.save()
@@ -396,9 +420,10 @@ def edittrip(request):
 		else:
 			return HttpResponse('nope')
 	else:
+		edit = 'True'
 		my_record = Trip.objects.get(Trip_ID = active.Trip_ID)
 		form = TripForm(instance=my_record)
-		return render(request, 'edittrip.html', {'form' : form})
+		return render(request, 'edittrip.html', {'form' : form, 'edit':edit})
 
 @login_required(login_url='/')
 def editexpense(request):
@@ -858,4 +883,3 @@ def pdf(request):
 	if Miscellaneous.objects.filter(Trip_ID_id = active.Trip_ID).exists():
 		expense_total = expense_total + missum['Cost__sum']
 	return render(request, 'expensepages.htm', {'current_user': current_user, 'active': active, 'date_list': date_list, 'breakfast_costs': breakfast_costs, 'lunch_costs':lunch_costs, 'dinner_costs': dinner_costs, 'day_total': day_total, 'breakfast_total': breakfast_total, 'lunch_total': lunch_total, 'dinner_total': dinner_total, 'lodging_costs': lodging_costs, 'lodging_total': lodging_total, 'meal_total': meal_total, 'meal_and_lodging': meal_and_lodging, 'mealtips': mealtips, 'taxi_costs': taxi_costs, 'tips_total':tips_total, 'taxi_total':taxi_total, 'parking_costs': parking_costs, 'parking_total': parking_total, 'gasoline_costs':gasoline_costs, 'gasoline_total':gasoline_total, 'businesscall_costs':businesscall_costs, 'businesscall_total':businesscall_total, 'other_total': other_total, 'missum': missum, 'pertotal': pertotal, 'regtotal': regtotal, 'dues': dues, 'conf': conf, 'banq': banq, 'mis': mis, 'mis1' : mis1, 'mis2': mis2, 'mis3': mis3, 'recentcar': recentcar, 'airfare': airfare, 'rental_car': rental_car, 'bus_train': bus_train, 'recentcar1': recentcar1 , 'recentcar2': recentcar2 , 'recentcar3': recentcar3 , 'recentcar4': recentcar4 , 'recentcar5': recentcar5 , 'recentcar6': recentcar6 , 'recentcar7': recentcar7, 'expense_total': expense_total, 'cos':cos, 'into':into, 'cos1':cos1,'into1':into1,'cos2':cos2,'into2':into2})
-

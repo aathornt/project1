@@ -27,8 +27,6 @@ class ConfirmForm(ModelForm):
 		model = Confirm;
 		fields = ['user', 'confirm']
 
-
-
 class MealForm(ModelForm):
 	Date = forms.DateField(widget=DateWidget(usel10n=True, bootstrap_version=3))
 	Cost = forms.FloatField()
